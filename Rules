@@ -1,14 +1,6 @@
 #!/usr/bin/env ruby
 
 # compile rules determines how source files are compiled to other representation
-compile '/**/*.{markdown,md}' do
-  filter :redcarpet
-  layout '/default.*'
-end
-
-compile '/**/*.{htm,html}' do
-  layout '/default.*'
-end
 
 compile '/sitemap.xml.erb' do
   filter :erb
@@ -21,14 +13,41 @@ compile '/atom.xml.erb' do
 end
 
 compile '/**/*' do
-  write item.identifier.to_s
+  next if item.binary?
+
+  case item[:extension]
+    when "coffee"
+      filter :coffeescript
+    when "sass"
+      filter :sass
+    when "scss"
+      filter :sass, :syntax => :scss
+    when "md", "markdown"
+      filter :kramdown, {
+        :toc_levels           => "4..6",
+        :coderay_css          => :class,
+        :coderay_line_numbers => :table,
+      }
+      # filter :redcarpet, :options => { }, :renderer_options => {:with_toc_data=>true}, :renderer => ::Redcarpet::Render::HTML_TOC
+    when "haml"
+      filter :haml
+    when 'css', "html", "js"
+      # do nothing
+    else
+      raise "no compile rule for #{item.identifier.chop}.#{item[:extension]}"
+    end
+
+  if item[:no_layout]
+  elsif %w/html haml markdown md/.include? item[:extension]
+    layout "/default.*"
+  end
 end
 
 # layout rule: how is compiled content embedeed into layouts
-layout '/**/*', :erb
+layout '/**/*.erb', :erb
 
 # route rule: how content maps to output file
-route '/**/*.{html,md,markdown}' do
+route '/**/*.{html,md,markdown,haml}' do
   case item.identifier.components.last
   when %r{\Aindex\.}
     # maps /aaa/index.markdown to /aaa/index.html
@@ -43,3 +62,10 @@ route '/**/*.{html,md,markdown}' do
   end
 end
 
+route '/**/*.{css,scss,sass}' do
+  item.identifier.chop + '.css'
+end
+
+route '/**/*.{ts,js,coffee}' do
+  item.identifier.chop + '.js'
+end
