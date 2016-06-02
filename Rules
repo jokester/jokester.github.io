@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+# compile rules determines how source files are compiled to other representation
+compile '/**/*.{markdown,md}' do
+  filter :redcarpet
+  layout '/default.*'
+end
+
+compile '/**/*.{htm,html}' do
+  layout '/default.*'
+end
+
+compile '/sitemap.xml.erb' do
+  filter :erb
+  write '/sitemap.xml'
+end
+
+compile '/atom.xml.erb' do
+  filter :erb
+  write '/atom.xml'
+end
+
+compile '/**/*' do
+  write item.identifier.to_s
+end
+
+# layout rule: how is compiled content embedeed into layouts
+layout '/**/*', :erb
+
+# route rule: how content maps to output file
+route '/**/*.{html,md,markdown}' do
+  case item.identifier.components.last
+  when %r{\Aindex\.}
+    # maps /aaa/index.markdown to /aaa/index.html
+    [
+      '',
+      item.identifier.components[0..-2],
+      'index.html'
+    ].flatten.join('/')
+  else
+    # maps /aaa.markdown to /aaa/index.html
+    item.identifier.without_exts + '/index.html'
+  end
+end
+
