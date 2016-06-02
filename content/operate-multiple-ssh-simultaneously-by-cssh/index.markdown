@@ -1,0 +1,23 @@
+---
+title: Operate multiple ssh simultaneously by cssh
+created_at: 2014-04-17
+kind: article
+---
+
+cssh (cluster ssh) enables one to operate multiple ssh simultaneously.
+
+One package:
+
+    % sudo pacman -S clusterssh
+
+3 lines of configuration in `~/.csshrc` (the hostnames are specified in ~/.ssh/config):
+
+    clusters = exp lab
+    exp = exp01 exp02 exp03 exp04 exp05 exp06 exp07 exp08 exp09 exp10
+    lab = exp itigo
+
+And I got this with `cssh lab` command: [(full image)](/pic/screenshot-cssh.png)
+
+![screenshot: cssh](screenshot-cssh.png)
+
+The input in left-top window is duplicated and sent to all other terminals.

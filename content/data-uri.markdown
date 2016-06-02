@@ -1,0 +1,48 @@
+---
+title: Data URI
+created_at: 2013-12-30
+kind: article
+---
+
+#### TL;NR
+A data URI contains:
+
+- BASE64 encoded binary data (exception exists)
+- MIME type
+- no more metadata such like filename
+
+It can be used instead of real file.
+
+A full definition at [wikipedia](http://en.wikipedia.org/wiki/Data_URI_scheme).
+
+#### Example
+
+External links in this site are followed by a icon like [this](http://external.site/).
+This is implemented with a data URI in CSS.
+
+Part of
+[.sass stylesheet](https://github.com/jokester/jokester.github.io/blob/source/content/css/style.sass)
+is like:
+
+~~~ css
+a[href^="http://"]:after, a[href^="https://"]:after
+  content: " " url(data:image/png;base64,iVBORw0 ... ORK5CYII=)
+~~~
+
+#### Relevant posts
+
+[On Mobile, Data URIs are 6x Slower than Source Linking](http://www.mobify.com/blog/data-uris-are-slow-on-mobile/)
+
+- (binary) images as data URI are slow, especially for mobile clients
+- consider to use [CSS sprites](http://css-tricks.com/css-sprites/) instead
+
+[Data URI Performance: Don't Blame it on Base64](http://www.mobify.com/blog/base64-does-not-impact-data-uri-performance/)
+
+- SVG image can be included in data URI, either BASE64 encoded or not
+- encoded and not-encoded groups performed almost equally, and are still much slower than no-svg group
+- so BASE64 may not be the bottleneck
+- resource scheduling of data URIs is suspicious
+- examined with **real user monitoring** / **RUM**
+    - monitor real usage of actual user
+    - "passive monitoring"
+    - [wikipedia](http://en.wikipedia.org/wiki/Real_user_monitoring)
