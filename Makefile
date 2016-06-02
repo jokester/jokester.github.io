@@ -1,7 +1,7 @@
 
 .phony: compile
 
-compile: bundle clean
+compile: bundle
 	bundle exec nanoc compile
 
 clean:
