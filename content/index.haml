@@ -1,0 +1,8 @@
+---
+title:
+---
+
+%ul#post-list
+  - articles.sort_by{|a| a[:created_at]}.reverse.each do |a|
+    %li
+      = link_to a[:title], a

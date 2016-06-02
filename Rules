@@ -13,29 +13,32 @@ compile '/atom.xml.erb' do
 end
 
 compile '/**/*' do
-  next if item.binary?
+  if item.binary?
+    write item.identifier.to_s
+    next
+  end
 
   case item[:extension]
-    when "coffee"
-      filter :coffeescript
-    when "sass"
-      filter :sass
-    when "scss"
-      filter :sass, :syntax => :scss
-    when "md", "markdown"
-      filter :kramdown, {
-        :toc_levels           => "4..6",
-        :coderay_css          => :class,
-        :coderay_line_numbers => :table,
-      }
-      # filter :redcarpet, :options => { }, :renderer_options => {:with_toc_data=>true}, :renderer => ::Redcarpet::Render::HTML_TOC
-    when "haml"
-      filter :haml
-    when 'css', "html", "js"
-      # do nothing
-    else
-      raise "no compile rule for #{item.identifier.chop}.#{item[:extension]}"
-    end
+  when "coffee"
+    filter :coffeescript
+  when "sass"
+    filter :sass
+  when "scss"
+    filter :sass, :syntax => :scss
+  when "md", "markdown"
+    filter :kramdown, {
+      :toc_levels           => "4..6",
+      :coderay_css          => :class,
+      :coderay_line_numbers => :table,
+    }
+    # filter :redcarpet, :options => { }, :renderer_options => {:with_toc_data=>true}, :renderer => ::Redcarpet::Render::HTML_TOC
+  when "haml"
+    filter :haml
+  when 'css', "html", "js"
+    # do nothing
+  else
+    raise "no compile rule for #{item.identifier.chop}.#{item[:extension]}"
+  end
 
   if item[:no_layout]
   elsif %w/html haml markdown md/.include? item[:extension]
@@ -45,6 +48,7 @@ end
 
 # layout rule: how is compiled content embedeed into layouts
 layout '/**/*.erb', :erb
+layout '/**/*.haml', :haml
 
 # route rule: how content maps to output file
 route '/**/*.{html,md,markdown,haml}' do

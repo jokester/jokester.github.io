@@ -1,0 +1,54 @@
+!!!5
+%html
+  %head
+    %title
+      = @item[:title] ? "#{@item[:title]} - #{config[:title]}" : "#{config[:title]}"
+    %meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    %meta(generator="Nanoc #{Nanoc::VERSION}")
+    %link(rel="stylesheet" type="text/css" href="/css/bootstrap.min.css")
+    %link(rel="stylesheet" type="text/css" href="/css/style.css")
+    %link(rel="stylesheet" type="text/css" href="/css/coderay-github.css")
+  %body
+    .navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          %a.navbar-brand(href="/")= config[:title]
+          %button.navbar-toggle(data-toggle="collapse" data-target="#navbar-main")
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+        .navbar-collapse.collapse#navbar-main
+          %ul.nav.navbar-nav
+            %li.dropdown
+              %a.dropdown-toggle(data-toggle='dropdown' href="#")
+                Posts
+                %span.caret
+              %ul.dropdown-menu
+                %li
+                  %a(href="/post/") All posts
+                %li.divider
+            %li.dropdown
+              %a.dropdown-toggle(data-toggle='dropdown' href="#")
+                Apps
+                %span.caret
+              %ul.dropdown-menu
+            %li
+              %a(href='/about') About
+    .container
+      .page-header
+        .row
+          .col-lg-8
+            - if @item[:title]
+              %h1= @item[:title]
+            - if @item[:date]
+              %p.lead= @item[:date]
+            - if @item[:subtitle]
+              %p.lead= @item[:subtitle]
+      .row#content
+        .col-lg-12= find_and_preserve yield
+      .row#after-content
+        .col-lg-12.term-color
+          %hr
+          = html_escape "<<END"
+
