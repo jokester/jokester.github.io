@@ -17,7 +17,7 @@ if ! make compile  ; then
 fi
 
 pushd output
-if git add -A . && git commit -m "update"; then
+if git add -A . && git commit -m "built ${COMMIT:0:8} at $now"; then
   git push
 else
   echo "did not commit"
