@@ -32,17 +32,19 @@ compile '/**/*' do
       :coderay_line_numbers => :table,
     }
     # filter :redcarpet, :options => { }, :renderer_options => {:with_toc_data=>true}, :renderer => ::Redcarpet::Render::HTML_TOC
+  when "erb"
+    filter :erb
   when "haml"
     filter :haml
   when 'css', "html", "js"
     # do nothing
   else
-    raise "no compile rule for #{item.identifier.chop}.#{item[:extension]}"
+    raise "no compile rule for #{item.identifier} of extension '#{item[:extension]}'"
   end
 
   if item[:no_layout]
   elsif %w/html haml markdown md/.include? item[:extension]
-    layout "/default.*"
+    layout "/material_dashboard.*"
   end
 end
 
@@ -67,7 +69,7 @@ route '/**/*.{html,md,markdown,haml}' do
 end
 
 route '/**/*.{css,scss,sass}' do
-  item.identifier.chop + '.css'
+  item.identifier.without_ext + '.css'
 end
 
 route '/**/*.{ts,js,coffee}' do

@@ -1,8 +1,13 @@
 ---
-title:
+title: Root
 ---
 
-%ul#post-list
-  - articles.sort_by{|a| a[:created_at]}.reverse.each do |a|
-    %li
-      = link_to a[:title], a
+%div.mdl-cell--8-col
+  %h5 Recent posts
+  %ul.mdl-list
+    - articles.sort_by{|a| a[:created_at]}.reverse.take(5).each do |a|
+      %li.mdl-list__item
+        = link_to a[:title], a
+
+%div.mdl-cell--4-col
+  %h5 About me
