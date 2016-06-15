@@ -1,0 +1,6 @@
+[submodule "output"]
+	path = output
+	url = git@github.com:jokester/jokester.github.io.git
+    update = none
+    branch = master
+    ignore = all

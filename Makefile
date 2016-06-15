@@ -4,8 +4,8 @@
 compile: bundle
 	bundle exec nanoc compile
 
-clean:
-	rm -rf output
+publish: compile
+	bash publish.sh
 
 guard: bundle
 	bundle exec guard
