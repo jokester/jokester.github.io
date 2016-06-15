@@ -1,0 +1,8 @@
+---
+title: Post
+---
+
+%ul.mdl-list
+  - articles.sort_by{|a| a[:created_at]}.reverse.take(5).each do |a|
+    %li.mdl-list__item
+      = link_to a[:title], a

@@ -1,5 +1,5 @@
 ---
-title: article with assets
+title: An article with assets
 kind: article
 created_at: 2016-01-11
 ---
