@@ -1,7 +1,6 @@
 ---
 title: Ruby operator or
 created_at: 2014-05-07
-kind: article
 ---
 
 - Difference of `||` and `or`

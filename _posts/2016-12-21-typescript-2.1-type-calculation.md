@@ -1,11 +1,13 @@
 ---
-title: TS 2.1
+title: TypeScript 2.1中的类型运算
 created_at: 2016-12-21
-kind: article
 ---
 
 去年12月的 TypeScript 2.1 中加入了 keyof / Lookup Types / Mapped Types 等 (编译期的) 类型运算特性。
 本文将介绍这些特性，并用这些特性实现一个 "递归的Readonly" 泛型。
+
+* toc
+{:toc}
 
 ## 新特性的介绍
 
@@ -19,7 +21,7 @@ kind: article
 
 `[]`的类型版。`T[K]` 返回 (类型T中以K为属性名的值) 的类型。K必须是`keyof T`的子集，可以是一个字符串字面量。
 
-```javascript
+```typescript
 const a = { k1: 1, k2: "v2" };
 
 // tv1 为number
@@ -44,7 +46,7 @@ type t_push = string[]["push"];  // (...items: string[]) => number
 
 引用哪些属性是通过一个string union来定义的。这个string union必须是(keyof 旧类型)的子集，可以是string或string union，也可以是keyof的返回值 (即映射全部属性)。
 
-```javascript
+```ts
 interface A {
     k1: string;
     k2: string;
@@ -57,7 +59,7 @@ type A_var1 = {
     [P in "k1" | "k3"]: A[P]
 }
 
-// 从A中取所有属性, 类型改为number
+// 从A中取所有属性名, 类型改为number
 // 结果: type A_var1 = { k1: number, k2: number, k3: number }
 // 注意: keyof / Mapped type / 泛型一起使用时有一些特殊规则。建议读一下最后一部分 "DeepReadonly 是怎样展开的"
 type A_var2 = {
@@ -74,7 +76,7 @@ type A_var3 = {
 
 使用上面介绍的新特性可以定义出一些实质是"类型的decorator"的泛型，比如下面的Readonly (已经在TS2.1标准库中):
 
-```javascript
+```ts
 /**
  * Make all properties in T readonly
  */
@@ -105,17 +107,17 @@ type A_ro = Readonly<A>;
 
 前面提到的`Readonly`只保证属性只读，不会把属性的属性也变成只读:
 
-```javascript
+```ts
 const v = { k1: 1, k2: { k21: 2 } };
 
 const v_ro = v as Readonly<typeof v>;
-v_ro.k1 = 2; // 禁止
+v_ro.k1 = 2;     // 禁止
 v_ro.k2.k21 = 3; // 可以
 ```
 
 我们可以写一个DeepReadonly，实现递归的只读:
 
-```javascript
+```ts
 type DeepReadonly<T> = {
     readonly [P in keyof T]: DeepReadonly<T[P]>;
 };
@@ -140,31 +142,32 @@ v_deep_ro.k2.k21 = 3; // **也禁止**
 
 所以上面的`DeepReadonly<typeof v>`的 (概念上) 展开过程是这样的 :
 
-    DeepReadonly<{ k1: number; k2: { k21: number } }>
-
+```ts
+DeepReadonly<{ k1: number; k2: { k21: number } }>
+```
 ↓
-
-    {
-        readonly k1: number;
-        readonly k2: DeepReadonly<{ k21: number }>;
+```ts
+{
+    readonly k1: number;
+    readonly k2: DeepReadonly<{ k21: number }>;
+}
+```
+↓ 
+```ts
+{
+    readonly k1: number;
+    readonly k2: {
+        readonly k21: DeepReadonly<number>;
     }
-
-↓
-
-    {
-        readonly k1: number;
-        readonly k2: {
-            readonly k21: DeepReadonly<number>;
-        }
-    }
-
+}
+```
 ↓ (规则1)
-
-    {
-        readonly k1: number;
-        readonly k2: {
-            readonly k21: number;
-        }
+```ts
+{
+    readonly k1: number;
+    readonly k2: {
+        readonly k21: number;
     }
-
+}
+```
 (规则1有时会导致一些奇怪的结果，不过大多数情况下我们不是想要基本类型的同构类型，到此停止展开可以接受)

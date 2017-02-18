@@ -16,13 +16,18 @@ a {
 }
 
 div.highlighter-rouge, code.highlighter-rouge {
-  background-color: #2a2a2a;
+  background-color: #222;
 }
 
 div.highlighter-rouge {
   margin: 2px;
 }
 
+.page-content, .post-content {
+  img {
+    max-width: 100%;
+  }
+}
 @import "pygment-highlight/native";
 
 

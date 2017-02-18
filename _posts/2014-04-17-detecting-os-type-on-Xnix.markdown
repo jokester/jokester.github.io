@@ -1,7 +1,6 @@
 ---
 title: Detecting OS type on *nix
 created_at: 2014-04-17
-kind: article
 ---
 
 My first thought was to use the environment variables in shell.

@@ -4,6 +4,8 @@ created_at: 2013-12-26
 kind: article
 ---
 
+(Updated 2017-Jan: the latest bundle can be found in [my dotfile repo](https://github.com/jokester/dotted/tree/master/osx))
+
 - toc
 {:toc}
 
