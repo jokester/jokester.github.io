@@ -1,6 +1,7 @@
 ---
 title: TypeScript 2.1中的类型运算
 created_at: 2016-12-21
+lang: zh
 ---
 
 去年12月的 TypeScript 2.1 中加入了 keyof / Lookup Types / Mapped Types 等 (编译期的) 类型运算特性。
