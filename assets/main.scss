@@ -1,0 +1,125 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+body {
+  background-color: #111;
+  color: #bbb;
+}
+
+body, p, a, h1, h2, h3, h4, h5, h6 {
+  /*font-family: 'Roboto', sans-serif !important;*/
+}
+
+a {
+  text-decoration: none;
+  color:lightcyan;
+}
+
+div.highlighter-rouge, code.highlighter-rouge {
+  background-color: #2a2a2a;
+}
+
+div.highlighter-rouge {
+  margin: 2px;
+}
+
+@import "pygment-highlight/native";
+
+
+@media screen and (min-width: 48em) {
+  /* non-mobile screen: 2 columns */
+  .nav-sidebar-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .page-content, .post-content {
+    padding-right: 16px;
+  }
+
+  ul.site-nav {
+    font-size: 24px;
+    li {
+      margin: 16px;
+    }
+  }
+
+  .hide-pc {
+    display: none !important;
+  }
+
+  .nav-sidebar-wrapper > h4 {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 16px;
+  }
+
+  .external-links {
+    padding-left: 16px;
+  }
+
+  .grow-1 {
+    flex-grow: 1;
+  }
+
+  .external-links {
+    margin-top: 36px;
+    flex-grow: 3;
+  }
+}
+
+@media screen and (max-width: 48em) {
+  /* mobile screen: top-down layout */
+
+  .page-content, .post-content {
+    padding-left: 4px;
+    padding-right: 4px;
+    flex-grow: 1;
+  }
+
+  .site-nav.pure-menu-list {
+    height: 31px;
+    li {
+      display: inline-block;
+      min-width: 3em;
+      margin: 4px;
+      font-size: 20px;
+      padding-right: 4px;
+    }
+  }
+
+  .hide-mobile {
+    display: none !important;
+  }
+
+  .nav-sidebar-wrapper > h4 {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 4px;
+    font-size: 20px;
+    height: 27px;
+  }
+
+  .nav-sidebar-wrapper > hr {
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+
+  .external-links-bottom {
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-bottom: 4px;
+    font-size: 20px;
+
+    li {
+      display: inline-block;
+    }
+  }
+
+  #main {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+  }
+}

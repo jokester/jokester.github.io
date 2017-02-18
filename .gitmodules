@@ -1,5 +1,0 @@
-[submodule "output"]
-	path = output
-	url = .
-    branch = master
-    ignore = all
