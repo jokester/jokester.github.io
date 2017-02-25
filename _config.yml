@@ -21,6 +21,8 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://jokester.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: tarsylia
 github_username:  jokester
+disqus:
+  shortname: jokester-blog
 
 # Build settings
 markdown: kramdown
