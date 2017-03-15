@@ -1,9 +1,10 @@
 ---
-title: 为什么 async 比 Promise.then 好
+title: 为什么 async/await 比 then 好
 created_at: 2016-11-11
 language: zh
 ---
 
+接上一篇:
 "为什么Promise比callback好"，就不赘述了。主要讨论为什么 `async/await` 比 `Promise.then` 更好:
 
 `async` 最好的一点是: 和一般 js 有相同的 scope 和几乎相同的语法，真正做到了代码上的顺序执行，行为上的间断执行。
@@ -28,8 +29,8 @@ A. 在上层scope，即foo1中新开一个变量，在`bar1`中把n1存进去，
 function foo1(arg1: Promise<number>) {
     let n1_lifted;
     return arg1
-        .then(/* bar1 */ n1 => { n1_lifted = n1; return asyncOperation(n1) })
-        .then(/* bar2 */ n2 => 100 / n2);
+           .then(/* bar1 */ n1 => { n1_lifted = n1; return asyncOperation(n1) })
+           .then(/* bar2 */ n2 => 100 / n2);
 }
 ```
 
@@ -38,8 +39,8 @@ B. 把bar2整个移到bar1内:
 ```ts
 function foo1(arg1: Promise<number>) {
     return arg1
-        .then(/* bar1 */ n1 => asyncOperation(n1)
-                                .then(/* bar2 */ n2 => 100 / n2));
+           .then(/* bar1 */ n1 => asyncOperation(n1)
+                                  .then(/* bar2 */ n2 => 100 / n2));
 }
 
 ```

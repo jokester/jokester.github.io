@@ -3,6 +3,8 @@ title: Promise is better value
 created_at: 2017-02-26
 ---
 
+I have been an
+
 # Promise is more than a value
 
 A Promise is a wrapped "result of computation".
