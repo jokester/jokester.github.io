@@ -5,7 +5,7 @@ permalink: /about/
 
 ### About this site
 
-This is my personal site about Web, Android, Unix and stuff.
+This is my personal site about Web, Android, Linux and stuff.
 
 You may see contents in English / Chinese / Japanese, please stay calm `:o`
 
