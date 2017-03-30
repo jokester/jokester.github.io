@@ -5,6 +5,17 @@ created_at: 2017-03-16
 
 # What is `await`
 
-# Implement `await` with ES6 generator function
+- Await is the new grammer in ES2017 that 
 
-# Implement `await` in pre-ES6
+
+- The expression `await v` evalutes to 
+- An `async` function always returns a `Promise`.
+
+
+
+# `await` implemented with generator function (ES6)
+
+## Generator: re-entryable control flow
+
+# `await` implemented with a state machine (pre-ES6)
+
