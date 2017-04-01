@@ -4,8 +4,12 @@ created_at: 2016-11-11
 language: zh
 ---
 
-接上一篇:
-"为什么Promise比callback好"，就不赘述了。主要讨论为什么 `async/await` 比 `Promise.then` 更好:
+# 为什么 `Promise<T>` 比 `callback(Error, T)` 好
+
+- `Promise<T>` 是和
+
+
+# 为什么 `async/await` 比 `Promise#then` 更好
 
 `async` 最好的一点是: 和一般 js 有相同的 scope 和几乎相同的语法，真正做到了代码上的顺序执行，行为上的间断执行。
 
