@@ -112,8 +112,8 @@ Percentage of the requests served within a certain time (ms)
 
 # 1000 connection
 
-- all http2 requests served
-- 9% of http1 requests failed during SSL handshake
+- 1.6% of http2 requests failed (h2load not showing the reason)
+- 9% of http1 requests failed (during SSL handshake)
 
 ```text
 % h2load -n 10000 -c 1000 https://some-site.jokester.io/
