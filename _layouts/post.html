@@ -25,37 +25,5 @@ comments: true
     {% if site.disqus.shortname %}
       {% include disqus_comments.html %}
     {% endif %}
-
-    <hr>
-
-    <div id="gitment-comments"></div>
-    <script async>
-        (function(gitment_options) {
-            let tried = 0;
-            const check_delay = 2e2;
-
-            function initGitment() {
-                if (tried++ > 50) {
-                    return console.error('Timeout when waiting for Gitment to load');
-                } else if (typeof Gitment !== "function") {
-                    return setTimeout(initGitment, check_delay);
-                }
-
-                new Gitment(gitment_options).render('gitment-comments');
-            }
-
-            initGitment();
-
-        })({
-            owner: 'jokester',
-            repo: 'jokester.github.io',
-            oauth: {
-                client_id: '72024c7faef2a833c03d',
-                client_secret: '73a3b1ba36204ec80952bd9050ced847a25a4ed3',
-            },
-            // ...
-        });
-    </script>
-    <hr>
   </article>
 </main>
