@@ -41,10 +41,16 @@ Challange 6.
 
 ```text
 () -> () : 1　arrows
-Bool -> Bool:
+    _ -> ()
+
+Bool -> Bool: 4 arrows
     _ -> True
     _ -> False
     _ -> _
     _ -> !_
-Void -> Void: 1 arrows
+
+Void -> Void: 1 arrows (I'm not pretty confident, but it cannot be more than 1 so)
 ```
+
+### 3. Categories Great and Small
+
