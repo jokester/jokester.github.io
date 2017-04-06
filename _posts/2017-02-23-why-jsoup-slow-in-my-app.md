@@ -1,6 +1,7 @@
 ---
 title: 为什么 jsoup 在我 app 内慢
 created_at: 2017-02-23
+lang: zh
 ---
 
 最近在android app中用 [jsoup](https://jsoup.org/) 从远程 html 中抽取数据, 觉得功能甚好, 只是有点慢. 翻了源码 & 做了简单测试后觉得下面这几点可以改造一下:
