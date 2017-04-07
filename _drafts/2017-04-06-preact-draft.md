@@ -16,6 +16,31 @@ lang: zh
 - attributes (来自jsx?)
 - children (jsx?)
 
-### Node
+### (DOM) Element
 
 node._component: Component instance that "owns" this node
+
+### Diff算法
+
+React: 先对vnode和vnode进行比较，将[Reconciliation](https://facebook.github.io/react/docs/reconciliation.html)
+
+Preact:
+
+```text
+输入: vnode 和 node
+可选输入: dom (), parent ()
+
+```
+
+### 设计模式: 对象池
+
+Preact分别为DOM对象 `HTML***Element`
+
+
+### 代码模式: 全局队列 / 全局栈
+
+### Preact
+
+- 自带一个className() 实现
+- 在JSX中可以使用 `class="c1"` (也可以使用className)
+-

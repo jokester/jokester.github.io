@@ -9,7 +9,7 @@ lang: zh
 ### 什么是 Preact?
 
 [Preact](https://preactjs.com/) 是一个使用和 [React](https://facebook.github.io/react/) 相同的思想，几乎相同的API的JavaScript渲染库。
-和 React 一样，Preact 也定位于 "渲染DOM" 的单一职责。
+和 React 一样，Preact 也定位于 "单向渲染DOM" 的单一职责。
 
 Preact和React的几个重要不同:
 
@@ -17,7 +17,7 @@ Preact和React的几个重要不同:
     - Preact 直接连接你的代码和原生DOM事件，不像React一样把不同浏览器的事件 "标准化"
     - Preact 在渲染VDOM时，直接和原生DOM对比
 2. 警告和错误处理比React少: 全部代码中只有一个catch，如果你的代码抛出异常，这个异常会直接漏到浏览器控制台。
-    - TODO: 漏异常会导致不可逆的状态破坏吗？
+    - TODO: 漏异常会导致不可逆的状态破坏吗？(FIXME: 可能会..)
 3. 小: 全部代码仅有 1.3k 行，最小化后9kB，再gzip后不到4kB。
 4. 快: 在很多测试中比 React 性能更高。
 5. TODO: async render?
@@ -66,6 +66,6 @@ import * as preact from 'preact';
 
 你也可以从我配置好的一个 TypeScript 模板开始: [jokester/typescript-boilerplate](https://github.com/jokester/typescript-boilerplate) 的 `webpack-preact`分支。
 
-### 如果你使用 babel转换jsx/tsx
+### 如果你使用 JavaScript 和 babel转换jsx/tsx
 
 我不用babel和jsx所以暂留空了。如果有在用的人欢迎补充。
