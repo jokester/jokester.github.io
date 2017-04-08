@@ -33,7 +33,7 @@ Preact和React的几个重要不同:
 
 ### 这系列不会介绍什么?
 
-- 怎样用JSX写出能动的东西 (所以在开始读之前，建议你先上手JavaScript，React及其API)
+- 怎样用JSX写出能动的东西 (所以在开始读之前，建议你先上手JavaScript, React及其API)
 - 怎样配置 babel / webpack / TypeScript / 其他和核心无关的东西
     - TODO: 加一个JS用的模板
 
@@ -43,9 +43,9 @@ Preact和React的几个重要不同:
 1. Element 和 Component
 2. VDOM 和 Render
 
-### 如果你使用 TypeScript
+### 开始使用Preact: 如果你使用 TypeScript
 
-为了让tsc用preact转换tsx，需要一些额外的设置。
+为了让 TypeScript编译器 (tsc) 用preact提供的函数转换tsx，需要一些额外的设置。
 
 在`tsconfig.json` (或其他地方的tsc设置) 中:
 
@@ -64,8 +64,8 @@ Preact和React的几个重要不同:
 import * as preact from 'preact';
 ```
 
-你也可以从我配置好的一个 TypeScript 模板开始: [jokester/typescript-boilerplate](https://github.com/jokester/typescript-boilerplate) 的 `webpack-preact`分支。
+也可以从直接使用我配置好的一个 TypeScript: [jokester/typescript-boilerplate](https://github.com/jokester/typescript-boilerplate) 的 `webpack-preact`分支。
 
-### 如果你使用 JavaScript 和 babel转换jsx/tsx
+### 开始使用Preact: 如果你使用 JavaScript 和 babel
 
 我不用babel和jsx所以暂留空了。如果有在用的人欢迎补充。

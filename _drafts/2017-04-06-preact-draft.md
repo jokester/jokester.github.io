@@ -39,8 +39,36 @@ Preact分别为DOM对象 `HTML***Element`
 
 ### 代码模式: 全局队列 / 全局栈
 
+
+避免了每次创建数组, 也避免了开一个参数来传递数组.
+
+
+注意: 如果
+
+
+### 代码模式: 缓存计算结果
+
+
+
 ### Preact
 
 - 自带一个className() 实现
-- 在JSX中可以使用 `class="c1"` (也可以使用className)
--
+- 在JSX中可以使用属性名 `class`, 也可以使用 `className`, 但如果同时存在, 其中一个会被覆盖.
+
+### 属性的 diff
+
+```js
+// preact/src/vdom/diff.js
+// dom: Element
+// attrs: 想要的attr
+// old: 上次更新时attr (保存在dom[ATTR_KEY]中, 如果没有, 会从dom.attributes ("Content attribute") 创建一个)
+function diffAttributes(dom, attrs, old) {
+    // 比较attrs和old
+    // 将不同的部分更新到dom (setAccessor)
+}
+
+// preact/src/vdom/index.js
+function setAccessor(node, name, old, value, isSvg) {
+    //
+}
+```
