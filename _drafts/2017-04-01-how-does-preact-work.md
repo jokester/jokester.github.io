@@ -14,12 +14,12 @@ lang: zh
 Preact和React的几个重要不同:
 
 1. 对浏览器做更少抽象 ("Closer to the Metal"):
-    - Preact 直接连接你的代码和原生DOM事件，不像React一样把不同浏览器的事件 "标准化"
+    - Preact 直接把原生DOM事件传给你的`onClick=`，不像React一样把不同浏览器的事件 "标准化"
     - Preact 在渲染VDOM时，直接和原生DOM对比
 2. 警告和错误处理比React少: 全部代码中只有一个catch，如果你的代码抛出异常，这个异常会直接漏到浏览器控制台。
     - TODO: 漏异常会导致不可逆的状态破坏吗？(FIXME: 可能会..)
-3. 小: 全部代码仅有 1.3k 行，最小化后9kB，再gzip后不到4kB。
-4. 快: 在很多测试中比 React 性能更高。
+3. 小: 全部代码仅有 1.3k 行，最小化后9kB，再gzip后不到4kB
+4. 快: 在很多测试中比 React 性能更高
 5. TODO: async render?
 
 更详细的比较可以看 [Preact](https://preactjs.com/) / [Differences to React](https://preactjs.com/guide/differences-to-react)。
