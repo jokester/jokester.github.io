@@ -4,9 +4,9 @@ created_at: 2017-04-01
 lang: zh
 ---
 
-这是一系列对 Preact 和 JSX 渲染的研究文章。
+这是一系列对 JSX 渲染 和 Preact 的研究文章。
 
-### 什么是 Preact?
+## 什么是 Preact?
 
 [Preact](https://preactjs.com/) 是一个使用和 [React](https://facebook.github.io/react/) 相同的思想，几乎相同的API的JavaScript渲染库。
 和 React 一样，Preact 也定位于 "单向渲染DOM" 的单一职责。
@@ -24,28 +24,38 @@ Preact和React的几个重要不同:
 
 更详细的比较可以看 [Preact](https://preactjs.com/) / [Differences to React](https://preactjs.com/guide/differences-to-react)。
 
-### 这系列会介绍什么?
+## 这系列会介绍什么?
 
 - Preact 怎样工作
     - 定义Component -- 在JSX中使用Component -- 把JSX渲染成DOM -- 事件和DOM更新 的完整流程
     - 考虑到Preact和React在概念和设计上有诸多相似，相信理解Preact的内部对React 用户也会有帮助
 - 顺便介绍 Preact 代码中用到的一些JavaScript技巧
 
-### 这系列不会介绍什么?
+## 这系列不会介绍什么?
 
-- 怎样用JSX写出能动的东西 (所以在开始读之前，建议你先上手JavaScript, React及其API)
+- 怎样写JSX写出能动的东西 (所以在开始读之前，建议你先上手JavaScript, React及其API)
 - 怎样配置 babel / webpack / TypeScript / 其他和核心无关的东西
-    - TODO: 加一个JS用的模板
 
-### 目录
+## 目录
 
 <!-- TODO: finish -->
 1. Element 和 Component
-2. VDOM 和 Render
+2. Render (一次)
+3. Render (多次)
 
-### 开始使用Preact: 如果你使用 TypeScript
+## 开始使用Preact
 
-为了让 TypeScript编译器 (tsc) 用preact提供的函数转换tsx，需要一些额外的设置。
+#### 如果你使用 JavaScript
+
+可以使用preact作者自己写的 [preact-boilerplate](https://github.com/developit/preact-boilerplate)，内有配置好的babel / webpack / 测试等东西。
+
+#### 如果你使用 TypeScript
+
+可以使用我写的 [jokester/typescript-boilerplate](https://github.com/jokester/typescript-boilerplate) 的 `webpack-preact`分支，内有配置好的tsc / webpack / 测试。
+
+#### 如果你使用 TypeScript 且需要自己配置
+
+1. 让 TypeScript编译器 (tsc) 用preact提供的函数转换tsx，需要一些额外的设置。
 
 在`tsconfig.json` (或其他地方的tsc设置) 中:
 
@@ -58,14 +68,11 @@ Preact和React的几个重要不同:
 }
 ```
 
-在所有的tsx文件中:
+2. 安装preact并在所有的tsx文件中:
 
 ```typescript
 import * as preact from 'preact';
 ```
 
-也可以从直接使用我配置好的一个 TypeScript: [jokester/typescript-boilerplate](https://github.com/jokester/typescript-boilerplate) 的 `webpack-preact`分支。
-
-### 开始使用Preact: 如果你使用 JavaScript 和 babel
-
-我不用babel和jsx所以暂留空了。如果有在用的人欢迎补充。
+注1: preact自带TypeScript的类型声明，不需要找 `@types/preact`
+注2: preact和`@types/react`同时安装会有类型冲突
