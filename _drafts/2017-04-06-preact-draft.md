@@ -20,6 +20,18 @@ lang: zh
 
 node._component: Component instance that "owns" this node
 
+Q:
+- what if multiple _component ?
+
+```ts
+node._listeners: event listeners
+
+type node._listeners {
+    [eventName: string]: (event: Event) => void
+}
+```
+
+
 ### Diff算法
 
 React: 先对vnode和vnode进行比较，将[Reconciliation](https://facebook.github.io/react/docs/reconciliation.html)
@@ -64,6 +76,7 @@ Preact分别为DOM对象 `HTML***Element`
 // old: 上次更新时attr (保存在dom[ATTR_KEY]中, 如果没有, 会从dom.attributes ("Content attribute") 创建一个)
 function diffAttributes(dom, attrs, old) {
     // 比较attrs和old
+    //      old: 如果attr name为，从dom取 "上次的值"。否则才从old取。
     // 将不同的部分更新到dom (setAccessor)
 }
 
