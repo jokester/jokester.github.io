@@ -1,6 +1,6 @@
 ---
-title: 分享你的TypeScript类型
-created_at: 2017-04-10
+title: 分享你的 TypeScript 类型声明
+created_at: 2017-04-14
 lang: zh
 ---
 
@@ -30,12 +30,13 @@ lang: zh
 
 - 回馈给社区给更多人用，可能更快发现问题甚至有人帮着改，这会降低将来的维护成本
 - 和开发者混个脸熟，问问题和求feature时比较好意思 (doge)
+- 加声望和功德值
 
 ## 合并到本体时的PR
 
 - 类型声明文件本身
 - 在`package.json`里加上类型声明的路径，如 `"types": "src/index.d.ts"`
-- 有类型声明才能通过编译的 `TypeScript`代码 (这个测试甚至不一定需要实际执行，如[]()。
+- 有类型声明才能通过编译的 `TypeScript`代码 (这个测试不一定需要实际执行，如[ts-decl-test.ts](https://github.com/jokester/node-libtidy/blob/5806f74ed1d801b3ee6c860b7d05c6dd37c24376/test/ts-decl-test.ts#L32)
 - Readme / contributors 等
-- 如果将来你也要继续用这份类型声明，不妨表明 "需要改bug/更新时可以找我"。相信维护者会更愿意接受这样的PR。
-- 如果你用代码生成类型声明: 完整的可以一键执行的生成代码，以及生成时需要的包
+- 如果将来你也要继续用这份类型声明，不妨表明 "需要改bug/更新时可以找我"。相信维护者会更愿意接受这样的PR
+- 如果你用代码生成类型声明: 生成用的代码，使用说明，以及生成时需要的包
