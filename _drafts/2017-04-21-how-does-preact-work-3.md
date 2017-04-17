@@ -37,8 +37,8 @@ lang: zh
     - 如果vchild有key: 在`keyed`中找相同key的
     - 如果vchild没有key: 在`children`中从左边开始找有相同类型的
         - 找到后更新`min / childrenLen`以减小将来的搜索范围
-- 对`child` (可能没找到) 和`vchild`用`idiff`
-- 将``
+- 对`child` (可能没找到) 和`vchild`用`idiff`，如果之前没找到child，这里会创建一个新的
+- 对每个
 - 回收没有被用到的`dom.childrenNodes`
 
 #### 属性diff

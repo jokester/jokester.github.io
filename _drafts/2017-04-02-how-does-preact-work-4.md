@@ -6,18 +6,43 @@ lang: zh
 
 ## Part4 Component
 
+### 什么是Component
 
+
+
+- "纯" Component: 一个从prop生成Element的函数，没有state
+- "不纯" Component: 一个定义了`render()`方法的类，有state
 
 ### Ref
 
+
+
 #### 入口: `buildComponentFromVNode`
 
-    - TODO:
 
 - `node._componentConstructor`
 
 - `node._component`
     - 如果多层component对应同一个node会怎样?
+
+### Component怎样和dom互相引用
+
+dom到Component: 
+
+- `dom._component`
+- `dom._componentConstructor`
+
+```jsx
+const A = (props) => <B />;
+const B = (props) => <C />;
+const C = (props) => <p />;
+
+<A />
+```
+
+```js
+p._component = A
+```
 
 ## Part5 其他
 

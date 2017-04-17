@@ -6,6 +6,8 @@ lang: zh
 
 这是一系列对 Preact / JSX / V-DOM 渲染的研究文章。
 
+(<!-- FIXME: -->还未全部完成)
+
 - toc
 {:toc}
 
@@ -13,7 +15,7 @@ lang: zh
 
 1. Preact介绍 & 开始使用Preact (本文)
 2. JSX 和 Element
-3. 将VDOM渲染到DOM
+3. 将 VDOM 渲染到 DOM
 4. Component
 
 ## Preact 是什么
@@ -21,9 +23,9 @@ lang: zh
 [Preact](https://preactjs.com/) 是一个使用和 [React](https://facebook.github.io/react/) 相同的思想，几乎相同的API的JavaScript-DOM渲染库。
 和 React 一样，Preact 也定位于 "单向渲染DOM" 这一职责。
 
-## Preact 的重要特点
+## Preact 的特点
 
-(以下)
+(以下的比较都是相对于 React)
 
 - 小: 全部代码仅有 1.3k 行，最小化后9kB，再gzip后不到4kB
     - 直接的好处: 可以边读这系列文章边把代码全部过一遍。这对于React的体量是难以做到的。
@@ -54,8 +56,10 @@ lang: zh
 
 ## 这系列不会介绍什么
 
-- 怎样用JSX和React API写出能动的东西 (在开始读之前，建议先上手JavaScript和React)
-- 怎样配置 babel / webpack / TypeScript (但会提供babel / TypeScript的两种新手包)
+- 怎样使用JSX和React API
+    - 在开始读之前，建议先熟悉一下JavaScript和React，比如学会定义和使用Component
+- 怎样配置 babel / webpack / TypeScript
+    - 但会提供babel / TypeScript的两种新手包
 
 ## 开始使用Preact
 
