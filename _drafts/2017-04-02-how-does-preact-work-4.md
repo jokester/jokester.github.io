@@ -21,16 +21,44 @@ lang: zh
 
 
 - `node._componentConstructor`
+    - 和`isDirectOwner`有关
 
 - `node._component`
-    - 如果多层component对应同一个node会怎样?
+    - 最内层的Component instance
 
-### Component怎样和dom互相引用
+### Component constructor
+
+- `Ctor.name`: [Function.name](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/name)
+
+### Component instance的属性
+
+- `c.constructor` 指向constructor
+- `c._disable` unmount时置为true / setComponentProps时
+- `c.base` 最后一次render结果的dom
+    - 有base `<=>` mounted
+- `c.__ref` props中的ref
+- `c.__key` props中的key
+- `c._dirty` 用于避免多次enqueueRender
+- `c.nextBase` ???
+
+### Component (instance) 怎样和dom互相引用
 
 dom到Component: 
 
-- `dom._component`
-- `dom._componentConstructor`
+- `dom._component` 最内层的 `Component` instance
+- `dom._componentConstructor` 这个instance的Constructor
+
+Component到外层Component:
+
+- `c._parentComponent`
+
+Component到内层 (inner) Component:
+
+- `c._component`
+
+Component到DOM:
+
+- `c.base` (最内层的非DOM component才有)
 
 ```jsx
 const A = (props) => <B />;
@@ -76,5 +104,6 @@ Preact分别为DOM对象 `HTML***Element`
 
 - 自带一个className() 实现
 - 在JSX中可以使用属性名 `class`, 也可以使用 `className`, 但如果同时存在, 其中一个会被覆盖.
+- `ref` 必须是函数
 
 
