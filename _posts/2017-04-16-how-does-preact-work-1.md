@@ -1,5 +1,5 @@
 ---
-title: 解剖Preact - 1
+title: 解剖Preact - 1 前言
 created_at: 2017-04-16
 lang: zh
 ---
@@ -29,6 +29,7 @@ lang: zh
 
 - 小: 全部代码仅有 1.3k 行，最小化后9kB，再gzip后不到4kB
     - 直接的好处: 可以边读这系列文章边把代码全部过一遍。这对于React的体量是难以做到的。
+    - 追求小的副作用是代码中有些晦涩的地方，这也是我写这系列的动机之一
 - 快: 在很多测试中比 React 性能更高
 - 对浏览器做更少抽象 ("Closer to the Metal")
     - 直接把原生DOM事件传给你的`onClick=`，不像React一样把不同浏览器的事件 "标准化"
@@ -45,19 +46,21 @@ lang: zh
 
 ## 这系列会介绍什么
 
-主要内容是 Preact 怎样工作，将覆盖Preact的全部代码。考虑到Preact和React在概念和行为上有诸多相似，相信理解Preact的内部对React 使用者也会有帮助。
+Preact 将JSX变成DOM的全过程及代码解说，将覆盖Preact 8.1.0 的所有功能。
+考虑到Preact和React在概念和行为上有诸多相似，相信理解Preact的内部对React 使用者也会有帮助。
 
-- JSX和Element (VNode / V-DOM)
-- 将VDOM渲染到DOM
-- Component的定义和使用
+- JSX和V-DOM
+- 将VDOM渲染到DOM - 无状态VDOM (DOM component)
+- 将VDOM渲染到DOM - 有状态VDOM
 - 事件和DOM更新
 
 顺便也会介绍 Preact 代码中用到的一些JavaScript技巧。
 
 ## 这系列不会介绍什么
 
-- 怎样使用JSX和React API
-    - 在开始读之前，建议先熟悉一下JavaScript和React，比如学会定义和使用Component
+- 怎样使用JSX和React API。所以在开始读之前，建议先上手React到如下程度:
+    - 会用JSX语法
+    - 会定义和使用Component，包括纯函数Component和有状态的 `class` Component
 - 怎样配置 babel / webpack / TypeScript
     - 但会提供babel / TypeScript的两种新手包
 

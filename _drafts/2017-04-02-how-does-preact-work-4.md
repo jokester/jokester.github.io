@@ -6,12 +6,14 @@ lang: zh
 
 ## Part4 Component
 
-### 什么是Component
+### (不纯的) Component
 
+如果以 "可组合" "可复用为标准，前面介绍过的纯函数Component已经可以达到了。那么不纯函数的Component多了些什么能力呢？
 
+一个不纯的Component实质上是一个定义了`prototype.render()`的类。定义类通常是为了使用实例。
 
-- "纯" Component: 一个从prop生成Element的函数，没有state
-- "不纯" Component: 一个定义了`render()`方法的类，有state
+- "纯" Component: 没有instance或state, 只由
+- "不纯" Component: 有instance，每个instance有自己的state
 
 ### Ref
 
@@ -32,14 +34,19 @@ lang: zh
 
 ### Component instance的属性
 
-- `c.constructor` 指向constructor
-- `c._disable` unmount时置为true / setComponentProps时
+- `c.constructor` 指向constructor (这是JS Obj共有的)
+- `c._component` 本次
+- `c._disable` 曾经的名字是 `_disableRendering`. unmount时置为true / setComponentProps中先true再false / 是true时renderComponent会忽略
 - `c.base` 最后一次render结果的dom
     - 有base `<=>` mounted
 - `c.__ref` props中的ref
 - `c.__key` props中的key
 - `c._dirty` 用于避免多次enqueueRender
 - `c.nextBase` ???
+
+### DOM Node的属性
+
+- `dom[ATTR_KEY]` 上次的
 
 ### Component (instance) 怎样和dom互相引用
 
@@ -102,7 +109,7 @@ Preact分别为DOM对象 `HTML***Element`
 
 ### Preact的细节
 
-- 自带一个className() 实现
+- 自带一个className() 实现 `8.1中已删除`
 - 在JSX中可以使用属性名 `class`, 也可以使用 `className`, 但如果同时存在, 其中一个会被覆盖.
 - `ref` 必须是函数
 

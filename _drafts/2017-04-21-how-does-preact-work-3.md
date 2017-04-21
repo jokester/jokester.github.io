@@ -19,8 +19,8 @@ lang: zh
 - 如果vnode是函数Component: 展开vnode直到得到非函数Component, 继续
 - 如果vnode是falsy: 设vnode为`''`, 继续
 - 如果vnode是字符串: 将dom改为`TextNode`, 返回dom
-- 如果vnode是Component: `buildComponentFromVNode` 并返回
-    - TODO: 这部分在Component中介绍
+- 如果vnode是 (非函数) Component: `buildComponentFromVNode` 并返回
+    - 这部分在Component中介绍
 - 剩下的情况: vnode是DOM element
     - 保证out
         - 如果node不存在

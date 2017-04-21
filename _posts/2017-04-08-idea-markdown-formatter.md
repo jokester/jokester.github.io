@@ -18,4 +18,9 @@ Features:
 4. 有编辑器插件
     - 比如VS Code
 5. 能在md中生成toc
-    - 有的md renderer能在渲染时生成toc, 但这就限制了用户的选择.
+    - 有的md renderer能在渲染时生成toc, 但这就限制了用户的选择。我希望能在md中生成toc
+6. 能重排md中的表格，成为 "在md中也不难看" 的格式
+
+参考:
+
+- [copywriting-correct / 中英文文案排版纠正器](https://github.com/ricoa/copywriting-correct)
