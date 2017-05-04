@@ -8,54 +8,68 @@ lang: zh
 
 ## Part 2 JSX和Element
 
-### V-DOM和渲染
+### 渲染
 
 "渲染" 这个词经常指 "从不可视的东西生成可视的东西" 的过程。
 比如在图形学中，从两个座标和画线指令 (不可视) 生成一条线段的像素 (可视) 这样的过程就被称为渲染。
 
-React式框架的渲染也是一个类似的过程，此时不可视形态是一些JS数据，可视形态则是浏览器原生DOM及其显示 (以下称DOM)。
+React式框架的渲染也是一个类似的过程，此时不可视形态是一些JS数据，可视形态则是浏览器原生DOM及其显示。
 整个渲染过程是声明式的: 我们用数据描述想要的DOM (渲染的结果)，由框架负责把DOM更新到这个状态 (渲染的过程)。
-这个传给框架的JS数据就是虚拟DOM (以下称V-DOM)。
+这些"描述了想要的渲染结果"的JS数据就是虚拟DOM (以下称V-DOM)。
 
-### Element / VNode
+### V-DOM和VNode
 
-V-DOM和DOM一样是树状结构，V-DOM的组成单位是Element (注意和原生DOM的Element区分。以下的Element如无特别注明，都指V-DOM即`JSX.Element`)。
+V-DOM和DOM一样，是由Element/Node组成的树状结构 (以后的Element/Node如无额外说明均指V-DOM，请注意和原生DOM区分)。
 
-Preact的V-DOM中有以下几种Element
+Preact的V-DOM主要有以下几种Node (也包括了Element):
 
-2. 和一个原生DOM Element对应，此时Element是一个JS对象，如 `{ nodeName: "div", ...}`
-3. 和一个纯函数Component对应，此时Element是一个，
-4. 没有comment和cdata
+1. 对应Component的Node: 是一个`VNode`类的JS对象，有以下属性:
+    - `nodeName`:
+        - 当VNode对应DOM Component时，`nodeName`是`div`等字符串
+        - 当VNode对应纯函数Component时，`nodeName`是那个函数
+        - 当VNode对应非纯函数Component时，`nodeName`是Component constructor
+    - `children`
+        - 这个Component下的子Node数组。子Node可能是`VNode`对象，也可能是字符串
+    - `attributes`
+        - 这个Component的属性
+    - `key`
+        - 这个Component
+2. Node也可能是字符串，对应原生DOM中的一个`Text` node。
+3. 原生DOM的Comment和CDATA没有对应的VNode
 
-1. 和DOM中一个`Text` Node对应的，此时Element本身是一个JS字符串
+### JSX
 
-V-DOM是
-一个Element
+JSX的实质是 "V-DOM字面量"，我们可以把JSX完全手工地改写成preact的VNode:
 
-V-DOM的单位是Element。
+```jsx
+// 定义Component
+class Greeting extends preact.Component {}
 
-1. string 本身也是VNode
-2. 和HTML tag对应的，不带JS实现的Component ("DOM component"): nodeName是`"div"`等字符串
-3. 自定义的Component子类: nodeName是Component类的Constructor
-4. 自定义的纯函数的Component: nodeName是那个函数
+// 一个JSX写法的Element
+const elem = <Greeting attr1={1} >text</Greeting>;
 
-对2 3 4类的VNode含有:
-
-- attributes (来自jsx?)
-- children (jsx?)
-
-### (DOM) Element
-
-`node._component`: Component instance that "owns" this node
-
-Q:
-- what if multiple _component ?
-
-`node._listeners`: event listeners
-
-```ts
-
-type node._listeners {
-    [eventName: string]: (event: Event) => void
-}
+// 一个JS写法的Element
+const elem = new VNode();
+elem.nodeName = Greeting;
+p.attributes = { a: 1};
+p.children = ["text"];
 ```
+
+当然这样就和手写
+
+Preact中提供了 `preact.h` 这个函数来将JSX转换成Preact自己的VNode等数据结构。
+
+### Element不等于Instance
+
+V-DOM Element里只含有Component constructor的引用，以及JSX中的属性。我们可以低成本地创建 (`preact.h()`) 和复制 (`preact.cloneElement()`) Element。
+
+在class Component内定义的state及hook方法 (`componentWillMount()`) 并不属于Element，而是属于那个Component的Instance。
+当一个Element被渲染到DOM时，才会有相应的Instance被Preact创建。
+同样的Element被多次渲染到DOM同一位置时，Instance也不会被多次创建。
+
+一般我们不需要自己手工创建或管理Instance，Preact也没有能获取Instance的公开API。
+
+### 代码
+
+本文涉及的功能很短，不到100行:
+

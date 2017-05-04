@@ -69,3 +69,17 @@ function diffAttributes(dom, attrs, old) {
 React: [Reconciliation](https://facebook.github.io/react/docs/reconciliation.html)
 
 Preact: vnode和node
+
+`node._component`: Component instance that "owns" this node
+
+Q:
+- what if multiple _component ?
+
+`node._listeners`: event listeners
+
+```ts
+
+type node._listeners {
+    [eventName: string]: (event: Event) => void
+}
+```

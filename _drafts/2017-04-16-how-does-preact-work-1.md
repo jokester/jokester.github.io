@@ -14,7 +14,8 @@ lang: zh
 ## 目录
 
 1. Preact介绍 & 开始使用Preact (本文)
-2. JSX 和 Element
+2. Preact的代码组成
+3. JSX 和 Element
 3. 将 VDOM 渲染到 DOM
 4. Component
 
@@ -29,7 +30,7 @@ lang: zh
 
 - 小: 全部代码仅有 1.3k 行，最小化后9kB，再gzip后不到4kB
     - 直接的好处: 可以边读这系列文章边把代码全部过一遍。这对于React的体量是难以做到的。
-    - 追求小的副作用是代码中有些晦涩的地方，这也是我写这系列的动机之一
+    - 追求小的副作用是代码中有些晦涩的地方，这也是我写这系列文章的动机之一。
 - 快: 在很多测试中比 React 性能更高
 - 对浏览器做更少抽象 ("Closer to the Metal")
     - 直接把原生DOM事件传给你的`onClick=`，不像React一样把不同浏览器的事件 "标准化"
@@ -44,15 +45,55 @@ lang: zh
 
 更详细的比较可以看 [Preact](https://preactjs.com/) / [Differences to React](https://preactjs.com/guide/differences-to-react)。
 
+Preact和React在概念和行为上有诸多相似，相信理解Preact的内部对React 使用者也会有帮助。
+
 ## 这系列会介绍什么
 
-Preact 将JSX变成DOM的全过程及代码解说，将覆盖Preact 8.1.0 的所有功能。
-考虑到Preact和React在概念和行为上有诸多相似，相信理解Preact的内部对React 使用者也会有帮助。
+后续文章将介绍Preact 8.1.0中的渲染全过程及代码。以下是按功能对Preact代码的划分，以及后续文章的内容。
 
-- JSX和V-DOM
-- 将VDOM渲染到DOM - 无状态VDOM (DOM component)
-- 将VDOM渲染到DOM - 有状态VDOM
-- 事件和DOM更新
+```text
+-----+---------------------------------+-------------------
+ LOC | filename                        | comment
+-----+---------------------------------+-------------------
+   2 | src/vnode.js                    | VNode类
+  10 | src/clone-element.js            | 复制VNode
+  60 | src/h.js                        | JSX -> VNode
+     |                                 | *** Part2. JSX和V-DOM *** (70LOC)
+-----+---------------------------------+-------------------
+  20 | src/render.js                   | Diff entrypoint
+ 108 | src/dom/index.js                | DOM
+ 303 | src/vdom/diff.js                | VDOM-DOM diff
+  50 | src/vdom/index.js               | VDOM utils
+     |                                 | *** Part3. 无状态V-DOM的渲染 *** (500LOC)
+-----+---------------------------------+-------------------
+  81 | src/component.js                | Base class of Component
+  49 | src/vdom/component-recycler.js  | Component对象池
+ 274 | src/vdom/component.js           | 将有状态Component渲染到DOM
+  21 | src/render-queue.js             | Component的渲染队列
+     |                                 | *** Part4. 有状态的V-DOM渲染 *** (500LOC)
+-----+---------------------------------+-------------------
+  26 | src/preact.js                   | Entrypoint
+  13 | src/constants.js                | consts
+  27 | src/options.js                  | options / hooks
+  10 | src/util.js                     | util
+ 754 | src/preact.d.ts                 | TypeScript decl
+   9 | src/preact.js.flow              | Flow decl
+     |                                 | *** Part5. 其他 ***
+-----+---------------------------------+-------------------
+1817 | total                           |
+```
+共不到100LOC。
+
+##### Part3. 无状态V-DOM的渲染
+
+
+
+##### Part4. 有状态V-DOM的渲染
+
+##### Part5. 其他
+-
+- 无状态V-DOM的渲染
+- 有状态V-DOM (class Component) 的渲染
 
 顺便也会介绍 Preact 代码中用到的一些JavaScript技巧。
 
@@ -63,6 +104,12 @@ Preact 将JSX变成DOM的全过程及代码解说，将覆盖Preact 8.1.0 的所
     - 会定义和使用Component，包括纯函数Component和有状态的 `class` Component
 - 怎样配置 babel / webpack / TypeScript
     - 但会提供babel / TypeScript的两种新手包
+
+## Preact的代码组成
+
+Preact 8.1.0中的代码如果按功能分类，是这样的:
+
+
 
 ## 开始使用Preact
 
