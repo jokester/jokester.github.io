@@ -1,10 +1,8 @@
 ---
-title: 解剖Preact - 1 前言
+title: 解剖Preact - 1
 created_at: 2017-04-16
 lang: zh
 ---
-
-这是一系列对 Preact / JSX / V-DOM 渲染的研究文章。
 
 (<!-- FIXME: -->还未全部完成)
 
@@ -13,11 +11,12 @@ lang: zh
 
 ## 目录
 
+本文是一系列对 Preact / JSX / V-DOM 渲染的研究文章的第一篇。
+
 1. Preact介绍 & 开始使用Preact (本文)
-2. Preact的代码组成
-3. JSX 和 Element
-3. 将 VDOM 渲染到 DOM
-4. Component
+2. JSX 和 V-DOM
+3. 无状态 V-DOM 的渲染
+4. 有状态 V-DOM 的渲染
 
 ## Preact 是什么
 
@@ -33,8 +32,8 @@ lang: zh
     - 追求小的副作用是代码中有些晦涩的地方，这也是我写这系列文章的动机之一。
 - 快: 在很多测试中比 React 性能更高
 - 对浏览器做更少抽象 ("Closer to the Metal")
-    - 直接把原生DOM事件传给你的`onClick=`，不像React一样把不同浏览器的事件 "标准化"
-    - 在渲染VDOM时，直接和原生DOM对比
+    - 直接把原生DOM事件传给你的`onClick=` (React会把不同浏览器的事件 "标准化")
+    - 在渲染V-DOM时，直接将V-DOM和原生DOM对比 (React会先把V-DOM和上次的V-DOM对比，然后将不同点更新到原生DOM)
 - 警告和错误处理比React少
     - 全部代码中只有一个catch，如果你的代码抛出异常，这个异常会直接漏到浏览器控制台。
 <!-- TODO: 漏异常会导致不可逆的状态破坏吗？(FIXME: 可能会..) -->
@@ -49,51 +48,39 @@ Preact和React在概念和行为上有诸多相似，相信理解Preact的内部
 
 ## 这系列会介绍什么
 
-后续文章将介绍Preact 8.1.0中的渲染全过程及代码。以下是按功能对Preact代码的划分，以及后续文章的内容。
+后续文章将介绍Preact 8.1.0中的渲染全过程及代码。以下是按功能对Preact代码的划分，前3部分分别对应本系列的余下3篇文章。
 
 ```text
 -----+---------------------------------+-------------------
  LOC | filename                        | comment
 -----+---------------------------------+-------------------
+     |                                 | *** Part 2. JSX和V-DOM *** (70LOC)
    2 | src/vnode.js                    | VNode类
   10 | src/clone-element.js            | 复制VNode
   60 | src/h.js                        | JSX -> VNode
-     |                                 | *** Part2. JSX和V-DOM *** (70LOC)
 -----+---------------------------------+-------------------
-  20 | src/render.js                   | Diff entrypoint
+     |                                 | *** Part 3. 无状态V-DOM的渲染 *** (500LOC)
+  20 | src/render.js                   | Diff 和渲染功能的入口
  108 | src/dom/index.js                | DOM
  303 | src/vdom/diff.js                | VDOM-DOM diff
   50 | src/vdom/index.js               | VDOM utils
-     |                                 | *** Part3. 无状态V-DOM的渲染 *** (500LOC)
 -----+---------------------------------+-------------------
-  81 | src/component.js                | Base class of Component
+     |                                 | *** Part 4. 有状态V-DOM的渲染 *** (500LOC)
+  81 | src/component.js                | Component的基类
   49 | src/vdom/component-recycler.js  | Component对象池
  274 | src/vdom/component.js           | 将有状态Component渲染到DOM
   21 | src/render-queue.js             | Component的渲染队列
-     |                                 | *** Part4. 有状态的V-DOM渲染 *** (500LOC)
 -----+---------------------------------+-------------------
-  26 | src/preact.js                   | Entrypoint
+     |                                 | *** 其他 ***
+  26 | src/preact.js                   | 整个Preact的入口
   13 | src/constants.js                | consts
   27 | src/options.js                  | options / hooks
   10 | src/util.js                     | util
  754 | src/preact.d.ts                 | TypeScript decl
    9 | src/preact.js.flow              | Flow decl
-     |                                 | *** Part5. 其他 ***
 -----+---------------------------------+-------------------
 1817 | total                           |
 ```
-共不到100LOC。
-
-##### Part3. 无状态V-DOM的渲染
-
-
-
-##### Part4. 有状态V-DOM的渲染
-
-##### Part5. 其他
--
-- 无状态V-DOM的渲染
-- 有状态V-DOM (class Component) 的渲染
 
 顺便也会介绍 Preact 代码中用到的一些JavaScript技巧。
 
@@ -103,13 +90,7 @@ Preact和React在概念和行为上有诸多相似，相信理解Preact的内部
     - 会用JSX语法
     - 会定义和使用Component，包括纯函数Component和有状态的 `class` Component
 - 怎样配置 babel / webpack / TypeScript
-    - 但会提供babel / TypeScript的两种新手包
-
-## Preact的代码组成
-
-Preact 8.1.0中的代码如果按功能分类，是这样的:
-
-
+    - 但会提供 babel / TypeScript的两种新手包
 
 ## 开始使用Preact
 
@@ -121,14 +102,12 @@ Preact 8.1.0中的代码如果按功能分类，是这样的:
 
 可以使用我写的 [jokester/typescript-boilerplate](https://github.com/jokester/typescript-boilerplate) 的 `webpack-preact`分支，内有配置好的tsc / webpack / 测试。
 
-TODO: 命令
+<!-- TODO: 命令 -->
 
 #### 如果你使用 TypeScript 且想要自己配置
 
 1. 让 TypeScript编译器 (tsc) 用preact提供的函数转换tsx，需要一些额外的设置。
-
-在`tsconfig.json` (或其他地方的tsc设置) 中:
-
+    在`tsconfig.json` (或其他地方的tsc设置) 中:
 ```json
 {
     "compilerOptions": {
@@ -139,7 +118,6 @@ TODO: 命令
 ```
 
 2. 安装preact并在所有的tsx文件中:
-
 ```typescript
 import * as preact from 'preact';
 ```
