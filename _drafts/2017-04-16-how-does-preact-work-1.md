@@ -1,5 +1,5 @@
 ---
-title: 解剖Preact - 1
+title: 解剖Preact - 介绍
 created_at: 2017-04-16
 lang: zh
 ---
@@ -11,16 +11,16 @@ lang: zh
 
 ## 目录
 
-本文是一系列对 Preact / JSX / V-DOM 渲染的研究文章的第一篇。
+本文是一系列对 Preact / JSX / V-DOM 渲染的介绍文章的第一篇。
 
 1. Preact介绍 & 开始使用Preact (本文)
-2. JSX 和 V-DOM
+2. V-DOM 和JSX
 3. 无状态 V-DOM 的渲染
 4. 有状态 V-DOM 的渲染
 
 ## Preact 是什么
 
-[Preact](https://preactjs.com/) 是一个使用和 [React](https://facebook.github.io/react/) 相同的思想，几乎相同的API的JavaScript-DOM渲染库。
+[Preact](https://preactjs.com/) 是一个使用和 [React](https://facebook.github.io/react/) 相同的思想，几乎相同的API的JavaScript DOM渲染库。
 和 React 一样，Preact 也定位于 "单向渲染DOM" 这一职责。
 
 ## Preact 的特点

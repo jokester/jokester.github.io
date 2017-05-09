@@ -37,6 +37,7 @@ lang: zh
 - https://github.com/markdown-it/markdown-it
 - API: https://markdown-it.github.io/markdown-it/
 - 有诸多plugins，还有个plugin指南，可能比较容易扩展
+- VSCode的[vscode-markdownlint](https://github.com/DavidAnson/vscode-markdownlint) / [markdownlint](https://github.com/DavidAnson/markdownlint) 也用了这个
 
 ### `jonschlinkert/remarkable`
 

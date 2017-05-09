@@ -1,14 +1,37 @@
 ---
-title: 解剖Preact - 3
+title: 解剖Preact - 无状态 V-DOM 的渲染
 created_at: 2017-04-01
 lang: zh
 ---
 
-这是一系列对 Preact / JSX / V-DOM 渲染的研究文章。目录在[链接](#)。
+- toc
+{:toc}
 
-## Part3 渲染DOM
+## 目录
 
-#### 入口: `diff() @ vdom/diff.js`
+本文是系列文章的第三篇，介绍Preact将无状态 V-DOM 渲染到DOM的过程。
+
+1. Preact介绍 & 开始使用Preact
+2. V-DOM 和 JSX
+3. 无状态 V-DOM 的渲染 (本文)
+4. 有状态 V-DOM 的渲染
+
+## "无状态"
+
+在上一篇中我们讲过，V-DOM是一种用于描述渲染结果的树状JS对象，由下面几种Node组成:
+
+1. `nodeName` 为字符串的VNode对象，对应DOM Component (以及原生DOM的一个Element)
+2. `nodeName` 为 (不是Component constructor的函数) 的VNode对象，对应纯函数Component
+3. `nodeName` 为 (Component constructor函数) 的VNode对象，对应 class Component
+4. JS string或number值，对应一个原生DOM的 `Text` Node
+
+
+我们知道只有3, `class Component` 才有state (以及Instance和)，其他几种Node都是无状态的。其中1和4已经是
+
+
+更深层的原因: 1和4已经是固定了的JS值。2虽然
+
+## 入口: `diff() @ vdom/diff.js`
 
 - 初始化: isSvgMode / hydrating
 - 实际的diff: `idiff()`

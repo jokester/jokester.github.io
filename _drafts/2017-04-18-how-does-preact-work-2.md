@@ -1,5 +1,5 @@
 ---
-title: 解剖Preact - 2
+title: 解剖Preact - V-DOM和JSX
 created_at: 2017-04-01
 lang: zh
 ---
@@ -9,10 +9,10 @@ lang: zh
 
 ## 目录
 
-本文是系列文章的第二篇:
+本文是系列文章的第二篇，介绍V-DOM和JSX的基础知识。
 
 1. Preact介绍 & 开始使用Preact
-2. JSX 和 V-DOM (本文)
+2. V-DOM 和 JSX (本文)
 3. 无状态 V-DOM 的渲染
 4. 有状态 V-DOM 的渲染
 
@@ -31,11 +31,11 @@ V-DOM和DOM一样，是由Element/Node组成的树状结构 (以后的Element/No
 
 Preact的V-DOM主要有以下几种Node (也包括了Element):
 
-1. 对应Component的Node: 是一个`VNode`类的JS对象，有以下属性:
+1. 对应Component的Element: 是一个`VNode`类的JS对象，有以下属性:
     - `nodeName`:
-        - 当VNode对应DOM Component时，`nodeName`是`div`等字符串
-        - 当VNode对应纯函数Component时，`nodeName`是那个函数
-        - 当VNode对应非纯函数Component时，`nodeName`是那个Component的constructor
+        - 当VNode对应 DOM Component 时，`nodeName`是`div`等字符串
+        - 当VNode对应纯函数Component 时，`nodeName`是那个函数
+        - 当VNode对应 class Component时，`nodeName`是那个Component的constructor
     - `children`
         - 这个Component下的子Node数组。子Node可能是`VNode`对象，也可能是字符串
     - `attributes`
@@ -43,7 +43,7 @@ Preact的V-DOM主要有以下几种Node (也包括了Element):
     - `key`
         - 这个Component
 2. Node也可能是字符串，对应原生DOM中的一个`Text` Node。
-3. 原生DOM的Comment和CDATA没有对应的VNode
+3. 原生DOM的Comment和CDATA没有对应的VNode。
 
 ## JSX
 
