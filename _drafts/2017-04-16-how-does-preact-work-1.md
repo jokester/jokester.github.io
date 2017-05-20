@@ -27,7 +27,7 @@ lang: zh
 
 (以下的比较都是相对于 React)
 
-- 小: 全部代码仅有 1.3k 行，最小化后9kB，再gzip后不到4kB
+- 小: 全部代码仅有 1.1k 行，最小化后9kB，再gzip后不到4kB
     - 直接的好处: 可以边读这系列文章边把代码全部过一遍。这对于React的体量是难以做到的。
     - 追求小的副作用是代码中有些晦涩的地方，这也是我写这系列文章的动机之一。
 - 快: 在很多测试中比 React 性能更高
@@ -86,7 +86,7 @@ Preact和React在概念和行为上有诸多相似，相信理解Preact的内部
 
 ## 这系列不会介绍什么
 
-- 怎样使用JSX和React API。所以在开始读之前，建议先上手React到如下程度:
+- 怎样使用JSX和React。所以在开始读之前，建议先上手React到如下程度:
     - 会用JSX语法
     - 会定义和使用Component，包括纯函数Component和有状态的 `class` Component
 - 怎样配置 babel / webpack / TypeScript
@@ -122,5 +122,5 @@ Preact和React在概念和行为上有诸多相似，相信理解Preact的内部
 import * as preact from 'preact';
 ```
 
-- 注1: `preact`自带TypeScript的类型声明，不需要找 `@types/preact`
-- 注2: `preact`和`@types/react`同时安装会有类型冲突
+- 注1: `preact`自带TypeScript的类型声明，不需要找 `@types/preact` 这样的npm包。
+- 注2: `preact`和`@types/react`同时安装可能会有类型冲突。

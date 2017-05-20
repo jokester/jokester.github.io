@@ -56,14 +56,14 @@ class Greeting extends preact.Component {}
 // 一个JSX写法的Element
 const elem1 = <Greeting attr1={1} >text</Greeting>;
 
-// 一个JS写法的Preact Element
+// 一个JS写法的Element
 const elem2 = new VNode();
 elem.nodeName = Greeting;
 p.attributes = { a: 1 };
 p.children = ["text"];
 ```
 
-当然这样手写出的代码既冗长又失去了 JSX 直观的优点。一般我们还是会手写JSX，然后用框架提供的 `preact.h` / `React.createElement` 等函数来将JSX转换成框架自己的数据结构。
+当然这样手写出的代码既冗长又失去了 JSX 直观的优点。一般我们还是会手写JSX，然后用框架提供的 `preact.h` / `React.createElement` 等函数来转换成框架自己的数据结构。
 
 延伸阅读:
 
@@ -80,11 +80,11 @@ Element 就是V-DOM本身。
 
 Instance 是V-DOM渲染的结果，也是实际调用Component constructor 创建的，持有state的对象。
 当一个Element被首次渲染到DOM时，相应的Instance 才会被Preact创建。
-同样 (相同Component) 的Element被第二次渲染到DOM同一位置时，Preact不会多次创建Instance，而是会将props传给上次创建的Instance并重新渲染。
+同样 (相同Component) 的Element被第二次渲染到DOM同一位置时，Preact不会多次创建Instance，而是会将props更新到上次创建的Instance并重新渲染。
 
-一句话总结: 框架使用者创建Element，框架创建并管理Instance。
+一句话总结: 框架使用者创建Element (`render()`)，框架创建并管理Instance。
 
-(一般我们不需要自己创建或管理Instance，Preact也没有提供能获取Instance的公开API。)
+一般我们不需要自己创建或管理Instance，Preact也没有提供能获取Instance的公开API。
 
 延伸阅读:
 - [React Components, Elements, and Instances](https://facebook.github.io/react/blog/2015/12/18/react-components-elements-and-instances.html)
@@ -106,4 +106,4 @@ VNode类: 只是一个空函数。
 
 - `src/h.js`
 
-将JSX转化为VNode。`preact.h` 函数的本体。
+将JSX转化为VNode的`preact.h` 函数的本体。对应React中的`React.createElement()`。

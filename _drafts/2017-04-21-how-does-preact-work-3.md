@@ -13,43 +13,55 @@ lang: zh
 
 1. Preact介绍 & 开始使用Preact
 2. V-DOM 和 JSX
-3. 无状态 V-DOM 的渲染 (本文)
-4. 有状态 V-DOM 的渲染
+3. DOM Component 的渲染 (本文)
+4. 自定义Component的渲染
 
 ## "无状态"
 
 在上一篇中我们讲过，V-DOM是一种用于描述渲染结果的树状JS对象，由下面几种Node组成:
 
-1. `nodeName` 为字符串的VNode对象，对应DOM Component (以及原生DOM的一个Element)
+1. `nodeName` 为字符串的VNode对象，对应DOM Component
 2. `nodeName` 为 (不是Component constructor的函数) 的VNode对象，对应纯函数Component
 3. `nodeName` 为 (Component constructor函数) 的VNode对象，对应 class Component
 4. JS string或number值，对应一个原生DOM的 `Text` Node
 
+其中只有3, `class Component` 才有自己的状态 (以及Instance和 `componentDidMount`等callback)，其他几种Node都是无状态的。
 
-我们知道只有3, `class Component` 才有state (以及Instance和)，其他几种Node都是无状态的。其中1和4已经是
+"无状态"意味着已经确定，不会再变动 (不像一个Component可以`setState()` 然后导致自己再被渲染一次。
+1和4已经是确定了的JS值。
+2虽然还没有被执行，但如果 `nodeName` 是对相同输入给出相同输出的纯函数Component，在props确定时相应的Node也已经确定。
 
+本文介绍Preact将1 / 4两种Node渲染到DOM的过程。
 
-更深层的原因: 1和4已经是固定了的JS值。2虽然
+## 渲染过程
 
-## 入口: `diff() @ vdom/diff.js`
+### 给框架使用者的入口: `render()`
 
-- 初始化: isSvgMode / hydrating
-- 实际的diff: `idiff()`
-- diff完成后: `flushMount` / 将新dom插入parent
+Preact 对外提供的 `render()` 函数处于 `src/preact.js`，仅仅是将参数转发给`diff()`。
 
-#### 一对一diff: `idiff(dom, vnode) @ vdom/diff.js`
+### `diff()` (`vdom/diff.js`)
 
-- 如果vnode是函数Component: 展开vnode直到得到非函数Component, 继续
-- 如果vnode是falsy: 设vnode为`''`, 继续
-- 如果vnode是字符串: 将dom改为`TextNode`, 返回dom
-- 如果vnode是 (非函数) Component: `buildComponentFromVNode` 并返回
-    - 这部分在Component中介绍
-- 剩下的情况: vnode是DOM element
-    - 保证out
-        - 如果node不存在
-        - 如果node存在但和vnode类型不同，新建out并将node的child移给out
-        - 否则就用原来的node为out
-    - 对node和vnode的children做多对多diff (`innerDiffNode`)
+- 初始化一些在下级diff中用到的变量:
+    - isSvgMode 现在的diff是否在svg内部
+    - hydrating 是否正在将VDOM渲染到不由Preact管理的DOM
+- 执行`idiff()`，用`vnode`的内容更新DOM (见下一段)
+- 如果指定了parent: 在diff完成后，将更新好的DOM移到parent
+- diff全部完成后: `flushMount` 执行刚被mount的component
+- 返回更新后的DOM
+    - 注意: 这个返回值和React不一样。React的`render()`会返回顶层的Instance。
+
+### `idiff(dom, vnode)` (`vdom/diff.js`)
+
+`idiff` 对dom和vnode进行一对一的比较，并更新dom到和vnode一致的状态。
+
+- 如果vnode是falsy或字符串: 创建或更新`TextNode`, 返回dom
+- 如果vnode是 class Component或纯函数Component: 执行`buildComponentFromVNode` 并返回其结果
+    - 这部分在下一篇文章中介绍
+- 如果vnode是DOM Component
+    - 如果dom还不存在: 新建DOM Element
+    - 如果dom存在，但和`vnode.nodeName`是不同类型: 新建dom元素，并将原dom中的children移给新元素
+    - 对dom和vnode的children做多对多diff (`innerDiffNode()`)
+    - 用vnode的属性更新dom属性 (`diffAttributes()`)
 
 #### 多对多diff: `innerDiffNode(dom, vchildren) @ vdom/diff.js`
 
@@ -64,16 +76,19 @@ lang: zh
 - 对每个
 - 回收没有被用到的`dom.childrenNodes`
 
-#### 属性diff
+#### 属性diff (``diffAttributes()``)
 
 - `diffAttributes(dom, attrs, old) @ vdom/diff.js`
     - 比较attrs(新) 和old(上次), 只对不同的属性调用setAccessor
-        - 但属性名为`value` / `checked`时，比较对象是dom而不是old
+        - 当属性名为`value` / `checked`时，比较对象是dom而不是old
             - FIXME: 是因为content / idl attribute吗?
         - 注意: content attribute和IDL attribute的区别
 
-- `setAccessor(node, name, old, value, isSvg) @ dom/index.js`
+### 将props中的属性更新到DOM (`setAccessor()`)
+
+`setAccessor(node, name, old, value, isSvg) @ dom/index.js`
     - event proxy
+- 如果vnode是纯函数Component: 展开vnode直到得到非函数Component, 继续
 
 ```js
 // preact/src/vdom/diff.js
@@ -87,22 +102,5 @@ function diffAttributes(dom, attrs, old) {
 }
 ```
 
-#### React的diff算法
+### 其他
 
-React: [Reconciliation](https://facebook.github.io/react/docs/reconciliation.html)
-
-Preact: vnode和node
-
-`node._component`: Component instance that "owns" this node
-
-Q:
-- what if multiple _component ?
-
-`node._listeners`: event listeners
-
-```ts
-
-type node._listeners {
-    [eventName: string]: (event: Event) => void
-}
-```
