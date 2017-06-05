@@ -43,8 +43,6 @@ https://docs.mongodb.com/manual/reference/operator/update/
 
 read-only doucments calculated from *real* documents.
 
-
-
 #### TTL collection
 
 #### Document Validation

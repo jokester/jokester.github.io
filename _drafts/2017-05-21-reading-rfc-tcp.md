@@ -1,3 +1,13 @@
+title: Reading: RFC793 / TCP
+
+---
+
+My memo when reading [RFC793 / Transmission Control Protocol](https://tools.ietf.org/html/rfc793)
+
+## TCP:
+    - `process > TCP > IP` 
+    - system call
+
 ## Core Concepts
 
 - Socket = IP + Port
@@ -19,7 +29,7 @@
   whether the data
   in that call (and any preceeding calls) should be immediately pushed
   through to the receiving user
-- hey
+- `STATUS`
 
 ## TIL: SYN and 3-way hand shake
 
