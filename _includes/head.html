@@ -13,6 +13,22 @@
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="https://feeds.feedburner.com/HoleDiggingAutomaton/">
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.0.3/turbolinks.js" integrity="sha256-iRVODWVEZe2jDvJZwC7qI/Xx40YHzWS2bOX1z53lqC8=" crossorigin="anonymous" async></script>
+  <script>
+      (function() {
+          var tick = 0;
+          var timer = setInterval(function() {
+              if (typeof Turbolinks !== "undefined") {
+                  clearInterval(timer);
+                  if (Turbolinks && Turbolinks.supported) {
+                      Turbolinks.start();
+                  }
+              } else if (++tick > 20)
+                  clearInterval(timer); // stop waiting in 10s
+              // else console.log("still waiting");
+          }, 0.5e3);
+      })();
+  </script>
   {% if jekyll.environment == 'production' and site.google_analytics %}
   {% include google-analytics.html %}
   {% endif %}
