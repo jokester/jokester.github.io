@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
-    <script>
-    if ((location.hostname.match('jokester')) && (location.href.match(/^http:/i))) {
-        // redirect to https when viewed in internet
-        location.href = location.href.replace(/^http:/, "https:")
-    }
-    </script>
-
     {% include head.html %}
 
     <body>
