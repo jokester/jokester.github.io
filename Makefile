@@ -1,7 +1,7 @@
 preview: bundle
 	bundle exec jekyll serve --host 0.0.0.0
 
-drafts: bundle
+preview-drafts: bundle
 	bundle exec jekyll serve --host 0.0.0.0 --drafts
 
 compile: bundle
