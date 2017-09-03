@@ -67,7 +67,7 @@ rsa 2048 bits 0.000908s 0.000040s   1101.7  25136.7
 rsa 4096 bits 0.009625s 0.000149s    103.9   6691.5
 ```
 
-That means for my small-to-medium traffic sites, SSL overhead should not exceed around 10% of CPU.
+That means for my small-to-medium traffic sites, SSL overhead is not likely to exceed around 10% of CPU.
 
 ## Tools
 

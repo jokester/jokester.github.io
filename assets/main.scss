@@ -36,8 +36,12 @@ a {
   color:lightcyan;
 }
 
-div.highlighter-rouge, code.highlighter-rouge {
+div.highlighter-rouge code, code.highlighter-rouge, pre.codehilite {
   background-color: #444;
+  /* workaround for monospace in chrome. taken from https://what.thedailywtf.com/topic/11811/android-monospace-isn-t */
+  // this overrides puremin.css
+  font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono",
+               "Bitstream Vera Sans Mono", "Courier New", monospace, serif;
 }
 
 div.highlighter-rouge {
