@@ -14,7 +14,9 @@ lang: zh
 <!--
 
 
-
+声明式编程: https://www.zhihu.com/question/28292740/answer/41235781
+合成事件及其坑: https://zhuanlan.zhihu.com/p/26742034
+JSX: https://zhuanlan.zhihu.com/p/29711902
 
 -->
 
