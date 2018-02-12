@@ -17,4 +17,3 @@ The following steps described here worked for me in FreeBSD 11.1 / vm-bhyve 1.1.
 3. Set resource limits with `rctl`. You can either use [options provided in vm-bhyve](https://github.com/churchers/vm-bhyve/blob/master/sample-templates/config.sample#L394-L406), or call rctl manually.
     - [This PR](https://github.com/churchers/vm-bhyve/pull/63/files) shows the actual commands vm-bhyve uses.
     - rctl can do much more than limiting CPU usage of a bhyve process, see [man rctl](https://www.freebsd.org/cgi/man.cgi?query=rctl&sektion=8) for more rctl options
-

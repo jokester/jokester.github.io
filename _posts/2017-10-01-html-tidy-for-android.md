@@ -44,10 +44,36 @@ Internally tidy-html5 is able to parse HTML and keep parsed DOM as its own `stru
     - `typedef struct _TidyDocImpl TidyDocImpl @ forward.h`
     - `struct _TidyDocImpl                     @ tidy-int.h`
 
-## Implement some selector
+## tidy-html5 / Overall flow of (parse - clean - output) flow
 
-## JNI
+```text
+- DocParseStream(doc, in)
+    - called by all public parse APIs: tidyParse{File,Stdin,String,Buffer,Source}
+    - calls ParseXMLDocument or ParseDocument
+    - returns tidyDocStatus(doc)
 
-## Alternative to HTML-Tidy
+- ParseDocument
+- (make use of cleaned document)
+- CloseDocument
+```
 
-## Get DO
+## C Structures
+
+```text
+- TidyDoc
+    - #errors
+    - #warnings
+    - Node *root
+    - options
+
+- Node
+    - a linked list of attributes
+    - a linked list of children
+    -
+```
+
+## A JNI binding for tidy-html5
+
+Code at [tidyj](https://github.com/jokester/tidyj)
+
+(Not quite performant though, so not suggested over `JSoup`)

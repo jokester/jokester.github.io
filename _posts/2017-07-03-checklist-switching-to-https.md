@@ -77,4 +77,3 @@ That means for my small-to-medium traffic sites, SSL overhead is not likely to e
 
 - Usage statistics of SSL: [SSL Pulse](https://www.ssllabs.com/ssl-pulse/)
 - [SSL TLS Knowledge Center](https://www.owasp.org/index.php/SSL_TLS_Knowledge_Center)
-

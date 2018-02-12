@@ -1,11 +1,11 @@
-title: Reading: RFC793 / TCP
-
+---
+title: Reading RFC793 (TCP)
 ---
 
-My memo when reading [RFC793 / Transmission Control Protocol](https://tools.ietf.org/html/rfc793)
+A memo when reading [RFC793 / Transmission Control Protocol](https://tools.ietf.org/html/rfc793).
 
 ## TCP:
-    - `process > TCP > IP` 
+    - `process > TCP > IP`
     - system call
 
 ## Core Concepts

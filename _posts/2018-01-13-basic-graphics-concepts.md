@@ -1,19 +1,19 @@
 ---
-title: knowledge-graphics
+title: Basic graphics concepts
 ---
 
-## Graphics
+This is a memo I used to show basic concepts in  at workplace.
 
-### Basic
-
-### 2D Vector graphics
+## 2D Vector graphics
 
 - Coordinates
     - 2D Linear Transform
         - scale
         - translate
         - rotation
+        - skew
     - Matrix Representation
+        - `x' = T x`
         - composable
 
 - Vector
@@ -29,22 +29,19 @@ title: knowledge-graphics
 - Text
     - Font
     - Glyph
-    - Weight (pound)
+    - Weight (often in pound / pt)
     - Baseline
 
 - Drawing API - high level
-    - web: `HTMLCanvasElement`
-    - android: `Canvas`
+    - Browser: `HTMLCanvasElement`
+    - Android: `Canvas`
     - iOS: `CGContext`
 
-### Rendering
+- Drawing API - low level
+    - OpenGL / OpenGL ES
 
+## Rendering: from vector to bitmap
 
+## 3D graphics
 
-### 3D Vector graphics
-
-Idea: project 3d point to a (perspective transformation)
-
-
-
-
+Idea: project 3d point to a 2d point (perspective transformation).

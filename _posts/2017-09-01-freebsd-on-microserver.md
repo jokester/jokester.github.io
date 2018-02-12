@@ -17,7 +17,7 @@ This is a memo after installing FreeBSD on my MicroServer. Before that it was Ar
     - Connected to onboard SATA port (originally for CDROM)
 - 4x4TB HDDs for data
     - Connected to 4 HDD bays
-- PCIE addon cards:
+- PCI-E addon cards:
     - ATI RV810 for HDMI output
     - Some USB3.0 interface card <!-- TODO: what is the brand? -->
 
@@ -53,6 +53,13 @@ References during my quest:
 - [freebsd wiki / ata issues](https://wiki.freebsd.org/JeremyChadwick/ATA_issues_and_troubleshooting)
 <!-- TODO: how to download / flash the custom firmware -->
 
+## Post Install / Delay boot from USB root
+
+A `kern.cam.boot_delay` in `/boot/loader.conf` prevents system to boot from USB before it gets ready.
+
+[an extensive example of loader.conf](http://web.mit.edu/freebsd/head/sys/boot/forth/loader.conf)
+
+
 ## Post Install / Packages
 
 BSD have a binary package manager `pkg` now.
@@ -65,7 +72,14 @@ BSD have a binary package manager `pkg` now.
   vm-bhyve grub2-bhyve
 ```
 
-(Binary packages constitutes a good example of the 20 / 80 rule. Personally I cannot recall a single time when I have to touch `make.conf` in my short journey with Gentoo.)
+(Binary packages constitutes a good example of the 20 / 80 rule. Personally I cannot recall a single time when I have to touch `make.conf` in my short Gentoo journey.)
+
+<!-- TODO: add 'basic' services: microcode update, etc -->
+
+## Post Install / User and Group
+
+- create new user: `adduser` (interactive)
+- add new user to group: `pw group mod wheel -m MY_USERNAME`
 
 ## Post Install / Storage Pool
 
@@ -130,4 +144,3 @@ ZFS References:
 ## Misc Tricks
 
 - We can [access UFS from linux](https://tachibanatech.com/chris/freebsd/)
-

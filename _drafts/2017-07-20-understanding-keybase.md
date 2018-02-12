@@ -48,7 +48,6 @@ Keybase key (which is different from `PGP key`, and may be NaCL key instead of P
 
 a keybase key unifies device key and PGP key with a 35 bytes [kid](https://keybase.io/docs/api/1.0/kid).
 
-
 #### fingerprint
 
 A cryphtogic hash of (encoded form of) public key.
@@ -76,7 +75,6 @@ TODO: how is it stored?
 ## Passphrase
 
 ### Recover
-
 
 ## Keybase / Merkle tree / Bitcoin blockchain
 

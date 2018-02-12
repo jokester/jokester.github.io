@@ -1,10 +1,13 @@
 ---
-title: Vox inspected
+title: Inspecting vox file format
 ---
 
-# VOX inspectation
+This is a memo I wrote when inspecting `.vox` file format of [MagicaVoxel](http://ephtracy.github.io/index.html?page=mv_main)
 
-```
+- [file-format-vox.txt](https://github.com/ephtracy/voxel-model/blob/master/MagicaVoxel-file-format-vox.txt)
+- [More refs](http://ephtracy.github.io/index.html?page=mv_resource)
+
+```text
 
 0000000: 564f 5820 9600 0000 4d41 494e 0000 0000  VOX ....MAIN....
          ^VOX    ^150        ^MAIN     ^MAIN content: 0
@@ -35,5 +38,3 @@ title: Vox inspected
          ^Voxel18-20
 
 ```
-
-- NOTE 

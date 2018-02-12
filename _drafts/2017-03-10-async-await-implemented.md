@@ -188,14 +188,7 @@ console.log(seq1.next()); // next 4
 生成。这个函数
 可能大家已经注意到了，`yield`的返回值。下面我们将把 `async` 函数改写成生成器函数，并用`yield` 和 `next / throw` 实现 `await` 的行为。
 
-
-
 #### 用Generator实现await
 
 
 ## 用状态机实现async
-
-
-
-- vczh:
--
