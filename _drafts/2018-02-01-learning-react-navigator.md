@@ -13,6 +13,8 @@
     - `StackNavigator`, `DrawerNavigator` etc
 - Navigator Component
     - Can also be used as Screen
+- Custom Navigator Component
+    - `Router` + `View`
 - Router: per Navigator Component (constructor)
     - Pure functions to (reduce over state) and (map state to component)
     - `(Action, State) -> State`
@@ -30,6 +32,8 @@
     - only 1 screen is active?
         - what about during animation / transition?
     - XXX: does inactive component get unmounted?
+- Dispatch
+    - by default, 1 instance shared by all Navigator in the navigation tree. see https://reactnavigation.org/docs/custom-navigators.html#docsNav
 
 ## Helpers
 
