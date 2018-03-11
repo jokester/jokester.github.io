@@ -18,12 +18,15 @@
 - Router: per Navigator Component (constructor)
     - Pure functions to (reduce over state) and (map state to component)
     - `(Action, State) -> State`
-    - `(Path, Params) -> Action`
-    - `(State) -> (Path, Param)`
+    - `(Path, URLParams) -> Action`
+    - `(State) -> (Path, URLParam)`
     - `(State) -> (Component)`
+        - Returns the active component for a deep navigation state.
     - `(routeName) -> (Component)`
+        - a Screen component, used by RouterView
     - [concept map](https://reactnavigation.org/docs/custom-routers.html)
     - XXX: how is router composed?
+    - XXX: what are conventions of Navigator Screen?
 - Action
     - a `intent` or `command` object to change state
     - as per Action in redux

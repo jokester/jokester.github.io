@@ -4,7 +4,7 @@ created_at: 2017-04-16
 lang: zh
 ---
 
-这是一系列对 Preact / JSX / V-DOM 渲染的研究文章。
+这是一系列对 Preact 内部行为的介绍文章，
 
 - toc
 {:toc}
