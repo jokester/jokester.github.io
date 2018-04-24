@@ -44,7 +44,7 @@ Subkeys:
 
 ## OpenKeychain
 
-Basically a PGP
+Basically a PGP client for Android.
 
 ## Fidesmo
 
@@ -53,7 +53,7 @@ I found when used to keep PGP key, fidesmo card have a quite limited capacity:
 - Only keeps 1 key
 - I cannot save a existing key to it. i.e. A new key have to be created.
 - The secret key part is always stored within the card, and cannot be exported.
-    - It's intended to be an authoritive key holder, rather than a backup key store. Reasonable in a security POV.
+    - It's intended to be an authoritive key holder, rather than a backup key store. Reasonable from a security POV.
 
 ## My use of them
 
