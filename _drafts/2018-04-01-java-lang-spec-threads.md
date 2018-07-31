@@ -77,8 +77,39 @@
     - external action
     - thread divergence
 
+action: described by `thread, kind-of-action, variable-or-monitor, action-identifier`:w
+
 ##### 17.4.3 Programs and Program Order
 
-- 
+- Program order
+    - **a** total order (of actions) that obeys intra-thread semantics of T
+- Sequentially consistent
+    - if the **execution order** is consistent with **program order**, and each read of variable `v` sees the 'last' value written to v.
 
+Strong guarantee:
+    - execution order is a total order
+    - each individual action is atomic and immediately visible
 
+##### 17.4.4 Synchronization order
+
+- Synchronization order: a total order of all **synchronization** actions that are consistent with the **program order**
+
+- synchronized-with relation of actions `>`
+    - unlock of m > lock of m
+    - volatile write of v > read of v
+    - starting a thread > first action in the thread
+    - write of default value (0 / false / null) > first action in *every* thread
+    - final action of thread > detection of termination of the thread (`Thread#isAlive()`, `Thread#join()`)
+    - 'release' > 'acquire'
+
+##### 17.4.5 happens-before order: a partial order over actions
+
+- x, y :: Action, x, y : hb(x,y) reads 'x happens before y'
+- happens-before defines where data race
+
+hb(x, y) IF:
+
+- x and y are in same threa, and x comes before y in program order
+- end of construction of object > finializer of that object
+- x > y
+- transitive: hb(x, y) && hb(y, z) => hb(x, z)
