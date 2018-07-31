@@ -42,5 +42,43 @@
 
 #### 17.4 内存模型
 
+给定一个程序（java或class）和其执行过程，内存模型描术执行过程(i.e. 内存模型规定JVM能否把一串代码这样执行)。内存模型检验执行过程中的每一次读，保证被那次读操作观测到的写操作是合规的。
+
+内存模型描述了程序可能的行为。一个实现可以自由地产生任何代码，只要执行程序得到的结果能被内存模型预测。
+
+(因此实现者可以非常自由地做代码变换，包括action重排序，以及去除不需要的同步)
+
+内存模型决定了在程序的每一点，能读到什么值。每个线程的action必须符合线程的语义，除了每次读到的值由内存模型决定。我们称此为“线程内”语义。线程内语义是单线程程序的语义，能用（线程中读操作的结果）来完全预测此线程的行为。要判断线程T的操作是否合法，我们
+
+每次线程T产生一个跨线程ACTION，它必须和下一个action a符合。如果a是读，则线程T中使用的A的结果必须符合内存模型。
 
 ##### 17.4.1 Shared Variables
+
+- shared memory OR heap memory
+- 'variable':
+    - instance fields
+    - static fields
+    - array elements
+- 'conflicting':
+    - 2 access to the same variable, where at least 1 of them is write
+
+##### 17.4.2 action
+
+- (inter-thread) action
+    - read (normal, aka non-volatile)
+    - write
+    - synchronization action
+        - volatile read
+        - volatile write
+        - lock
+        - unlock
+        - first and last action of thread
+        - start of thread, and detection of termination of thread
+    - external action
+    - thread divergence
+
+##### 17.4.3 Programs and Program Order
+
+- 
+
+
