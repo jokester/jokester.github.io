@@ -21,9 +21,9 @@ JSX: https://zhuanlan.zhihu.com/p/29711902
 ## 目录
 
 1. Preact介绍 & 开始使用Preact (本文)
-2. JSX 和 Element
-3. 将 VDOM 渲染到 DOM
-4. Component
+2. Element / 
+3. 渲染过程详解 (stateless)
+4. 渲染过程详解 (stateful)
 
 ## Preact 是什么
 
@@ -33,18 +33,19 @@ JSX: https://zhuanlan.zhihu.com/p/29711902
 ## Preact 的特点
 
 (以下的比较都是相对于 React)
+
 - 小: 全部代码仅有 1.3k 行，最小化后9kB，再gzip后不到4kB
     - 直接的好处: 可以边读这系列文章边把代码全部过一遍。这对于React的体量是难以做到的。
 - 快: 在很多测试中比 React 性能更高
-- 对浏览器做更少抽象 ("Closer to the Metal")
-    - 直接把原生DOM事件传给你的`onClick=`，不像React一样把不同浏览器的事件标准化成 “合成事件” (`SyntheticEvent`)
+- 简单: 具体地说有以下几点
+    - 对浏览器做更少抽象 ("Closer to the Metal")
+        - 直接把原生DOM事件传给你的`onClick=`，不像React一样把不同浏览器的事件标准化成 “合成事件” (`SyntheticEvent`)。
     - 在渲染VDOM时，直接和原生DOM对比
-- 警告和错误处理比React少
-    - 全部代码中只有一个catch，如果你的代码抛出异常，这个异常会直接漏到浏览器控制台。
-<!-- TODO: 漏异常会导致不可逆的状态破坏吗？(FIXME: 可能会..) -->
-- 和React API略有不同
+    - 警告和错误处理比React少
+    - 全部代码中只有一个catch，如果你的代码抛出异常，这个异常会直接漏到浏览器控制台)。<!-- TODO: 漏异常会导致不可逆的状态破坏吗？(FIXME: 可能会..) -->
+- 和React API有些差别
     - 大致上兼容React的最近release，可能比React更早抛弃deprecated API
-    - 同时提供了 [preact-compat](https://github.com/developit/preact-compat) 来减少API区别
+    - 同时提供了 [preact-compat](https://github.com/developit/preact-compat) [preact-portal](https://github.com/developit/preact-portal/) 等包，来补全这些不同
     - 不一定有 React v16的新API
 <!-- TODO:  diff算法略有不同? -->
 

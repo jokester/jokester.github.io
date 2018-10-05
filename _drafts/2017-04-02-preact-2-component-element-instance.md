@@ -19,11 +19,11 @@ lang: zh
 ## 渲染
 
 "渲染" 这个词经常指 "从不可视的东西生成可视的东西" 的过程。
-比如在图形学中，从两个座标和画线指令 (不可视) 生成一条线段的像素 (可视) 这样的过程就被称为渲染。
+比如在图形学中，从两点座标和画线指令 (不可视) 生成看起来像一条线段的像素 (可视) 的过程就属于渲染。
 
-React式框架的渲染也是一个类似的过程，此时不可视形态是一些JS数据，可视形态则是浏览器原生DOM及其显示。
+React式框架的渲染也是一个类似的过程，此时不可视的是一些JS数据，渲染得到的可视结果则是浏览器原生DOM。
 整个渲染过程是 *声明式* 的: 我们用数据描述想要的DOM (渲染的结果)，由框架负责把DOM更新到这个状态 (渲染的过程)。
-这些"描述了想要的渲染结果"的JS数据就是虚拟DOM (以下称V-DOM)。
+这些"描述渲染结果"的JS数据就是虚拟DOM (以下称V-DOM)。
 
 ## V-DOM和VNode
 
@@ -70,19 +70,21 @@ p.children = ["text"];
 - [WTF is JSX](jasonformat.com/wtf-is-jsx)
 - [React Without JSX](https://facebook.github.io/react/docs/react-without-jsx.html)
 
-## Element和Instance
+## Component / Element / Instance
 
-Element和Instance是两个重要而又容易混淆的概念。
+这是几个重要而又容易混淆的概念。
 
-Element 就是V-DOM本身。
-一个V-DOM Element里只含有对Component constructor的引用，以及JSX中的属性。
+Component
+
+Element 是组成V-DOM的元素 (就像DOM Element是组成DOM树的元素)。
+一个Element里只含有对Component (函数或class) 的引用，以及JSX中的属性。
 我们可以低成本地创建 (`preact.h()`) 和复制 (`preact.cloneElement()`) Element。
 
 Instance 是V-DOM渲染的结果，也是实际调用Component constructor 创建的，持有state的对象。
-当一个Element被首次渲染到DOM时，相应的Instance 才会被Preact创建。
-同样 (相同Component) 的Element被第二次渲染到DOM同一位置时，Preact不会多次创建Instance，而是会将props更新到上次创建的Instance并重新渲染。
+当一个Element被首次渲染到DOM时，相应的Instance 才会被Preact创建 (`componentDidMount`)。
+同样 (相同Component) 的Element被第二次渲染到DOM同一位置时，Preact不会多次创建Instance，而是会将props更新到上次创建的Instance并重新渲染 (`componentDidUpdate`)。
 
-一句话总结: 框架使用者创建Element (`render()`)，框架创建并管理Instance。
+一句话总结: 框架使用者创建Component和Element (`render()`)，框架创建并管理Instance。
 
 一般我们不需要自己创建或管理Instance，Preact也没有提供能获取Instance的公开API。
 
