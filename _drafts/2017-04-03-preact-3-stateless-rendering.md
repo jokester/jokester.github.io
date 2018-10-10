@@ -13,30 +13,41 @@ lang: zh
 
 1. Preact介绍 & 开始使用Preact
 2. V-DOM 和 JSX
-3. DOM Component 的渲染 (本文)
-4. 自定义Component的渲染
+3. 无状态V-DOM的渲染
+4. 有状态V-DOM的渲染
 
 ## "无状态"
 
 在上一篇中我们讲过，V-DOM中有下面几种Node:
 
-1. JS string值，对应一个原生DOM的 `Text` Node
+1. 字符串，对应一个原生DOM的 `Text` Node
 2. `nodeName` 为字符串的VNode对象，对应原生DOM Element
 3. `nodeName` 为 (不是 class constructor的函数) 的VNode对象，对应无状态Component
 4. `nodeName` 为 (class constructor) 的VNode对象，对应 class Component
 
 其中只有4, `class Component` 才会渲染得到有状态的Instance，其他几种Node都是无状态的。
 
-1和4已经是确定了的JS值。
+"无状态" 的意思是渲染所需信息完全由V-DOM决定，且不会再变动:
 
-2虽然还没有被执行，但如果 `nodeName` 是对相同输入给出相同输出的纯函数Component，在props确定时相应的Node也已经确定。
+- 1和2已经是固定了的JS值。
+- 3虽然还没有被执行，但如果 `nodeName` 是对相同输入给出相同输出的纯函数Component，在props确定时相应的Node也已经确定。 
 
-"无状态"意味着已经确定，不会再变动 (不像一个Component Instance可以`this.setState()` 然后导致自己再被渲染一次)。
+与其相反的则是 "有状态":
 
+- 在首次渲染后，每个Instance有自己的状态，这个状态同样影响渲染结果
+- 一个Instance可以改变自己的状态 (`this.setState()`) 并导致Instance重新渲染
 
-本文介绍Preact将1 / 2 / 3的V-DOM渲染到DOM的过程。
+本文介绍Preact将1 / 2 / 3几种Node渲染到DOM的过程。
 
 ## 渲染过程
+
+```text
+call graph:
+
+- diff() / vdom/diff.js
+    - `idiff(dom, vnode)` (`vdom/diff.js`) 
+
+```
 
 ### 给框架使用者的入口: `render()`
 
@@ -53,7 +64,7 @@ Preact 对外提供的 `render()` 函数处于 `src/preact.js`，仅仅是将参
 - 返回更新后的DOM
     - 注意: 这个返回值和React不一样。React的`render()`会返回顶层的Instance。
 
-### `idiff(dom, vnode)` (`vdom/diff.js`)
+### 
 
 `idiff` 对dom和vnode进行一对一的比较，并更新dom到和vnode一致的状态。
 

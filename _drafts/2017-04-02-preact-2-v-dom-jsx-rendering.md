@@ -19,9 +19,11 @@ lang: zh
 "渲染" 这个词经常指 "从不可视的东西生成可视的东西" 的过程。
 比如在图形学中，从两点座标和画线指令 (不可视) 生成一条线段的像素 (可视) 的过程就是一种渲染。
 
-React / Preact 式框架的渲染也是一个类似的过程，此时不可视的是一些JS数据，渲染得到的可视结果则是浏览器原生DOM。
+React / Preact 式框架的渲染也是一个类似的过程，此时不可视的是一些JS数据，(在前端) 渲染得到的可视结果则是原生DOM (在服务器渲染则是得到HTML字符串)。
 
 整个渲染过程是 *声明式* 的: 我们用数据描述想要的DOM (渲染的结果)，由框架负责把DOM更新到这个状态 (渲染的过程)。这些 "描述渲染结果" 的JS数据就是虚拟DOM (以下称V-DOM)。
+
+本文主要介绍渲染的输入 (V-DOM / JSX) 和输出，剩下的两篇文会具体研究渲染过程。
 
 ## Preact的V-DOM
 
@@ -68,7 +70,7 @@ p.attributes = { a: 1 };
 p.children = ["text"];
 ```
 
-显然手写JS麻烦得多。所以一般我们还是写JSX，然后让编译器 (如tsc / babel) 把JSX转换为 `const elem = preact.h(Greeting, { a: 1 })`，再由 `preact.h` 生成VNode。
+显然手写JS麻烦得多。所以一般我们还是写JSX，然后让编译器 (如tsc / babel) 把JSX转换为 `const elem = preact.h(Greeting, { a: 1 }, "text")`，再由 `preact.h` 生成VNode。
 
 延伸阅读:
 
@@ -77,7 +79,7 @@ p.children = ["text"];
 
 ## Component / Element / Instance
 
-这是几个重要而又容易混淆的概念。
+这是几个貫穿全局的，重要而又容易混淆的概念。
 
 **Element**
 
@@ -97,9 +99,9 @@ Component决定这个VNode被渲染时的结果:
 
 **Instance**
 
-Instance 是 (有状态Component的Element) 的渲染结果。当一个Element被首次渲染到DOM时，Preact才会创建相应的Instance。
+Instance 是 (有状态Component的Element) 的渲染结果。当一个这样的Element被首次渲染到DOM时，Preact才会创建相应的Instance。
 
-同样 (相同Component) 的Element被第二次渲染到DOM同一位置时，Preact不会多次创建Instance，而是将新的props传给已有的Instance，并由那个Instance决定是否重新渲染 (`componentShouldUpdate`)。
+同样 (相同Component) 的Element被再次渲染到DOM同一位置时，Preact不会多次创建Instance，而是将新的props传给已有的Instance，并由那个Instance决定是否重新渲染 (`componentShouldUpdate`)。
 
 一个Instance也可以 `this.setState()` / `this.forceUpdate()` 然后重新渲染自己持有的那部分子树。
 
