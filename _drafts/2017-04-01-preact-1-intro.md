@@ -1,5 +1,5 @@
 ---
-title: 解剖Preact - 1
+title: 解剖Preact - 开篇
 created_at: 2017-04-16
 lang: zh
 ---
@@ -18,12 +18,12 @@ JSX: https://zhuanlan.zhihu.com/p/29711902
 
 -->
 
-## 目录
+## 系列目录
 
 1. Preact介绍 & 开始使用Preact (本文)
-2. Element / 
-3. 渲染过程详解 (stateless)
-4. 渲染过程详解 (stateful)
+2. JSX 是什么
+3. Preact 渲染过程 (stateless)
+4. Preact 渲染过程 (stateful)
 
 ## Preact 是什么
 
@@ -53,14 +53,15 @@ JSX: https://zhuanlan.zhihu.com/p/29711902
 
 ## 这系列会介绍什么
 
-主要内容是 Preact 怎样工作，将覆盖Preact的全部代码。考虑到Preact和React在概念和行为上有诸多相似，相信理解Preact的内部对React 使用者也会有帮助。
+主要内容是 Preact 怎样工作，将覆盖Preact的全部代码。
 
-- JSX和Element (VNode / V-DOM)
-- 将VDOM渲染到DOM
-- Component
-- 事件和DOM更新
+- JSX和Element (VNode / VDOM)
+- 将VDOM渲染到DOM的过程
+- Component的更新和重渲染
 
-顺便也会介绍 Preact 代码中用到的一些JavaScript技巧。
+考虑到Preact和React在概念和行为上有诸多相似，相信理解Preact的内部对React 使用者也会有帮助。
+
+顺便也会介绍 Preact 代码中看到的一些JavaScript技巧。
 
 ## 这系列不会介绍什么
 
@@ -102,3 +103,4 @@ import * as preact from 'preact';
 
 - 注1: `preact`自带TypeScript的类型声明，不需要找 `@types/preact`
 - 注2: `preact`和`@types/react`同时安装会有类型冲突
+
