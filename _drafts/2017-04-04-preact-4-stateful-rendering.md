@@ -6,6 +6,35 @@ lang: zh
 
 ## Part4 Component
 
+### Notation
+
+```
+dom :: DOM Element
+
+dom
+
+vnode :: VNode
+
+C :: new() => Component
+c :: Component
+
+c._base === dom // if c 'owns' the dom
+c.nextBase // dom that gets 'owned' by c when c gets mounted
+c._disabled // true during setComponentProps()
+c.__ref , c.__key // ref and key from vnode
+c.context, c.prevContext
+c.props, c.prevProps
+
+dom._component              :: Component
+component._parentComponent  :: Component
+
+
+
+```
+
+
+
+
 ### (不纯的) Component
 
 如果以 "可组合" "可复用为标准，前面介绍过的纯函数Component已经可以达到了。那么不纯函数的Component多了些什么能力呢？

@@ -116,5 +116,10 @@ function diffAttributes(dom, attrs, old) {
 }
 ```
 
+### `ATTR_KEY`
+
+- `dom[ATTR_KEY]` iff dom is created/managed by preact
+
+
 ### 其他
 
