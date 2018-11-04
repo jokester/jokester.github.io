@@ -11,8 +11,9 @@ lang: zh
 
 1. Preact介绍 & 开始使用Preact
 2. V-DOM / JSX / 渲染 (本文)
-3. Preact 渲染过程 (stateless)
-4. Preact 渲染过程 (stateful)
+3. 渲染过程 - DOM Component
+4. 渲染过程 - 纯函数 Component
+5. 渲染过程 - class Component
 
 ## 渲染
 
@@ -23,13 +24,13 @@ React / Preact 式框架的渲染也是一个类似的过程，此时不可视�
 
 整个渲染过程是 *声明式* 的: 我们用数据描述想要的DOM (渲染的结果)，由框架负责把DOM更新到这个状态 (渲染的过程)。这些 "描述渲染结果" 的JS数据就是虚拟DOM (以下称V-DOM)。
 
-本文主要介绍渲染的输入 (V-DOM / JSX) 和输出，剩下的两篇文会具体研究渲染过程。
+本文主要介绍渲染的输入 (V-DOM / JSX) 和输出，下面几篇会具体研究渲染过程。
 
 ## Preact的V-DOM
 
 V-DOM和DOM一样，是树状结构 (下文的Element/Node如无额外说明均指V-DOM，请注意和原生DOM区分)。
 
-Preact的V-DOM有以下两种Node:
+Preact的V-DOM有以下几种Node:
 
 1. 字符串，对应原生DOM的 `Text` Node。
 2. `VNode` 类 (`src/vnode.js` 中的空白类) 的JS对象。有以下属性:
@@ -46,7 +47,7 @@ Preact的V-DOM有以下两种Node:
 
 注: 原生DOM的`Comment` `CDATA` 等Node 在Preact的V-DOM中没有东西对应
 
-<!-- 注2: VNode个类名字叫 "Node" 但其实对应原生DOM的Element-->
+注2: VNode名字叫 "Node" 但其实对应原生DOM的HTMLElement / React的 `React.Element` 。
 
 ## JSX
 
@@ -77,7 +78,7 @@ p.children = ["text"];
 - [WTF is JSX](jasonformat.com/wtf-is-jsx)
 - [React Without JSX](https://facebook.github.io/react/docs/react-without-jsx.html)
 
-## Component / Element / Instance
+## Element / Component / Instance
 
 这是几个貫穿全局的，重要而又容易混淆的概念。
 
@@ -89,13 +90,13 @@ p.children = ["text"];
 
 **Component**
 
-被Element引用 (`nodeName`) 的字符串或函数或class constructor。
+被 VNode 引用 (`nodeName`) 的字符串或函数或class constructor。
 
 Component决定这个VNode被渲染时的结果:
 
 - 字符串: 一个原生DOM Element
-- 返回Element的函数 (aka 无状态Component): 一颗原生DOM的子树
-- class constructor (aka 有状态Component): 一颗原生DOM的子树，和一个 "持有" 这颗子树的Instance
+- 纯函数Component: 一颗原生DOM的子树
+- class Component: 一颗原生DOM的子树，和一个 "持有" 这颗子树的Instance
 
 **Instance**
 
@@ -115,7 +116,7 @@ Instance 是 (有状态Component的Element) 的渲染结果。当一个这样的
 
 ## 相关代码
 
-本文涉及的代码很少，不到100行。代码划分
+本文涉及的代码不到100行。代码划分
 
 <!-- FIXME: 加上有注释的代码。-->
 <!-- FIXME: 加上到代码划分的链接 -->

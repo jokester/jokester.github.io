@@ -4,12 +4,27 @@ created_at: 2017-04-01
 lang: zh
 ---
 
+
+
 ## Part4 Component
+
+## Pure / Stateless
+
+我们把前 3 种情况称为 "无状态" 渲染。"无状态" 是指渲染所需信息完全由V-DOM决定，且不会再变动:
+
+- 1和2已经是固定了的JS值。
+- 3虽然还没有被执行，但只要 `nodeName` 是对相同输入给出相同输出的纯函数Component，在props确定时相应的Node也已经确定。
+
+与其相反的则是 4 "有状态" 渲染:
+
+本文介绍Preact将1 / 2 / 3几种Node渲染到DOM的过程。
+
+
 
 ### Notation
 
 ```
-dom :: DOM Element
+dom :: DOM Node
 
 dom
 
@@ -18,7 +33,7 @@ vnode :: VNode
 C :: new() => Component
 c :: Component
 
-c._base === dom // if c 'owns' the dom
+c.base ::: dom // if c 'owns' the dom
 c.nextBase // dom that gets 'owned' by c when c gets mounted
 c._disabled // true during setComponentProps()
 c.__ref , c.__key // ref and key from vnode
@@ -27,24 +42,12 @@ c.props, c.prevProps
 
 dom._component              :: Component
 component._parentComponent  :: Component
+component._component        :: child component?
 
 
 
 ```
 
-
-
-
-### (不纯的) Component
-
-如果以 "可组合" "可复用为标准，前面介绍过的纯函数Component已经可以达到了。那么不纯函数的Component多了些什么能力呢？
-
-一个不纯的Component实质上是一个定义了`prototype.render()`的类。定义类通常是为了使用实例。
-
-- "纯" Component: 没有instance或state, 只由
-- "不纯" Component: 有instance，每个instance有自己的state
-
-### Ref
 
 
 
