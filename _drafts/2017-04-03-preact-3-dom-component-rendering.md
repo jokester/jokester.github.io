@@ -61,7 +61,7 @@ Preact 对外提供的 `render()` 函数处于 `src/preact.js`，仅仅是将参
 `idiff` 对dom node和vnode进行一对一的比较，并更新dom到和vnode一致的状态。
 
 - 如果vnode是falsy或字符串: 创建或更新`TextNode`, 返回dom
-- 如果vnode是 class Component或纯函数Component: 执行`buildComponentFromVNode` 并返回其结果
+- 如果vnode是 class Component或纯函数Component: 仅执行`buildComponentFromVNode` 并返回其结果
     - 这个分支会在后面的文章介绍
 - 如果vnode是DOM Component
     - 如果dom还不存在: 新建DOM Element
