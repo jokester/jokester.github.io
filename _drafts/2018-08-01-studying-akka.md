@@ -53,8 +53,17 @@ An actor's supervisor (parent) decides what to do:
 
 - restart: re-create from the props (becomes the same actorRef) and continue processing **next** message
     - resets internal state
-    - TODO: how to retry with the message?
+    - the message caused fault can be seen in `preRestart` hook
 - ignore
     - keeps internal state
 - stop
+    - cause `Terminated` message
 - escalate: let supervisor's supervisor decide
+
+##### Lifecycle
+
+- preStart
+- preRestart
+    - default impl: stop all children and call postRestart
+- postRestart
+- postStop
