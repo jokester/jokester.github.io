@@ -74,14 +74,88 @@ then
 "possible behaviors of a program"
 
 - whether an execution trace (instructions?) is a legal execution of the program (code?)
-- each *read* MUST observe some *write* that is valid according to certain rules (i.e. memory model)
+- "legal" := each *read* MUST observe some *write* that is valid according to certain rules
+
+- intra-thread semantics
+    - semantics for single-threaded programs
+
+#### 17.4.1 Shared Variables
+
+- "shared variable": instance fields / static fields / array elements
+    - in contrast to single-threaded : local variables / method params / execution handler params
+- "conflicting": two accesses to the same variable if at least 1 of them is write
+
+#### 17.4.2 Actions
+
+**inter-thread action** or simply "action": an action that can be detected or directly-influenced by another thread
+
+intra-thread actions do not concern us: all threads need to obey intra-thread semantics
+
+possible (inter-thread) actions:
+
+- non-volatile read
+- non-volatile write
+- **synchronized actions**
+    - volatile read
+    - volatile write
+    - lock of monitor
+    - unlock of monitor
+    - first and last action of a thread
+    - actions that start a thread, or detect termination of a thread
+- "external" action
+    - an action that may be observable outside of an execution (`side effect` ?), and have a result based on an environment external to the execution (`RealWorld` ?)
+- thread divergence action, or "dead loop"
+
+#### 17.4.3 Programs and Program Order
+
+(*program order* of thread *t*): a total order that obeys intra-thread semantics of *t*
+
+a set of actions is *sequentially consistent* if
+
+- the actions occur in a total order *"execution order* that is consistent with program order
+- AND each read r of variable v sees (last write to v in execution order)
+
+"sequential consistency" as a language model prohibits many compiler optimizations
+
+#### 17.4.4 Synchronization order
+
+a synchronization order is a total order over all the *synchronization actions* of an execution.
+
+For each thread t, the **synchronization order** of synchronization actions in t is consistent with the **program order** of t.
+
+Synchronization actions induce **synchronized-with** relation relation of actions:
+
+- unlock *synchronized-with* all subsequent lock
+- a volatile write *synchronized-with* all subsequent volatile read
+- starting a thread *synchronized-with* first action in that thread
+- final action of a thread T *synchronized-with* actions of thread T2, if T2 dectes T has terminatedd
+- interruption of thread blah blah
+- write of default value *synchronized-with* first action in every thread
+     - "conceptually every object is created at start of program"
+
+#### 17.4.5 Happens-before order
+
+2 actions can be ordered by a **happens-before** relationship
+
+If x happens before y, then: x is visible to y AND is ordered before y
+
+x happens before y if:
+
+- x and y are actions of the same thread, and x comes before y in program order
+- OR: x is (end of constructor) and y is (start of finalizer)
+- OR: x synchronized-with y
+- OR: x happens-before some z, and z happens-before y (i.e. happens-before is a transitive relation)
+
+NOTE: happens-before does not require certain order in execution (implementation may reorder as long as all observations obeys *happens-before*)
+
+happens-before relation defines **data races**: if 2 **conflicting accesses** are not ordered by a **happens-before** relationship, the program is said to contain a **data race**.
+
+a program is **correctly synchronized** IFF all sequentially consistent executions are free of data races.
+
+if a program is **correctly synchronized**, then **all** executions of the program will appear to be sequentially consistent
+
+read r of varable v is allowed to observe a write w if
+
+**happens-before consistency**:
 
 
-happens-before:
-
-分布式中的基本关系.
-
-- `volatile`
-- [jls / 8.3.1.4. volatile Fields](https://docs.oracle.com/javase/specs/jls/se9/html/jls-8.html#jls-8.3.1.4)
-    - Java Memory Model ensures that all threads see a **consistent** value for the variable
-    - `consistent`
