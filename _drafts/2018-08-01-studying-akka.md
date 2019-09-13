@@ -2,7 +2,6 @@
 
 ### Stream
 
-
 - "blocks used to build data process pipeline"
     - Source: 0 input / 1 output
     - Sink: 1 input / 0 output

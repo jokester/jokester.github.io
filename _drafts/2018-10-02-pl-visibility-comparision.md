@@ -5,8 +5,8 @@ Behavior
 callsite
 
 1. Same instance (no receiver)
-2. Same class
-3. Subclass (or subtype)
+2. Same class (type)
+3. Subclass (subtype)
 4. Same Package
 5. anywhere
 

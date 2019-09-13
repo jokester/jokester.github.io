@@ -1,15 +1,17 @@
 ---
-title: 黑客FAQ 中译版
+title: 黑客FAQ (的又一个中译版)
 created_at: 2017-03-25
 ---
 
 原文: [The Hacker FAQ rev0.05 / Peter Seebach](https://www.seebs.net/faqs/hacker.html)
 
+译注：我觉得这篇FAQ，
+
 ### NEWS!
 
-[IBM DeveloperWorks](http://www.ibm.com/developerworks/) 曾买下了本文的一个版本。
+[IBM DeveloperWorks](http://www.ibm.com/developerworks/) 买下了本文的一个版本。
 
-而且 IBM 还赞助了另一篇文章，[管理者FAQ](http://www.seebs.net/faqs/manager.html)。这是一份写给需要管理黑客，并在职场中感觉到挫败和迷茫的人的指南。
+而且 IBM 还赞助了另一篇文章，[管理者FAQ](http://www.seebs.net/faqs/manager.html)。这是一份写给需要管理黑客，并且在工作中感到挫败和迷茫的人的指南。
 感谢 IBM 对这个项目的支持。我很喜欢这篇新文章，也很高兴能把它发表出来。
 
 我要特别指出IBM在此事上非常友善和通情达理；和 CRC 对待 Eric Weisstein 的方式相比。
@@ -73,7 +75,7 @@ IBM 曾有报告说，特定的程序员的生产率是其他人100倍或更高�
 1.0 我的黑客不适合公司环境。她好像工作不错，但朋友不多。
 
 这是正常的。你的黑客可能觉得周围没有和黑客合得来的人。
-你可以考虑给她一个远程上班，或弹性时间 (读作夜班) 的职位，可能会让她更有效率。
+你可以考虑给她一个远程上班，或弹性时间 (意思是夜班) 的职位，可能会让她更有效率。
 或者再雇一个。
 
 1.1 我的黑客穿奇怪的衣服。怎样提醒他公司着装的重要性？
