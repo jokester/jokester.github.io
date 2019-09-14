@@ -1,7 +1,7 @@
 ---
-title: 解剖Preact - 无状态 V-DOM 的渲染
+title: 解剖Preact - DOM Component的渲染
 created_at: 2017-04-01
-lang: zh
+lang: zh_cn
 ---
 
 - toc
@@ -12,28 +12,34 @@ lang: zh
 本文是系列文章的第三篇，介绍Preact将无状态 V-DOM 渲染到DOM的过程。
 
 1. Preact介绍 & 开始使用Preact
-2. V-DOM 和 JSX
-3. DOM Component 的渲染 (本文)
-4. 自定义Component的渲染
+2. V-DOM / JSX / 渲染
+3. 渲染过程 - DOM Component (本文)
+4. 渲染过程 - 纯函数 Component
+5. 渲染过程 - class Component
 
-## "无状态"
+## VDOM的分类
 
-在上一篇中我们讲过，V-DOM是一种用于描述渲染结果的树状JS对象，由下面几种Node组成:
+在上一篇中我们讲过，V-DOM中有下面几种Node:
 
-1. `nodeName` 为字符串的VNode对象，对应DOM Component
-2. `nodeName` 为 (不是Component constructor的函数) 的VNode对象，对应纯函数Component
-3. `nodeName` 为 (Component constructor函数) 的VNode对象，对应 class Component
-4. JS string或number值，对应一个原生DOM的 `Text` Node
+1. 字符串，对应一个原生DOM的 `Text` Node
+2. `nodeName` 为字符串的VNode对象，对应原生DOM Component。nodeName的字符串即是原生DOM的nodeName (tagName)。
+3. `nodeName` 为 (不是 class constructor的函数) 的VNode对象，对应无状态Component
+4. `nodeName` 为 (class constructor) 的VNode对象，对应 class Component
 
-其中只有3, `class Component` 才有自己的状态 (以及Instance和 `componentDidMount`等callback)，其他几种Node都是无状态的。
+本文将介绍仅含1 / 2的V-DOM的渲染过程。
 
-"无状态"意味着已经确定，不会再变动 (不像一个Component可以`setState()` 然后导致自己再被渲染一次。
-1和4已经是确定了的JS值。
-2虽然还没有被执行，但如果 `nodeName` 是对相同输入给出相同输出的纯函数Component，在props确定时相应的Node也已经确定。
+### call graph
 
-本文介绍Preact将1 / 4两种Node渲染到DOM的过程。
+```text
+call graph:
 
-## 渲染过程
+render()    => diff()    =>     idiff()     <=>    innerDiffNode()
+
+- diff() / vdom/diff.js
+    - `idiff(dom, vnode)` (`vdom/diff.js`) 
+```
+
+## API和内部流程
 
 ### 给框架使用者的入口: `render()`
 
@@ -46,24 +52,26 @@ Preact 对外提供的 `render()` 函数处于 `src/preact.js`，仅仅是将参
     - hydrating 是否正在将VDOM渲染到不由Preact管理的DOM
 - 执行`idiff()`，用`vnode`的内容更新DOM (见下一段)
 - 如果指定了parent: 在diff完成后，将更新好的DOM移到parent
-- diff全部完成后: `flushMount` 执行刚被mount的component
+- diff全部完成后: `flushMount` 执行diff过程中被mount的component
 - 返回更新后的DOM
-    - 注意: 这个返回值和React不一样。React的`render()`会返回顶层的Instance。
+    - 注意: 这个返回值和React不一样。React的`render()`会返回顶层Component的Instance。
 
-### `idiff(dom, vnode)` (`vdom/diff.js`)
+### `idiff()` (`vdom/diff.js`)
 
-`idiff` 对dom和vnode进行一对一的比较，并更新dom到和vnode一致的状态。
+`idiff` 对dom node和vnode进行一对一的比较，并更新dom到和vnode一致的状态。
 
 - 如果vnode是falsy或字符串: 创建或更新`TextNode`, 返回dom
-- 如果vnode是 class Component或纯函数Component: 执行`buildComponentFromVNode` 并返回其结果
-    - 这部分在下一篇文章中介绍
+- 如果vnode是 class Component或纯函数Component: 仅执行`buildComponentFromVNode` 并返回其结果
+    - 这个分支会在后面的文章介绍
 - 如果vnode是DOM Component
     - 如果dom还不存在: 新建DOM Element
-    - 如果dom存在，但和`vnode.nodeName`是不同类型: 新建dom元素，并将原dom中的children移给新元素
+    - 如果dom存在，但和`vnode.nodeName`是不同类型: 同样地新建DOM Element，并将原dom中的children移给新元素
     - 对dom和vnode的children做多对多diff (`innerDiffNode()`)
-    - 用vnode的属性更新dom属性 (`diffAttributes()`)
+    - 将vnode的属性更新到dom (`diffAttributes()`)
 
 #### 多对多diff: `innerDiffNode(dom, vchildren) @ vdom/diff.js`
+
+`innerDiffNode` 只由 `idiff()` 调用。
 
 - 将 `dom.childNodes` 分组
     - `keyed` : `[key: string] : Node`
@@ -72,11 +80,11 @@ Preact 对外提供的 `render()` 函数处于 `src/preact.js`，仅仅是将参
     - 如果vchild有key: 在`keyed`中找相同key的
     - 如果vchild没有key: 在`children`中从左边开始找有相同类型的
         - 找到后更新`min / childrenLen`以减小将来的搜索范围
-- 对`child` (可能没找到) 和`vchild`用`idiff`，如果之前没找到child，这里会创建一个新的
-- 对每个
-- 回收没有被用到的`dom.childrenNodes`
+- 对上一步找到的 `child` 和`vchild` 递归执行 `idiff` ，把 `child` 更新到和 `vchild` 一致的状态。
+    - 如果 `child` 之前不存在，`idiff` 内会新建一个。
+- 回收没有匹配到 `vchild` 的 `child`
 
-#### 属性diff (``diffAttributes()``)
+#### 属性diff (`diffAttributes()`)
 
 - `diffAttributes(dom, attrs, old) @ vdom/diff.js`
     - 比较attrs(新) 和old(上次), 只对不同的属性调用setAccessor
@@ -88,7 +96,6 @@ Preact 对外提供的 `render()` 函数处于 `src/preact.js`，仅仅是将参
 
 `setAccessor(node, name, old, value, isSvg) @ dom/index.js`
     - event proxy
-- 如果vnode是纯函数Component: 展开vnode直到得到非函数Component, 继续
 
 ```js
 // preact/src/vdom/diff.js
@@ -102,5 +109,14 @@ function diffAttributes(dom, attrs, old) {
 }
 ```
 
-### 其他
+## 数据结构
+
+在仅有DOM Component时整个渲染流程都比较简单。
+
+Preact把 (上次渲染时VDOM node的attributes) 用 `ATTR_KEY` 这个key保存在原生DOM的对象上。
+
+### `ATTR_KEY`
+
+- `dom[ATTR_KEY]` iff dom is created/managed by preact
+- `
 
