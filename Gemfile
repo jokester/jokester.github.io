@@ -8,5 +8,5 @@ ruby RUBY_VERSION
 
 # use same set of jekyll plugins to github page
 group :jekyll_plugins do
-  gem "github-pages", ">= 182"
+  gem "github-pages"
 end
