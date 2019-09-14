@@ -21,6 +21,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://jokester.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: tarsylia
 github_username:  jokester
+google_analytics: UA-39627402-1
 disqus:
   shortname: jokester-blog
 
