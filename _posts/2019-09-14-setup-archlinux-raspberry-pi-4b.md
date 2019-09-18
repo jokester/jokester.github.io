@@ -1,11 +1,15 @@
 ---
-title: Setup archlinux on Raspberry pi 4b
+title: Setup Archlinux on Raspberry Pi 4b
 created_at: 2019-09-14
+updated_at: 2019-09-18
 ---
 
 I bought a raspberry 4b (4g mem) to use as a low-power home server and emulator console ([libretro](https://www.archlinux.org/groups/x86_64/libretro/)). By far it's quite satisfactory.
 
 This is a memo about my settings and tunings.
+
+* toc
+{:toc}
 
 ## Prepare SD card
 
@@ -46,6 +50,8 @@ Refer to original instructions if you are uncertain about `fdisk` commands.
 
 # mkdir sdcard/root-current/boot
 
+# mount /dev/sdX1 sdcard/root-current/boot
+
 # bsdtar -xpf ArchLinuxARM-rpi-4-latest.tar.gz -C sdcard/root-current
 ```
 
@@ -61,24 +67,29 @@ Edit `sdcard/root-current/boot/cmdline.txt`, add `rootflags` part to mount the s
 Edit `sdcard/root-current/etc/fstab`, add our mount options (it boots without these lines, but new created files won't get compressed):
 
 ```diff
-+/dev/mmcblk0p2  /              btrfs   defaults,compress=lzo,subvol=/root-current,ssd       0       0
-+/dev/mmcblk0p2  /media/sdcard  btrfs   defaults,compress=lzo,subvol=/,ssd,discard,noauto       0       0
++/dev/mmcblk0p2  /              btrfs   defaults,compress=lzo,subvol=/root-current       0       0
++/dev/mmcblk0p2  /media/sdcard  btrfs   defaults,compress=lzo,subvol=/,noauto            0       0
 ```
 
 The `/media/sdcard` mount is not necessary for everyday use. It can be used to manage subvolumes / snapshots.
 
-### unmount all partitions and try boot
+## Customization and hardening
 
-## Tunable
+After successfully booting from SD card:
 
-After the following attempts to minimize disk IO, I'm already OK with the performance. Stopping here until I need to squeeze more.
+- Modify `/etc/locale.gen` and re-run `locale-gen` (It's strange that the `locale.gen` does not come with any locale.)
+- Recommended: harden sshd and other security config
+
+## Tuneables to minimize SD card IO
+
+After the following attempts, I'm already OK with the performance. Stopping here until I need to squeeze more out of it.
 
 ### Mount options
 
 - vfat partition: `noatime,nodiratime`
 - btrfs partition: `noatime,nodiratime,compress=lzo,ssd,discard`
 
-### Turn off journald
+### Stop journald from persisting logs
 
 ```diff
 # /etc/systemd/journald.conf
@@ -99,7 +110,7 @@ This is my first journey about iSCSI but it's smoother than I thought.
 
 see [archwiki](https://wiki.archlinux.org/index.php/Open-iSCSI)
 
-## joystick / emulator games
+## Gaming stuff: libretro and joystick
 
 TODO
 
