@@ -1,6 +1,7 @@
 ---
 title: Setup Archlinux on Raspberry Pi 4b
 created_at: 2019-09-14
+updated_at: 2019-09-18
 ---
 
 I bought a raspberry 4b (4g mem) to use as a low-power home server and emulator console ([libretro](https://www.archlinux.org/groups/x86_64/libretro/)). By far it's quite satisfactory.
