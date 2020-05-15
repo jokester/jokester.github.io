@@ -1,11 +1,12 @@
 ---
 title: Data URI
-created_at: 2013-12-30
-kind: article
+publishAt: 2013-12-30
+slug: til-data-uri
 ---
 
 #### TL;NR
-A data URI contains:
+
+A data URI is a URI that encodes bytes + content-type:
 
 - BASE64 encoded binary data (exception exists)
 - MIME type
