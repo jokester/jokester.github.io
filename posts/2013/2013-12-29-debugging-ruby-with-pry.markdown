@@ -1,7 +1,7 @@
 ---
 title: Debugging ruby with pry and plugins
-created_at: 2013-12-29
-kind: article
+publishAt: 2013-12-29
+slug: debugging-ruby-with-pry
 ---
 
 - toc

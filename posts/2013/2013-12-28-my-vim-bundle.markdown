@@ -1,7 +1,7 @@
 ---
 title: My vim bundle
-created_at: 2013-12-28
-kind: article
+publishAt: 2013-12-28
+slug: my-vim-bundle
 ---
 
 (Updated 2017-Jan: the latest bundle can be found in [my dotfile repo](https://github.com/jokester/dotted/blob/master/DOTvimrc.bundle))

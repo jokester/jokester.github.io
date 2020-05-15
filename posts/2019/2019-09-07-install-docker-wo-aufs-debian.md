@@ -1,6 +1,7 @@
 ---
 title: Install docker-ce without aufs in Debian
-created_at: 2019-09-07
+publishAt: 2019-09-07
+slug: install-docker-ce-without-aufs-in-debian
 ---
 
 The offical build of [docker-ce for debian](https://docs.docker.com/install/linux/docker-ce/debian/)

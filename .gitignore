@@ -132,3 +132,4 @@ $RECYCLE.BIN/
 public
 .cache
 graphql-types.ts
+.idea

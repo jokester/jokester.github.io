@@ -1,7 +1,7 @@
 ---
 title: My OSX bundle
-created_at: 2013-12-26
-kind: article
+publishAt: 2013-12-26
+slug: my-osx-brew-bundle
 ---
 
 (Updated 2017-Jan: the latest bundle can be found in [my dotfile repo](https://github.com/jokester/dotted/tree/master/osx))
