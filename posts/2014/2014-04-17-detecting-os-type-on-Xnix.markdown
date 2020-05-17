@@ -1,5 +1,5 @@
 ---
-title: Detecting OS type on *nix
+title: "TIL: Detecting OS type in *nix"
 publishAt: 2014-04-17
 slug: memo-detect-os-and-arch-in-unix
 ---

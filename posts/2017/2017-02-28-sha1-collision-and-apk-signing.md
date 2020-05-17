@@ -1,6 +1,7 @@
 ---
 title: SHA1 Collision and Android APK Signing
-created_at: 2017-02-28
+publishAt: 2017-02-28
+slug: sha1-collision-and-android-apk-signing
 ---
 
 As a paranoiac Android developer, I was concerned by recent SHA1-collision news.
@@ -9,8 +10,8 @@ After investigating it a bit, I am writing this as a FAQ to answer myself.
 
 If you need more information, or want to share any ideas, feel free to drop me a comment.
 
-* toc
-{:toc}
+- toc
+  {:toc}
 
 # Why should I be concerned?
 
@@ -19,7 +20,7 @@ You might be using it as either creator or consumer of APK files.
 
 # What is the worst case?
 
-A bad guy *may* be able to create a APK with his/her malicious code, and identical SHA1 digest of your genuine files. Devices that had previous version will consider the crafted APK to be signed by *your* certificate, and issue no warning when installing it.
+A bad guy _may_ be able to create a APK with his/her malicious code, and identical SHA1 digest of your genuine files. Devices that had previous version will consider the crafted APK to be signed by _your_ certificate, and issue no warning when installing it.
 
 # Am I still (practically) safe?
 
@@ -40,9 +41,9 @@ And this is the dark side:
 
 # How is SHA1 used in APK signing?
 
-SHA1 and its fellows is used in the `digest` part of `digest-and-sign` pattern of *digital signature*.
+SHA1 and its fellows is used in the `digest` part of `digest-and-sign` pattern of _digital signature_.
 
-The digest function (MD5 / SHA1 / SHA256) and type of sign key (DSA / RSA / EC) constitutes a *Signature Algorithm* like `SHA1withRSA` or `SHA256withEC`.
+The digest function (MD5 / SHA1 / SHA256) and type of sign key (DSA / RSA / EC) constitutes a _Signature Algorithm_ like `SHA1withRSA` or `SHA256withEC`.
 
 ## APK Signature scheme v1
 
@@ -52,7 +53,7 @@ Scheme v1 had a few other algorithms, but I'm afraid a vast majority used `SHA1w
 
 Scheme v2 always use SHA2 and up, and is thus safe against SHA1 collision.
 
-*But* it is only supported since Android 7.0 (SDK level 24).
+_But_ it is only supported since Android 7.0 (SDK level 24).
 
 # How is digest function determined for scheme V1?
 
@@ -88,17 +89,17 @@ Yes.
 This can be done by setting minimum SDK to a higher value.
 However older devices will not be able to install your new APKs.
 
-Please go on and read *why a simply switching is not enough*.
+Please go on and read _why a simply switching is not enough_.
 
 # Is switching to SHA2 (completely) enough?
 
 No.
 
-*/me sobs*
+_/me sobs_
 
 In a few devices I tested, Android installs new APK without warning, as long as it is signed with identical certificate of existing version.
 
-This means older devices (that only checks scheme v1) is inherently vulenarble to a *downgrade attack*.
+This means older devices (that only checks scheme v1) is inherently vulenarble to a _downgrade attack_.
 One can overwrite a `SHA256withRSA`-signed version with a `SHA1withRSA` APK (maybe made from an old version).
 
 # What can I do to maximize security?

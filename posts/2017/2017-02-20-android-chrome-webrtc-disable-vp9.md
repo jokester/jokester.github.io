@@ -1,10 +1,11 @@
 ---
-title: Disabling VP9 in Android Chrome's WebRTC
-created_at: 2017-02-20
+title: "Disabling VP9 in Android Chrome's WebRTC"
+publishAt: 2017-02-20
+slug: disabling-vp9-in-android-chrome-webrtc
 ---
 
 - toc
-{:toc}
+  {:toc}
 
 NOTE: due to complexity and opaqueness (to a JavaScript developer) of WebRTC technologies, this may not be a complete solution.
 You are advised to test and benchmark thorough before using this hack in real product.
@@ -140,18 +141,17 @@ This is stated in [RFC4566: SDP](https://tools.ietf.org/html/rfc4566) (`The sequ
 
 We decided to use VP8 because it should almost be available.
 [Android Compatibility Definition Document](https://source.android.com/compatibility/android-cdd.html#5_1_3_video_codecs)
-says that all devices with Android `>= 4.3` is *required* to have VP8 encoder.
+says that all devices with Android `>= 4.3` is _required_ to have VP8 encoder.
 
 ### Caveats / TBD
 
 Editing SDP worked for me, but this is far from a perfect fix. To name a few:
 
 - VP9 is stated to save 30% of bandwidth than VP8 ([src](https://developers.google.com/web/updates/2016/01/vp9-webrtc)).
-- I did not find a way to detect hardware encoding capability in mobile browser (any browser actually). The best workaround I could think of is to apply this hack to *all* Android Chrome versions.
+- I did not find a way to detect hardware encoding capability in mobile browser (any browser actually). The best workaround I could think of is to apply this hack to _all_ Android Chrome versions.
 
 ### Reference
 
 - [SoCs Supporting VP8/VP9](http://wiki.webmproject.org/hardware/socs)
 - [RFC4566 / SDP](https://tools.ietf.org/html/rfc4566)
 - [RFC4588 / RTP Retransmission Payload Format](https://tools.ietf.org/html/rfc4588)
-

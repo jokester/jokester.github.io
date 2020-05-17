@@ -1,5 +1,5 @@
 ---
-title: Immutable element in tuple
+title: "TIL: Immutable element in tuple"
 publishAt: 2014-01-14
 slug: til-python-immutable-element-in-tuple
 ---

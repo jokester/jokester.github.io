@@ -1,6 +1,7 @@
 ---
-title: Fast exp() for Monoids
-created_at: 2017-03-30
+title: 'TIL: Fast exp() for Monoids'
+publishAt: 2017-03-30
+slug: til-fast-exp-algorithm-for-monoids
 ---
 
 Today I learned that the fast-exponentiation in [SICP 1.2.4](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.4) can be applied to all monoids as well.
@@ -19,7 +20,7 @@ We can see that the set of all real numbers, `R`, and `a ⊕ b := a + b` forms a
 ### More examples of Monoid
 
 - `R`, and `a ⊕ b := a * b` forms a Monoid, where `I = 1`.
-- When N is an integer, Set of all integers `Z`, and `a ⊕ b := (a + b) mod N`  forms a Monoid, where `I = 0`.
+- When N is an integer, Set of all integers `Z`, and `a ⊕ b := (a + b) mod N` forms a Monoid, where `I = 0`.
 
 ## "Multiplication" of Monoid
 
@@ -32,8 +33,8 @@ If we consider `⊕` to be a general form of `plus`, we can define a general for
 This makes `a ⊗ k := a ⊕ a ⊕ a ⊕ a ⊕ a ⊕ a ⊕ a ⊕ a ⊕ a ...` where the right hand side is `k` `a`s concatencated by `⊕`.
 
 - When `a ⊕ b` is `a + b`, `⊗` becomes `*`.
-- When `a ⊕ b` is `a * b`, `⊗` becomes `**`. 
-- When `a ⊕ b` is `(a + b) % N`, `a ⊗ b` becomes `(a * b) % N`. 
+- When `a ⊕ b` is `a * b`, `⊗` becomes `**`.
+- When `a ⊕ b` is `(a + b) % N`, `a ⊗ b` becomes `(a * b) % N`.
 
 ## `a ⊗ k` can be computed in `O(ln2 k)`
 
@@ -51,27 +52,26 @@ However things are different in the case of `a * b` and `(a + b) % N`. Applying 
 
 ```ts
 function fastMul<T>(id: T, mplus: (op1: T, op2: T) => T, a: T, k: number): T {
-    if (~~k !== k || k < 0)
-        throw new Error('exp must be positive integer');
+  if (~~k !== k || k < 0) throw new Error('exp must be positive integer');
 
-    let ans = id;
+  let ans = id;
 
-    while (k > 0) {
-        if (k % 2 == 1) {
-            ans = mplus(ans, a);
-            k--;
-        } else {
-            a = mplus(a, a);
-            k /= 2;
-        }
+  while (k > 0) {
+    if (k % 2 == 1) {
+      ans = mplus(ans, a);
+      k--;
+    } else {
+      a = mplus(a, a);
+      k /= 2;
     }
+  }
 
-    return ans;
+  return ans;
 }
 
 // 2**5
 console.log(fastMul(1, (a, b) => a * b, 2, 5));
 
 // (887 * 885) % 12
-console.log(fastMul(0, (a, b) => (a % 12 + b % 12) % 12, 887, 885));
+console.log(fastMul(0, (a, b) => ((a % 12) + (b % 12)) % 12, 887, 885));
 ```

@@ -1,6 +1,7 @@
 ---
-title: A benchmark of http2
-created_at: 2017-04-01
+title: 'A simple benchmark of nginx http2'
+publishAt: 2017-04-01
+slug: a-simple-benchmark-nginx-http2
 ---
 
 Just updated my nginx sites to use http2. `nginx 1.10` package in Alpine linux already have this feature built. All I did is to enable it: changing `listen 443 ssl;` to `listen 443 ssl http2;`.
@@ -60,7 +61,7 @@ Percentage of the requests served within a certain time (ms)
 # 100 connection
 
 - all requests served happily
-- http2 reduces average but has larger *max time*
+- http2 reduces average but has larger _max time_
 
 ```text
 % h2load -n 1000 -c 100 https://some-site.jokester.io/

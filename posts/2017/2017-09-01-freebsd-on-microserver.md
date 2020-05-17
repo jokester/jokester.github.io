@@ -1,25 +1,27 @@
 ---
-title: FreeBSD on MicroServer
+title: 'Memo: home nas server and FreeBSD'
+publishAt: 2017-09-01
+slug: memo-home-nas-server-freebsd
 ---
 
 This is a memo after installing FreeBSD on my MicroServer. Before that it was Arch Linux.
 
 - toc
-{:toc}
+  {:toc}
 
 ## Hardware
 
 - HP MicroServer N54L (Gen7)
 - a handicapped N54L 2core cpu
 - 2x8G ECC DDR3 memory
-    - NOTE: N54L is picky about memory: it must be DDR3 ECC *unbuffered*. I found 2 economical modules on eBay at $50 / 8GB.
+  - NOTE: N54L is picky about memory: it must be DDR3 ECC _unbuffered_. I found 2 economical modules on eBay at \$50 / 8GB.
 - 1x256GB SSD for cache and performance-critical data
-    - Connected to onboard SATA port (originally for CDROM)
+  - Connected to onboard SATA port (originally for CDROM)
 - 4x4TB HDDs for data
-    - Connected to 4 HDD bays
+  - Connected to 4 HDD bays
 - PCI-E addon cards:
-    - ATI RV810 for HDMI output
-    - Some USB3.0 interface card <!-- TODO: what is the brand? -->
+  - ATI RV810 for HDMI output
+  - Some USB3.0 interface card <!-- TODO: what is the brand? -->
 
 ## Install
 
@@ -59,7 +61,6 @@ A `kern.cam.boot_delay` in `/boot/loader.conf` prevents system to boot from USB 
 
 [an extensive example of loader.conf](http://web.mit.edu/freebsd/head/sys/boot/forth/loader.conf)
 
-
 ## Post Install / Packages
 
 BSD have a binary package manager `pkg` now.
@@ -87,30 +88,30 @@ My no.1 reason to change to FreeBSD is for ZFS. It seems to me that zfsonlinux s
 The whole storage is like:
 
 - a `syspo` zpool, created during install
-    - contains a basic FreeBSD system
-    - 32GB of SSD, as a `log` vdev
+  - contains a basic FreeBSD system
+  - 32GB of SSD, as a `log` vdev
 - a `datapo` zpool
-    - all 4x4TB HDDs, as a `raidz1` vdev
-    - 4GB of SSD, as a `log` vdev
-        - used by zfs for ZIL
-    - 128GB of SSD, as a `cache` vdev
-        - will be used by zfs for L2ARC (cached IO, dedup table, etc)
-        - the 4x4TB of data would make a DDT (dedup table) of around 100G
+  - all 4x4TB HDDs, as a `raidz1` vdev
+  - 4GB of SSD, as a `log` vdev
+    - used by zfs for ZIL
+  - 128GB of SSD, as a `cache` vdev
+    - will be used by zfs for L2ARC (cached IO, dedup table, etc)
+    - the 4x4TB of data would make a DDT (dedup table) of around 100G
 - Rest of SSD is reserved, for ssd lifetime and future use
 
 ZFS settings and tuneables:
 
 - enable [Encrypted](http://www.schmidp.com/2014/01/07/zfs-full-disk-encryption-with-freebsd-10-part-2/)
-    - [Unlock Geli-encrypted ZFS Volume - FreeNAS](https://www.openattic.org/posts/unlock-geli-ecrypted-zfs-volume-freenas/)
-    - Wanted [] as in zfsonlinux, sadly it's not part of FreeBSD yet
+  - [Unlock Geli-encrypted ZFS Volume - FreeNAS](https://www.openattic.org/posts/unlock-geli-ecrypted-zfs-volume-freenas/)
+  - Wanted [] as in zfsonlinux, sadly it's not part of FreeBSD yet
 - enable LZ4 [compreession](https://www.freebsd.org/doc/handbook/zfs-term.html#zfs-term-compression-lz4)
-    - lz4 / lz4fast saves like 0.5% - 0.8% [benchmark](https://gist.github.com/e921a4620fd8deec648d6b95b342e1ea) with [lzbench](https://github.com/inikep/lzbench)
-    - *Risk*: my server is severly CPU bounded (N54L 2core/2.2G)
-    - this can be always be disabled later: https://serverfault.com/q/499304/74190
+  - lz4 / lz4fast saves like 0.5% - 0.8% [benchmark](https://gist.github.com/e921a4620fd8deec648d6b95b342e1ea) with [lzbench](https://github.com/inikep/lzbench)
+  - _Risk_: my server is severly CPU bounded (N54L 2core/2.2G)
+  - this can be always be disabled later: https://serverfault.com/q/499304/74190
 - enable [Dedupe](http://constantin.glez.de/blog/2011/07/zfs-dedupe-or-not-dedupe)
-    - a good BSD guy told me that dedup do save some space
-    - I happen to have a SSD for L2ARC (dedup-table sizes at 5~6GB per TB data)
-    - `When in doubt, check how much` ... in [ZFSTuningGuide](https://wiki.freebsd.org/ZFSTuningGuide#Deduplication)
+  - a good BSD guy told me that dedup do save some space
+  - I happen to have a SSD for L2ARC (dedup-table sizes at 5~6GB per TB data)
+  - `When in doubt, check how much` ... in [ZFSTuningGuide](https://wiki.freebsd.org/ZFSTuningGuide#Deduplication)
 - cache stragegy: `all/all` for memory/L2ARC
 - scrub: once per week
 
@@ -128,18 +129,20 @@ ZFS References:
 ## Post Install / Services
 
 - Mail
-    - forward alert mail with mailgun: [guide](https://marblenix.com/blag/2017/08/20/Receiving-Email-Alerts-from-FreeBSD-using-Mailgun.html)
-    - some [earlier guide](https://www.digitalocean.com/community/tutorials/how-to-send-email-through-an-external-smtp-service-with-sendmail-on-freebsd-10-1) required sendmail to be recompiled. This is not the case today.
+
+  - forward alert mail with mailgun: [guide](https://marblenix.com/blag/2017/08/20/Receiving-Email-Alerts-from-FreeBSD-using-Mailgun.html)
+  - some [earlier guide](https://www.digitalocean.com/community/tutorials/how-to-send-email-through-an-external-smtp-service-with-sendmail-on-freebsd-10-1) required sendmail to be recompiled. This is not the case today.
 
 - Storage
-    - The data pool is exposed with samba
+
+  - The data pool is exposed with samba
 
 - VMs
-    - [vm-bhyve](https://github.com/churchers/vm-bhyve/wiki/Quickstart) works out of box for creating and managing VMs
-    - All VMs uses bridged network and is now part of my home LAN
-    - VM1: debian x64 for internal services
-    - VM2: CoreOS for public services
-    - VM3: archlinux playground (whole filesystem imported from old Arch Linux)
+  - [vm-bhyve](https://github.com/churchers/vm-bhyve/wiki/Quickstart) works out of box for creating and managing VMs
+  - All VMs uses bridged network and is now part of my home LAN
+  - VM1: debian x64 for internal services
+  - VM2: CoreOS for public services
+  - VM3: archlinux playground (whole filesystem imported from old Arch Linux)
 
 ## Misc Tricks
 

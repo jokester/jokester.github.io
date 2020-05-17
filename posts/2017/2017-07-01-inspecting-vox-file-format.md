@@ -1,5 +1,7 @@
 ---
-title: Inspecting vox file format
+title: 'Memo: Inspecting vox file format'
+publishAt: 2017-07-01
+slug: memo-inspecting-vox-file-format
 ---
 
 This is a memo I wrote when inspecting `.vox` file format of [MagicaVoxel](http://ephtracy.github.io/index.html?page=mv_main)

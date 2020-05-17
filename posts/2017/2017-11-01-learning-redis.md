@@ -1,3 +1,9 @@
+---
+title: "Memo: Redis"
+publishAt: 2017-11-01
+slug: memo-redis
+
+---
 
 # Redis
 
@@ -12,11 +18,11 @@ String-centred:
 
 - string
 - list (of strings)
-    - internally linked list
+  - internally linked list
 - set (of strings)
 - sorted sets (of strings)
-    - where every string is attached a floating number value (weight?)
-    - internally, maybe sth like heap?
+  - where every string is attached a floating number value (weight?)
+  - internally, maybe sth like heap?
 - hash of `<string, string>`
 
 Others (todo: read):
@@ -35,10 +41,7 @@ redis keys are "binary safe" strings. i.e. they can be any byte sequence, and no
 
 ## Concept
 
-
 ### Value
-
-
 
 ### Atomcity
 
@@ -46,117 +49,113 @@ all commands are atomic, including commands about multi values (`MGET / MSET`) t
 
 ### Expire
 
-
-
-
 ## Commands
 
 ### Key
 
 - EXISTS key
-    - see if key exists
+  - see if key exists
 - DEL key
-    - del the key
+  - del the key
 - TYPE key
-    - return `none | list `
+  - return `none | list`
 
 ### Expire
 
 - EXPIRE / PEXPIRE
-    - set expire with relative time
+  - set expire with relative time
 - EXPIREAT / PEXPIREAT
-    - set expire with current time
+  - set expire with current time
 - `TTL` / `PTTL`
-    - query 
+  - query
 - `PERSIST key`
-    - removes the expiration
+  - removes the expiration
 
 ### `string`
 
-- `SET key value [EX expire_in_sec] [PX expire_in_msec] [NX|XX]
-    - EX/PX flag: set expire (relative time)
-    - NX flag: only set if not exist
-    - XX flag: only set if exist
-    - can be used to implement a (not fool-proof) mutex lock: see [SET / patterns](https://redis.io/commands/set)
+- `SET key value [EX expire_in_sec][px expire_in_msec] [NX|XX]
+  - EX/PX flag: set expire (relative time)
+  - NX flag: only set if not exist
+  - XX flag: only set if exist
+  - can be used to implement a (not fool-proof) mutex lock: see [SET / patterns](https://redis.io/commands/set)
 - GET
 - INCR / DECR / INCRBY / DECRBY
-    - `++x` or `x+= delta`
-    - the string and the delta must represent decimal integer
-    - returns new value
-    - delta must be integer
+  - `++x` or `x+= delta`
+  - the string and the delta must represent decimal integer
+  - returns new value
+  - delta must be integer
 - GETSET key new-value
-    - return old value (may be nil)
+  - return old value (may be nil)
 
 ### `list`
 
 - LPUSH / RPUSH
-    - runs in `O(1)` time
-    - add string values to (left | right) of list
-    - `lpush key a b c` results in a list of `c b a ...`
-    - returns number of values pushed
-    - creates list if not exist
-    - fails if the key exists but value is not list
+  - runs in `O(1)` time
+  - add string values to (left | right) of list
+  - `lpush key a b c` results in a list of `c b a ...`
+  - returns number of values pushed
+  - creates list if not exist
+  - fails if the key exists but value is not list
 - LPOP / RPOP / BLPOP / BRPOP
-    - pop 1 element from left / right
-    - return nil on empty list
-    - list gets removed if it had 1 element
+  - pop 1 element from left / right
+  - return nil on empty list
+  - list gets removed if it had 1 element
 - BRPOP / BLPOP
-    - like LPOP / RPOP
-    - differs in that B-POP would block on empty list, until there is sth to return
-        - won't stop blocking if value is changed to a non-list
-    - FIFO: the first client started waiting, gets served first
-    - timeout: max block time in second (sepcify 0 to block indefinitely)
+  - like LPOP / RPOP
+  - differs in that B-POP would block on empty list, until there is sth to return
+    - won't stop blocking if value is changed to a non-list
+  - FIFO: the first client started waiting, gets served first
+  - timeout: max block time in second (sepcify 0 to block indefinitely)
 - LRANGE
-    - `LRANGE key start end`
-    - get values from list
-    - both start / end are inclusive
-    - -1 means last index, -2 means last but 1
-        - so `LRANGE key 0 -1` gets all
+  - `LRANGE key start end`
+  - get values from list
+  - both start / end are inclusive
+  - -1 means last index, -2 means last but 1
+    - so `LRANGE key 0 -1` gets all
 - LLEN
-    - get length of list
-    - may need `O(n)` time
+  - get length of list
+  - may need `O(n)` time
 - LTRIM
-    - trims a list to a range
-    - "capped list" pattern: trim after push, to limit capacity
+  - trims a list to a range
+  - "capped list" pattern: trim after push, to limit capacity
 - LINSERT
-    - insert new value before/after a pivot
+  - insert new value before/after a pivot
 
 complicated:
 
 - RPOPLPUSH src dest
-    - atomic `LPUSH dest $ RPOP src`
-    - returns the element
-    - TODO: read patterns https://redis.io/commands/brpoplpush
+  - atomic `LPUSH dest $ RPOP src`
+  - returns the element
+  - TODO: read patterns https://redis.io/commands/brpoplpush
 
 ### `hash`
 
 - HSET / HGET : 1 field-value pair
 - HMSET / HMGE: multi pairsT
 - HGETALL
-    - returns `[field1, value1, field2, value2, ...]`
+  - returns `[field1, value1, field2, value2, ...]`
 - HLEN: `#fields`
 
 Operation on values:
 
 - HSETNX
-    - sets field only if not exist
+  - sets field only if not exist
 - HINCBY / HINCBYFLOAT
 - HSCAN
-    - iterator
-
+  - iterator
 
 ### `set`
 
 - SADD
 - SISMEMBER
 - SINTER
-    - intersection
+  - intersection
 - SUNIONSTORE
-    - compute union of 2 stores, and save to another set
+  - compute union of 2 stores, and save to another set
 - SPOP
-    - pop a *random* element
+  - pop a _random_ element
 - SCARD
-    - return cardinal of set
+  - return cardinal of set
 
 ### `sorted set`
 
@@ -167,22 +166,22 @@ Elements are in a (strict) `total order`
 - ZADD
 - ZINCRBY
 - ZSCORE
-    - get score by element
+  - get score by element
 - ZCARD
 - ZCOUNT ZLEXCOUNT
-    - count elements in a range (by score / by key)
+  - count elements in a range (by score / by key)
 - ZRANGE ZRANGEBYLEX ZRANGEBYSCORE ZREVRANGE ZREVRANGEBYLEX ZREVRANGEBYSCORE
-    - get elements in a range of rank (ranked by score or lexicographical)
-    - can get scores too (WITHSCORES)
+  - get elements in a range of rank (ranked by score or lexicographical)
+  - can get scores too (WITHSCORES)
 - ZREM ZREMRANGEBYSCORE ZREMRANGEBYRANK ZREMRANGEBYLEX
-    - del element
+  - del element
 - ZRANK ZREVRANK
-    - get index when sorted by key
+  - get index when sorted by key
 - ZINTERSTORE ZUNIONSTORE
-    - merge 2 or more sorted sets
-    - aggregation function of scores: SUM (default) / MIN / MAX
+  - merge 2 or more sorted sets
+  - aggregation function of scores: SUM (default) / MIN / MAX
 - ZSCAN
-    - iterator
+  - iterator
 
 ## Server
 

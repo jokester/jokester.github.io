@@ -1,7 +1,7 @@
 ---
-title: grep on column
-created_at: 2014-06-08
-kind: article
+title: 'TIL: grep on a column rather on line'
+publishAt: 2014-06-08
+slug: til-grep-on-column-rather-than-line
 ---
 
 One may want to run grep-like operation on a specific column.
@@ -27,7 +27,7 @@ Example:
 Arguments explained:
 
 - `-1`, `-2`: which column to join on
-- `-o`: which columns to output  (I had to specify all columns explicitly)
+- `-o`: which columns to output (I had to specify all columns explicitly)
 - `-t`: column delimiter of input/output
 - `<(sort test --key=2)`: lines sorted by 2nd column
 - `<(echo a)`: just `a`

@@ -1,12 +1,14 @@
 ---
-title: "Memo: pdf creation in browser"
+title: 'Memo: pdf creation in browser'
+publishAt: 2017-09-01
+slug: memo-pdf-creation-in-browser
 ---
 
 When working on a svg-based document viewer in browser, I had a chance to make a pdf-export feature.
 This post is a memo about caveats and findings in my quest.
 
 - toc
-{:toc}
+  {:toc}
 
 ## Background
 
@@ -27,23 +29,23 @@ We used 2 libraries:
 ### bundle pdfkit for browser use
 
 - pdfkit has a [How to compile PDFKit for use in the browser](https://github.com/devongovett/pdfkit/wiki/How-to-compile-PDFKit-for-use-in-the-browser) guide in `github/pdfkit` wiki.
-    - We did not take this way: use of `browserify coffeeify` would make our build (currently webpack only) more complicated.
+  - We did not take this way: use of `browserify coffeeify` would make our build (currently webpack only) more complicated.
 - Or, use a webpack-only solution
-    - in short: we resolve module dependencies with webpack `transform-loader`
-    - some dependicies (that exists in node but not browser) are taken from [bpampuch/pdfmake](https://github.com/bpampuch/pdfmake)
-    - see my [jokester/random-hack](https://github.com/jokester/random-hack/tree/master/pdfkit-webpack) repo for a minimal working example.
+  - in short: we resolve module dependencies with webpack `transform-loader`
+  - some dependicies (that exists in node but not browser) are taken from [bpampuch/pdfmake](https://github.com/bpampuch/pdfmake)
+  - see my [jokester/random-hack](https://github.com/jokester/random-hack/tree/master/pdfkit-webpack) repo for a minimal working example.
 
 ### draw svg to pdf
 
 - We used [alafr/SVG-to-PDFKit](https://github.com/alafr/SVG-to-PDFKit)
-    - internally, this library traversals DOM of svg and draws equivalent vector image with `pdfkit`.
-    - If the svg input is a string, a pure js svg parser will be used to build a DOM.
-        - This should work in both browser and node
-        - *Caveat*: this svg parser *does not* recognize svg strings start with `<?xml version="1.0" encoding="UTF-8">`. We have to strip this before passing it to `SVGtoPDF()`.
-        - *Note*: `style` attribute in svg string will not be intepreted. If your svg makes use of `style=`, you have to use `SVGElement` input and `useCSS` option. In that case SVG-to-PDFKit uses native `getComputedStyle` to have browser interprete the style.
-    - The svg input can also be a `SVGElement` object. Such objects can be obtained from `HTMLObjectElement#getSVGDocument()` `HTMLEmbedElement#getSVGDocument()` or [XMLHttpRequest](https://stackoverflow.com/a/14070928/327815).
-        - This likely requires a browser to work.
-        - *Caveat*: chrome may set incorrect prototype for native `SVGElement`, see [this issue](https://github.com/alafr/SVG-to-PDFKit/issues/47) for inspection and a workaround.
+  - internally, this library traversals DOM of svg and draws equivalent vector image with `pdfkit`.
+  - If the svg input is a string, a pure js svg parser will be used to build a DOM.
+    - This should work in both browser and node
+    - _Caveat_: this svg parser _does not_ recognize svg strings start with `<?xml version="1.0" encoding="UTF-8">`. We have to strip this before passing it to `SVGtoPDF()`.
+    - _Note_: `style` attribute in svg string will not be intepreted. If your svg makes use of `style=`, you have to use `SVGElement` input and `useCSS` option. In that case SVG-to-PDFKit uses native `getComputedStyle` to have browser interprete the style.
+  - The svg input can also be a `SVGElement` object. Such objects can be obtained from `HTMLObjectElement#getSVGDocument()` `HTMLEmbedElement#getSVGDocument()` or [XMLHttpRequest](https://stackoverflow.com/a/14070928/327815).
+    - This likely requires a browser to work.
+    - _Caveat_: chrome may set incorrect prototype for native `SVGElement`, see [this issue](https://github.com/alafr/SVG-to-PDFKit/issues/47) for inspection and a workaround.
 
 ### remove font data from pdfkit
 
@@ -52,21 +54,18 @@ We used 2 libraries:
 
 ### draw not-in-font text to pdf
 
-
-
-
 ### Browser compatibility
 
 pdfkit needs some newer API to deal with binary data. Most browser (effectively everyone except IE) should work fine. The following list shows key features we needed.
 
 - `IE >= 9`:
-    - Canvas: for bitmap drawing
-    - CSS (2d) transform: zoom and scroll DOM element with a transform matrix
+  - Canvas: for bitmap drawing
+  - CSS (2d) transform: zoom and scroll DOM element with a transform matrix
 - `IE >= 10`:
-    - Blob / ArrayBuffer / TypedArray: handle binary data in browser
-    - createObjectURL: can be used to cache arbitrary data (e.g. prefetched svg of all pages)
-        - Caveat: blob URLs in IE / Edge look like `blob:UUID`, and cannot be used as resource of object / embed elements.
-    - FileReader: read string or ArrayBuffer out of a Blob object
+  - Blob / ArrayBuffer / TypedArray: handle binary data in browser
+  - createObjectURL: can be used to cache arbitrary data (e.g. prefetched svg of all pages)
+    - Caveat: blob URLs in IE / Edge look like `blob:UUID`, and cannot be used as resource of object / embed elements.
+  - FileReader: read string or ArrayBuffer out of a Blob object
 
 ### Reduce bundled size of pdfkit
 
@@ -76,7 +75,7 @@ pdfkit needs some newer API to deal with binary data. Most browser (effectively 
 
 ### By looking at pdf object
 
-The Vector images are stored as *object* in a pdf file.
+The Vector images are stored as _object_ in a pdf file.
 We can read them after decoding them to textual form.
 
 - see [PDF Stream Objects](https://blog.didierstevens.com/2008/05/19/pdf-stream-objects/) for a brief introduction of encoded objects.
@@ -96,8 +95,3 @@ We can also convert pdf to svg again, to see if that is correct (I found it much
 - `InkScape` should be able to do the same.
 
 ## TypeScript - related stuff
-
-
-
-
-

@@ -1,6 +1,7 @@
 ---
 title: Update git submodule with minimal traffic
-created_at: 2017-04-12
+publishAt: 2017-04-12
+slug: update-git-submodules-with-minimal-traffic
 ---
 
 `git update --init` by default performs a normal `git clone`. This is less favorable when bandwidth or traffic is limited. I'm going to show a workaround for this, the core idea is to only fetch the needed commit.

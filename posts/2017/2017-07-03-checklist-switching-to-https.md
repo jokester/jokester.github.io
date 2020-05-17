@@ -1,17 +1,19 @@
 ---
-title: Checklist when Switching to HTTPS
+title: Checklist before Switching to HTTPS
+publishAt: 2017-07-03
+slug: checklist-before-switching-to-https
 ---
 
 This is a memo before I switched all my services to https.
 
 - toc
-{:toc}
+  {:toc}
 
 ## User Experience
 
 ### Browser support: can users still view my site?
 
-- *most* browser support TLS 1.0 and up.
+- _most_ browser support TLS 1.0 and up.
 - The only reason to enable SSL would be IE6 users `/bless`.
 
 ### Content: (if https is supported at all) will users still see complete content?
@@ -20,11 +22,11 @@ This relates to how browser handles [mixed content](https://developer.mozilla.or
 the non-https resources in a https page.
 
 - `active mixed content` (e.g. `<script src=`) are blocked by most browsers
-    - FX 23 +
-    - IE 9 +
-    - Chrome
+  - FX 23 +
+  - IE 9 +
+  - Chrome
 - `passive mixed content` (e.g. `<img src=`)
-    - `<img>` loads with warning
+  - `<img>` loads with warning
 
 ## Cost and Performance
 
@@ -35,24 +37,24 @@ Will server experience high load and explode?
 The extra stuff browser and server have to do includes:
 
 - Session Establishment
-    - the part where client and server determines a encryption key for data transfer
-    - once per SSL session
-        - Some webservers support reuse of ssl session. nginx does.
-    - cipher negotiation ([cipher suite](https://en.wikipedia.org/wiki/Cipher_suite))
-    - asymmetric encryption, typically RSA
-        - simple benchmark: `openssl speed rsa`
+  - the part where client and server determines a encryption key for data transfer
+  - once per SSL session
+    - Some webservers support reuse of ssl session. nginx does.
+  - cipher negotiation ([cipher suite](https://en.wikipedia.org/wiki/Cipher_suite))
+  - asymmetric encryption, typically RSA
+    - simple benchmark: `openssl speed rsa`
 - After established: client and server exchange encrypted data
-    - the part where client and server flows encrypted data to each other
-    - symmetric encryption, typically AES
-        - nowdays CPUs have intrustion set to accelerate this
-        - simple benchmark: `openssl speed aes`
+  - the part where client and server flows encrypted data to each other
+  - symmetric encryption, typically AES
+    - nowdays CPUs have intrustion set to accelerate this
+    - simple benchmark: `openssl speed aes`
 
 A good illustration of SSL: [ssl-tls-handshake-overview](https://www.ssl.com/article/ssl-tls-handshake-overview/)
 
 ### Estimation of overhead
 
 We can use `openssl speed rsa aes` to estimate intensity and throughput of a server.
-In my $5 vultr instance (1cpu / 1G mem / AES-NI supported), I am getting this result:
+In my \$5 vultr instance (1cpu / 1G mem / AES-NI supported), I am getting this result:
 
 ```text
 type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes

@@ -12,7 +12,7 @@ const PostsPage: React.FC<GatsbyPageProps<{}, SsrPostNodesQuery>> = (props) => {
     .map((_) => (
       <Link className="block my-2" key={_.node.id} to={TypedRouters.posts.show(_.node)}>
         <li className="px-4">
-          <span className="text-sm mr-2">{_.node.frontmatter?.publishAt ?? 'yyyy-mm-dd'}</span>
+          <span className="text-sm mr-2 font-mono">{_.node.frontmatter?.publishAt ?? 'yyyy-mm-dd'}</span>
           <span>{_.node.frontmatter?.title!}</span>
         </li>
       </Link>

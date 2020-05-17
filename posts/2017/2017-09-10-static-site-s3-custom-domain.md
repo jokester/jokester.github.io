@@ -1,5 +1,7 @@
 ---
-title: Static site with AWS S3 and custom domain
+title: "Memo: Static site with AWS S3 and custom domain"
+publishAt: 2017-09-10
+slug: 
 ---
 
 Recently I found that hosting a full-static site with AWS S3 is pretty much easy.

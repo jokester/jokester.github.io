@@ -1,6 +1,6 @@
 ---
 title: PS3 media server is not for PS3
-created_at: 2014-01-03
+publishAt: 2014-01-03
 kind: article
 ---
 
