@@ -1,10 +1,11 @@
 import { SsrPostNodesQuery } from '../../graphql-types';
 
 export const TypedRouters = {
+  index: '/',
   posts: {
     index: '/posts',
     show: (node: SsrPostNodesQuery['allMdx']['edges'][number]['node']) =>
-      `/posts/${node.frontmatter?.publishAt ?? 'draft'}/${node.frontmatter?.slug ?? 'no-slug'}`.replace(/\/+/g, '/'),
+      `/posts/${node.frontmatter?.publishAt ?? 'xxxx-yy-zz'}/${node.frontmatter!.slug}`.replace(/\/+/g, '/'),
   },
 } as const;
 

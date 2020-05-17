@@ -21,6 +21,7 @@ async function createPostPages({ graphql, getNode, actions: { createPage } }: Cr
               title
               slug
             }
+            fileAbsolutePath
           }
         }
       }
@@ -30,7 +31,15 @@ async function createPostPages({ graphql, getNode, actions: { createPage } }: Cr
   if (postNodes.errors) throw postNodes.errors;
 
   const publishedPostNodes = (postNodes.data as SsrPostNodesQuery).allMdx.edges
-    .filter((edge) => shouldBuildPostPage(edge, isDevBuild))
+    .filter((edge) => {
+      const createPage = shouldBuildPostPage(edge, isDevBuild);
+      if (createPage) {
+        logger('CREATING page for %s', edge.node.fileAbsolutePath)
+      } else {
+        logger('NOT creating page for %s', edge.node.fileAbsolutePath)
+      }
+      return createPage;
+    })
     .map((_) => _.node);
 
   logger('published nodes', publishedPostNodes);
