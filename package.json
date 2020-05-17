@@ -16,6 +16,8 @@
     "lint:fix": "eslint '**/*.@(ts|js|tsx|jsx)' --fix"
   },
   "dependencies": {
+    "@types/classnames": "^2.2.10",
+    "classnames": "^2.2.6",
     "gatsby": "^2.21.23",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
