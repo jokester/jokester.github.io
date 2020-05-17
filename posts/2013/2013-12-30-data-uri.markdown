@@ -4,7 +4,7 @@ publishAt: 2013-12-30
 slug: til-data-uri
 ---
 
-#### TL;NR
+#### Summary
 
 A data URI is a URI that encodes bytes + content-type:
 

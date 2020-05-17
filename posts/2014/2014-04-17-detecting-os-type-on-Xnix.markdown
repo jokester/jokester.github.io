@@ -1,6 +1,7 @@
 ---
 title: Detecting OS type on *nix
-created_at: 2014-04-17
+publishAt: 2014-04-17
+slug: memo-detect-os-and-arch-in-unix
 ---
 
 My first thought was to use the environment variables in shell.
@@ -9,8 +10,6 @@ That didn't work: zsh only provides `$CPUTYPE`, bash only provides `$HOSTTYPE`.
 More portable way is to use `uname`:
 
 ~~~ bash
-# works with both bash / zsh
-
 case $(uname -m) in #
   i686)
     :
@@ -21,7 +20,7 @@ case $(uname -m) in #
 esac
 
 case $(uname -s) in
-  Linux)  # what can it be?
+  Linux)
     :
     ;;
   Darwin) # OSX

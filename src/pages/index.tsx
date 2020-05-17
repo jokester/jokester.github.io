@@ -1,4 +1,5 @@
 import React from 'react';
+import { Layout } from "../components/layout";
 
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
@@ -13,9 +14,7 @@ interface IndexPageProps {
 }
 
 const IndexPage: React.FC = () => (
-  <div className="app-root">
-    <h1>example</h1>
-  </div>
+  <Layout>TODO</Layout>
 );
 
 export default IndexPage;

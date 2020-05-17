@@ -8,6 +8,6 @@ export const TypedRouters = {
   },
 } as const;
 
-export function shouldBuildPostPage(mdxNode: SsrPostNodesQuery['allMdx']['edges'][number]): boolean {
-  return !!mdxNode.node.frontmatter?.publishAt;
+export function shouldBuildPostPage(mdxNode: SsrPostNodesQuery['allMdx']['edges'][number], allowDrafts : boolean): boolean {
+  return (mdxNode.node.frontmatter?.slug && (allowDrafts || mdxNode.node.frontmatter.publishAt));
 }

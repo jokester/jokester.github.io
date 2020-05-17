@@ -1,7 +1,7 @@
 ---
 title: Immutable element in tuple
-created_at: 2014-01-14
-kind: article
+publishAt: 2014-01-14
+slug: til-python-immutable-element-in-tuple
 ---
 
 #### What

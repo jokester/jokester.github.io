@@ -1,7 +1,7 @@
 ---
-title: TL&DR; Thinking Clearly About Performance
-created_at: 2014-05-11
-kind: article
+title: "TIR: Thinking Clearly About Performance"
+publishAt: 2014-05-11
+slug: tir-thinking-clearly-about-performance
 ---
 
 This post summaries an interesting paper called *Thinking Clearly About Performance*,

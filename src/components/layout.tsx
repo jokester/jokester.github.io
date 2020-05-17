@@ -1,10 +1,11 @@
 import React from 'react';
+import { Header } from "./header";
 
 export const Layout: React.FC = (props) => {
   return (
     <div>
-      <h1>TITLE</h1>
-      <div>{props.children}</div>
+      <Header />
+     <div>{props.children}</div>
     </div>
   );
 };

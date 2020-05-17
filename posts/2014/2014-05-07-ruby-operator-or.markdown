@@ -1,6 +1,7 @@
 ---
-title: Ruby operator or
-created_at: 2014-05-07
+title: "TIL: Ruby operator or has a much lower precedence"
+publishAt: 2014-05-07
+slug: til-ruby-operator-or-has-much-lower-precedence
 ---
 
 - Difference of `||` and `or`

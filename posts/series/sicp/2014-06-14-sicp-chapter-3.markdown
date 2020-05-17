@@ -1,11 +1,6 @@
----
 title: Note for SICP Chapter 3
-created_at: 2014-06-14
-kind: article
 ---
 
-* toc
-{:toc}
 
 #### Modularity, Objects and State
 

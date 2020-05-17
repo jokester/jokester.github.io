@@ -40,8 +40,10 @@ kind: article
 
 - general form of procedure definition:
 
+```
       (define (<name> <formal parameters>)
           <body>)
+```
 
     The `<body>' part may contain multiple expressions. The value of the final expression becomes the value of the procedure application.
 

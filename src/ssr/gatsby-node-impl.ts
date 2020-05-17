@@ -5,6 +5,7 @@ import debug from 'debug';
 import { createFilePath } from 'gatsby-source-filesystem';
 import { SsrPostNodesQuery } from '../../graphql-types';
 import { shouldBuildPostPage, TypedRouters } from '../config/routes';
+import { isDevBuild } from "../config/build-env";
 
 const logger = debug('gatsby-site:ssr');
 
@@ -29,7 +30,7 @@ async function createPostPages({ graphql, getNode, actions: { createPage } }: Cr
   if (postNodes.errors) throw postNodes.errors;
 
   const publishedPostNodes = (postNodes.data as SsrPostNodesQuery).allMdx.edges
-    .filter((edge) => process.env.GATSBY_ENV === 'development' || shouldBuildPostPage(edge))
+    .filter((edge) => shouldBuildPostPage(edge, isDevBuild))
     .map((_) => _.node);
 
   logger('published nodes', publishedPostNodes);

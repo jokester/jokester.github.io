@@ -38,4 +38,3 @@ A monitor command with iostat:
 $ iostat -xtz 1
 ```
 
-<!-- TODO: iostat in BSD >
