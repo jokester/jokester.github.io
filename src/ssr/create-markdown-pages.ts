@@ -1,5 +1,8 @@
 import * as fsp from './fsp';
 import path from 'path';
+import debug from 'debug';
+
+const logger = debug('ssr:create-markdown-pages');
 
 export async function recursiveDir(
   start: string,
@@ -24,8 +27,18 @@ export async function recursiveDir(
   return ret;
 }
 
-export async function getMarkdownList(): Promise<{ postsDir: string; files: string[] }> {
-  const start = path.join(__dirname, '../../posts');
+export async function getMarkdownList(): Promise<{ postsDir: string; files: { realpath: string; slug: string[] }[] }> {
+  const start = path.join(process.env.REPO_ROOT!, 'posts');
   const files = await recursiveDir(start);
-  return { postsDir: start, files: files.filter((_) => /\.(md|markdown)$/i.test(_)) };
+  logger('start', start);
+  logger('files', files);
+  return {
+    postsDir: start,
+    files: files
+      .filter((_) => /\.(md|markdown)$/i.test(_))
+      .map((realpath) => ({
+        realpath,
+        slug: realpath.slice(start.length + 1).split('/'),
+      })),
+  };
 }
