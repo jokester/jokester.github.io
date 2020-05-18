@@ -7,11 +7,8 @@ export default class extends App {
 
   render() {
     const { Component } = this.props;
-
-    const { pathname, asPath, query } = this.props.router;
-    const pageProps: {} = {
+    const pageProps = {
       ...this.props.pageProps,
-      route: { pathname, asPath, query },
     };
 
     return (

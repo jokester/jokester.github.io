@@ -1,19 +1,13 @@
 import React from 'react';
-import { ExampleLinks } from '../src/dummy/example-links';
 import { PreJson } from '../src/dummy/pre-json';
-import { PageType } from '../src/next-types';
-import { buildEnv, inServer, isDevBuild } from '../src/config/build-env';
+import { Layout } from '../src/components/layout';
 
-const IndexPage: PageType = (props) => {
-  console.log('buildEnv', buildEnv, inServer, isDevBuild);
+const IndexPage: React.FC = (props) => {
   return (
-    <>
-      <ExampleLinks />
+    <Layout>
       <PreJson value={props} />
-    </>
+    </Layout>
   );
 };
-
-// IndexPage.getInitialProps = async ctx => ({});
 
 export default IndexPage;

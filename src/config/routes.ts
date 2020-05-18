@@ -1,21 +1,14 @@
-import { SsrPostNodesQuery } from '../../graphql-types';
+import { ParsedUrlQuery } from 'querystring';
 
-export const TypedRouters = {
+export const TypedRoutes = {
   index: '/',
   posts: {
     index: '/posts',
-    show: (node: SsrPostNodesQuery['allMdx']['edges'][number]['node']) =>
-      `/posts/${node.frontmatter?.publishAt ?? 'xxxx-yy-zz'}/${node.frontmatter!.slug}`.replace(/\/+/g, '/'),
+    show: (slug: string) => `/posts/${slug}`,
   },
   works: '/works',
   about: {
-    me: '/about/me',
+    me: '/about',
   },
 } as const;
-
-export function shouldBuildPostPage(
-  mdxNode: SsrPostNodesQuery['allMdx']['edges'][number],
-  allowDrafts: boolean,
-): boolean {
-  return mdxNode.node.frontmatter?.slug && (allowDrafts || mdxNode.node.frontmatter.publishAt);
-}
+export type TypedRouteParam<RouteNode> = RouteNode extends (param: infer Param) => string ? Param & ParsedUrlQuery : {};
