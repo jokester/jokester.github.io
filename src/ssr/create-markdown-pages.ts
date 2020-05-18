@@ -2,7 +2,7 @@ import * as fsp from './fsp';
 import path from 'path';
 import matter from 'gray-matter';
 import * as dateFns from 'date-fns';
-import { publicDecrypt } from 'crypto';
+import { isDevBuild } from '../config/build-env';
 
 export async function recursiveDir(
   start: string,
@@ -27,13 +27,15 @@ export async function recursiveDir(
   return ret;
 }
 
-export async function readMarkdownFile(realpath: string) {
-  return fsp.readText(realpath).then(matter);
+export async function readMarkdownContent(realpath: string): Promise<string> {
+  const parsed = matter(await fsp.readText(realpath));
+
+  return parsed.content;
 }
 
 interface MarkdownFrontMatter {
-  title: string;
-  publishAt: string;
+  title?: string;
+  publishAt?: string;
 }
 
 export interface MarkdownMeta {
@@ -41,7 +43,10 @@ export interface MarkdownMeta {
   basename: string;
   slug: string[];
   frontMatter: MarkdownFrontMatter;
-  // content: string;
+}
+
+function launderFrontMatter(data: { title?: string; publishAt?: Date }): MarkdownFrontMatter {
+  return { title: data.title, publishAt: data.publishAt && dateFns.format(data.publishAt, 'yyyy-MM-dd') };
 }
 
 export async function getMarkdownList(): Promise<{
@@ -61,20 +66,17 @@ export async function getMarkdownList(): Promise<{
       yymmdd &&
       slug
     ) {
-      const mdFile = await readMarkdownFile(realpath);
-      const data: {
-        title?: string;
-        publishAt?: Date;
-      } = mdFile.data as any;
+      const mdFile = matter(await fsp.readText(realpath));
+      const frontMatter = launderFrontMatter(mdFile.data as any);
 
-      if (data.title && data.publishAt) {
+      if (isDevBuild || (frontMatter.publishAt && frontMatter.title)) {
         files.push({
           realpath,
           basename,
           slug: [slug], //realpath.slice(start.length + 1).split('/'),
           frontMatter: {
-            title: data.title,
-            publishAt: dateFns.format(data.publishAt, 'yyyy-MM-dd'),
+            title: frontMatter.title ?? 'UNTITLED',
+            publishAt: frontMatter.publishAt ?? '7777-77-77',
           },
         });
       }
