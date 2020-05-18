@@ -8,6 +8,30 @@ const withBundleAnalyzer = require('@zeit/next-bundle-analyzer');
 const withTM = require('next-transpile-modules');
 
 const nextConf = {
+
+  exportPathMap: async (defaultPathMap, {}) => {
+
+    require('ts-node').register({
+      compilerOptions: {
+        module: 'commonjs',
+        target: 'es6',
+        strict: true,
+        noImplicitAny: false,
+      },
+      transpileOnly: true,
+    });
+
+    const {getMarkdownList} = require('./src/ssr/create-markdown-pages');
+
+    const markdownList = await getMarkdownList();
+
+    const pathMap = {...defaultPathMap};
+    markdownList.files.forEach(md => {
+      const relative = '/posts/' + md.slice(markdownList.postsDir.length, md.length);
+      pathMap[relative] = { page: '/posts/[...slug]', query: { slug: relative.split('/') } };
+    });
+    return pathMap;
+  },
   analyzeServer: ['server', 'both'].includes(process.env.BUNDLE_ANALYZE),
   analyzeBrowser: ['browser', 'both'].includes(process.env.BUNDLE_ANALYZE),
   bundleAnalyzerConfig: {
@@ -59,7 +83,7 @@ module.exports = withPlugins(
     [optimizedImages, { optimizeImages: false }],
     [withBundleAnalyzer],
     // [withSourceMap],  // this does not work
-    withTM([/* ES modules used in server code */ 'lodash-es']),
+    withTM([/* ES modules used in server code */ 'lodash-es', '@jokester/ts-commonutil',]),
   ],
   withSourceMap(nextConf),
 );

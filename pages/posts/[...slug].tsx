@@ -27,18 +27,7 @@ const PostsShowPage: React.FC<PageProps> = (props) => (
 
 export const getStaticPaths: GetStaticPaths<{}> = async () => {
   return {
-    paths: [
-      {
-        params: {
-          slug: 'slug1',
-        },
-      },
-      {
-        params: {
-          slug: 'slug2',
-        },
-      },
-    ],
+    paths: [],
     fallback: false,
   };
 };

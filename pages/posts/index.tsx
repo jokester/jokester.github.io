@@ -1,5 +1,5 @@
 import { PreJson } from '../../src/dummy/pre-json';
-import { TypedRouteParam, TypedRoutes } from '../../src/typed-routes';
+import { TypedRouteParam, TypedRoutes } from '../../src/config/routes';
 import * as React from 'react';
 import { useRouter } from 'next/router';
 import { Layout } from '../../src/components/layout';
