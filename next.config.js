@@ -27,7 +27,7 @@ const nextConf = {
 
     const pathMap = {...defaultPathMap};
     markdownList.files.forEach(md => {
-      const relative = '/posts/' + md.slice(markdownList.postsDir.length, md.length);
+      const relative = '/posts' + md.slice(markdownList.postsDir.length, md.length) + '/';
       pathMap[relative] = { page: '/posts/[...slug]', query: { slug: relative.split('/') } };
     });
     return pathMap;
