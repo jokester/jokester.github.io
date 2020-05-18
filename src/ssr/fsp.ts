@@ -4,7 +4,7 @@ import util from 'util';
 export const readDir = util.promisify(fs.readdir);
 export const readFile = util.promisify(fs.readFile);
 
-export const readText = (filename: string, encoding = 'UTF-8') => readFile(filename, { encoding });
+export const readText = (filename: string, encoding = 'UTF-8') => readFile(filename, { encoding }) as Promise<string>;
 
 export const lstat = util.promisify(fs.lstat);
 

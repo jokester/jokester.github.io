@@ -1,8 +1,8 @@
 import * as fsp from './fsp';
 import path from 'path';
-import debug from 'debug';
-
-const logger = debug('ssr:create-markdown-pages');
+import matter from 'gray-matter';
+import * as dateFns from 'date-fns';
+import { publicDecrypt } from 'crypto';
 
 export async function recursiveDir(
   start: string,
@@ -27,22 +27,61 @@ export async function recursiveDir(
   return ret;
 }
 
+export async function readMarkdownFile(realpath: string) {
+  return fsp.readText(realpath).then(matter);
+}
+
+interface MarkdownFrontMatter {
+  title: string;
+  publishAt: string;
+}
+
+export interface MarkdownMeta {
+  realpath: string;
+  basename: string;
+  slug: string[];
+  frontMatter: MarkdownFrontMatter;
+  // content: string;
+}
+
 export async function getMarkdownList(): Promise<{
   postsDir: string;
-  files: { realpath: string; basename: string; slug: string[] }[];
+  files: MarkdownMeta[];
 }> {
   const start = path.join(process.env.REPO_ROOT!, 'posts');
-  const files = await recursiveDir(start);
-  logger('start', start);
-  logger('files', files);
+  const realpaths = await recursiveDir(start);
+  const files: MarkdownMeta[] = [];
+
+  for (const realpath of realpaths) {
+    const basename = path.basename(realpath);
+
+    let _, yymmdd, slug;
+    if (
+      ([_, yymmdd = null, slug = null] = /^(\d+-\d+-\d+)-(.*)\.(md|markdown)$/i.exec(basename) ?? []) &&
+      yymmdd &&
+      slug
+    ) {
+      const mdFile = await readMarkdownFile(realpath);
+      const data: {
+        title?: string;
+        publishAt?: Date;
+      } = mdFile.data as any;
+
+      if (data.title && data.publishAt) {
+        files.push({
+          realpath,
+          basename,
+          slug: [slug], //realpath.slice(start.length + 1).split('/'),
+          frontMatter: {
+            title: data.title,
+            publishAt: dateFns.format(data.publishAt, 'yyyy-MM-dd'),
+          },
+        });
+      }
+    }
+  }
   return {
     postsDir: start,
-    files: files
-      .filter((_) => /\.(md|markdown)$/i.test(_))
-      .map((realpath) => ({
-        realpath,
-        basename: path.basename(realpath),
-        slug: realpath.slice(start.length + 1).split('/'),
-      })),
+    files,
   };
 }

@@ -1,6 +1,6 @@
 ---
 title: 我的笔记本电脑复活了
-publishAt: 2017-10-13-yogabook-revived
+publishAt: 2017-10-13
 slug: reviving-yogabook
 ---
 
