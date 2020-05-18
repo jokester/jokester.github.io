@@ -27,7 +27,10 @@ export async function recursiveDir(
   return ret;
 }
 
-export async function getMarkdownList(): Promise<{ postsDir: string; files: { realpath: string; slug: string[] }[] }> {
+export async function getMarkdownList(): Promise<{
+  postsDir: string;
+  files: { realpath: string; basename: string; slug: string[] }[];
+}> {
   const start = path.join(process.env.REPO_ROOT!, 'posts');
   const files = await recursiveDir(start);
   logger('start', start);
@@ -38,6 +41,7 @@ export async function getMarkdownList(): Promise<{ postsDir: string; files: { re
       .filter((_) => /\.(md|markdown)$/i.test(_))
       .map((realpath) => ({
         realpath,
+        basename: path.basename(realpath),
         slug: realpath.slice(start.length + 1).split('/'),
       })),
   };
