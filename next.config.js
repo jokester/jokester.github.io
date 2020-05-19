@@ -13,7 +13,7 @@ const nextConf = {
   exportPathMap: async (defaultPathMap) => {
     return {
       ...defaultPathMap,
-      '/404.html': { page: '/404', },
+      '/404.html': { page: '/404' },
     };
   },
 
