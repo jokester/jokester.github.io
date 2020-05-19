@@ -32,7 +32,7 @@ export const Header: React.FC = () => {
       <span>|</span>
       <SectionLink path={TypedRoutes.posts.index}>/posts</SectionLink>
       <SectionLink path={TypedRoutes.works}>/works</SectionLink>
-      <SectionLink path={TypedRoutes.about.me}>/me</SectionLink>
+      <SectionLink path={TypedRoutes.about.me}>/about</SectionLink>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { PreJson } from '../src/dummy/pre-json';
 import * as React from 'react';
 import { GetStaticProps } from 'next';
 import { Layout } from '../src/components/layout/layout';
+import { MarkdownArticle } from '../src/components/markdown/markdown-article';
 
 interface PageProps {
   renderedAt: number;
@@ -11,9 +12,22 @@ interface PageProps {
 const AboutPage: React.FC<PageProps> = (props) => {
   return (
     <Layout>
-      <h1>About</h1>
-      <hr />
-      TODO
+      <MarkdownArticle
+        title="About"
+        content={`
+### About this site
+
+This is my personal site about Web, Android, Linux and stuff.
+
+You may see contents in English / Chinese / Japanese, please stay calm \`:o\`
+
+### About me
+
+I have various skills and responsibilities. My title is executive developer.
+
+Links about me: [about.me/wangguan](https://about.me/wangguan)
+`}
+      />
     </Layout>
   );
 };
