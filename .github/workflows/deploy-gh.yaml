@@ -1,0 +1,26 @@
+name: deploy github page
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Echo environment
+      run: |
+        echo "node-$(node -v)"
+        echo "yarn-$(yarn -v)"
+    - uses: actions/checkout@v2
+    - uses: bahmutov/npm-install@v1
+    - name: Echo node_modules size
+      run: du -sh node_modules
+    - name: Build
+      run: yarn build && yarn export
+    - name: Deploy Github Page
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: out
