@@ -1,7 +1,7 @@
 import { PreJson } from '../src/dummy/pre-json';
 import * as React from 'react';
 import { GetStaticProps } from 'next';
-import { Layout } from '../src/components/layout';
+import { Layout } from '../src/components/layout/layout';
 
 interface PageProps {
   renderedAt: number;

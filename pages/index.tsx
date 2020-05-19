@@ -1,6 +1,6 @@
 import React from 'react';
 import { PreJson } from '../src/dummy/pre-json';
-import { Layout } from '../src/components/layout';
+import { Layout } from '../src/components/layout/layout';
 
 const IndexPage: React.FC = (props) => {
   return (

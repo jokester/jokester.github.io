@@ -1,7 +1,5 @@
 ---
 title: 解剖Preact - 开篇
-created_at: 2017-04-16
-lang: zh
 ---
 
 这是一系列对 Preact 内部行为的介绍文章，

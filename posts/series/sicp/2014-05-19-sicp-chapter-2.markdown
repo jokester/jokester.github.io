@@ -1,7 +1,6 @@
 ---
 title: Note for SICP Chapter 2
-created_at: 2014-05-19
-kind: article
+publishAt: 2014-05-19
 ---
 
 * toc

@@ -1,7 +1,5 @@
 ---
 title: 解剖Preact - 4
-created_at: 2017-04-01
-lang: zh
 ---
 
 

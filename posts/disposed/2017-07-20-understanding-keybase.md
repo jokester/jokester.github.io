@@ -1,9 +1,5 @@
 ---
-
-title: "memo: keybase from a programmer's perspective"
-publishAt: 2017-07-20
-slug: memo-keybase-from-a-pgorammers-perspective
-
+title: keybase from a programmer's perspective
 ---
 
 From a programmer's perspective.

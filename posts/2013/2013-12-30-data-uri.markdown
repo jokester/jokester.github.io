@@ -1,7 +1,6 @@
 ---
 title: Data URI
 publishAt: 2013-12-30
-slug: til-data-uri
 ---
 
 #### Summary

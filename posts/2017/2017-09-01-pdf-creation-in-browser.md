@@ -1,7 +1,6 @@
 ---
-title: 'Memo: pdf creation in browser'
+title: PDF creation in browser
 publishAt: 2017-09-01
-slug: memo-pdf-creation-in-browser
 ---
 
 When working on a svg-based document viewer in browser, I had a chance to make a pdf-export feature.

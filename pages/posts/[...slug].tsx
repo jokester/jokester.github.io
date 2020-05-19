@@ -1,8 +1,8 @@
 import React from 'react';
 import { PreJson } from '../../src/dummy/pre-json';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Layout } from '../../src/components/layout';
-import { getMarkdownList } from '../../src/ssr/create-markdown-pages';
+import { Layout } from '../../src/components/layout/layout';
+import { getMarkdownList, readMarkdownContent } from '../../src/ssr/create-markdown-pages';
 
 interface RouteParams {
   slug: string[];
@@ -40,10 +40,11 @@ export const getStaticPaths: GetStaticPaths<{}> = async () => {
 
 export const getStaticProps: GetStaticProps<PageProps> = async (ctx) => {
   const query: RouteParams = ctx.params as any;
+  const content = await readMarkdownContent(query.slug);
   return {
     props: {
       slug: query.slug,
-      postContent: `content for ${query.slug.join('/')}`,
+      postContent: content,
     },
   };
 };

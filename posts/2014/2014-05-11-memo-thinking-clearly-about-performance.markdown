@@ -1,5 +1,5 @@
 ---
-title: "TIR: Thinking Clearly About Performance"
+title: "memo: Thinking Clearly About Performance"
 publishAt: 2014-05-11
 slug: tir-thinking-clearly-about-performance
 ---

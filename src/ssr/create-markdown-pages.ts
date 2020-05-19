@@ -2,7 +2,7 @@ import * as fsp from './fsp';
 import path from 'path';
 import matter from 'gray-matter';
 import { format } from 'date-fns';
-import { sortBy } from 'lodash-es';
+import { sortBy, isEqual } from 'lodash-es';
 import { isDevBuild } from '../config/build-env';
 
 export async function recursiveDir(
@@ -28,8 +28,10 @@ export async function recursiveDir(
   return ret;
 }
 
-export async function readMarkdownContent(realpath: string): Promise<string> {
-  const parsed = matter(await fsp.readText(realpath));
+export async function readMarkdownContent(slug: string[]): Promise<string> {
+  const x = await getMarkdownList();
+  const f = x.files.find((_) => isEqual(_.slug, slug))!;
+  const parsed = matter(await fsp.readText(f.realpath));
 
   return parsed.content;
 }
@@ -64,11 +66,11 @@ export async function getMarkdownList(): Promise<{
   for (const realpath of realpaths) {
     const basename = path.basename(realpath);
 
-    let _, yymmdd, slug;
+    let _, authorDate, slugFromBasename;
     if (
-      ([_, yymmdd = null, slug = null] = /^(\d+-\d+-\d+)-(.*)\.(md|markdown)$/i.exec(basename) ?? []) &&
-      yymmdd &&
-      slug
+      ([_, authorDate = null, slugFromBasename = null] = /^(\d+-\d+-\d+)-(.*)\.(md|markdown)$/i.exec(basename) ?? []) &&
+      authorDate &&
+      slugFromBasename
     ) {
       const mdFile = matter(await fsp.readText(realpath));
       const frontMatter = launderFrontMatter(mdFile.data as any);
@@ -77,7 +79,7 @@ export async function getMarkdownList(): Promise<{
         files.push({
           realpath,
           basename,
-          slug: [frontMatter?.publishAt ?? '7777-77-77', slug], //realpath.slice(start.length + 1).split('/'),
+          slug: [frontMatter?.publishAt ?? '7777-77-77', slugFromBasename], //realpath.slice(start.length + 1).split('/'),
           frontMatter: frontMatter ?? {
             title: 'UNTITLED',
             publishAt: '7777-77-77',

@@ -1,7 +1,6 @@
 ---
-title: 'memo: ELK stack for log archiving and search'
+title: ELK stack for log archiving and search
 publishAt: 2018-08-22
-slug: memo-elk-stack-for-log-archiving and search
 ---
 
 ## Related Products

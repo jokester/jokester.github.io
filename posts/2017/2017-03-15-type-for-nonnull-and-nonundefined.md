@@ -1,7 +1,6 @@
 ---
 title: Type for non-null and non-undefined in TypeScript
 publishAt: 2017-03-15
-slug: type-for-nonnull-nonundefined-typescript
 ---
 
 TypeScript's type computation does support `complement of type`, so we cannot simply define a type for `not-null`.

@@ -1,7 +1,6 @@
 ---
 title: TypeScript 2.1中的类型运算
 publishAt: 2016-12-21
-slug: enhanced-type-calcuation-in-typescript-2.1
 lang: zh
 ---
 

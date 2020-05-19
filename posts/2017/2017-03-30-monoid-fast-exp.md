@@ -1,7 +1,6 @@
 ---
-title: 'TIL: Fast exp() for Monoids'
+title: Fast exp() operator for Monoids
 publishAt: 2017-03-30
-slug: til-fast-exp-algorithm-for-monoids
 ---
 
 Today I learned that the fast-exponentiation in [SICP 1.2.4](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.4) can be applied to all monoids as well.

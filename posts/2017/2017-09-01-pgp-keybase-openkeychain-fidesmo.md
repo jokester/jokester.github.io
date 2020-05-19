@@ -1,7 +1,6 @@
 ---
-title: 'Memo: Using PGP with keybase, OpenKeychain and fidesmo'
+title: Using PGP with keybase, OpenKeychain and fidesmo
 publishAt: 2017-09-01
-slug: memo-using-pgp-with-keybase-openkeychain-fidesmo
 ---
 
 ## Basic on PGP

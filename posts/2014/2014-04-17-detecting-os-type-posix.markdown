@@ -1,7 +1,6 @@
 ---
-title: "TIL: Detecting OS type in *nix"
+title: Detecting common posix OSs
 publishAt: 2014-04-17
-slug: memo-detect-os-and-arch-in-unix
 ---
 
 My first thought was to use the environment variables in shell.

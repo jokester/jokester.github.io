@@ -1,7 +1,6 @@
 ---
 title: 'A simple benchmark of nginx http2'
 publishAt: 2017-04-01
-slug: a-simple-benchmark-nginx-http2
 ---
 
 Just updated my nginx sites to use http2. `nginx 1.10` package in Alpine linux already have this feature built. All I did is to enable it: changing `listen 443 ssl;` to `listen 443 ssl http2;`.

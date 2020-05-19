@@ -1,11 +1,10 @@
 ---
 title: Local domain names with pow
-created_at: 2013-12-31
-kind: article
+publishAt: 2013-12-31
 ---
 
 - toc
-{:toc}
+  {:toc}
 
 #### Pow
 
@@ -28,7 +27,7 @@ Cons:
 
 Run `brew install pow` AND execute what you are instructed.
 
-~~~ sh
+```sh
 % brew install pow
 Create the required host directories:
   mkdir -p ~/Library/Application\ Support/Pow/Hosts
@@ -41,7 +40,7 @@ Setup port 80 forwarding and launchd agents:
 Load launchd agents:
   sudo launchctl load -w /Library/LaunchDaemons/cx.pow.firewall.plist
   launchctl load -w ~/Library/LaunchAgents/cx.pow.powd.plistd.
-~~~
+```
 
 If this succeeds, you should see a page at `http://localhost/`.
 
@@ -53,9 +52,9 @@ so accesses to `http://demo_app.dev` are routed to it.
 
 The domain name is determined by name of the symlink.
 
-~~~ sh
+```sh
 % ln -s ~/demo_app ~/.pow/
-~~~
+```
 
 #### Troubles I met
 

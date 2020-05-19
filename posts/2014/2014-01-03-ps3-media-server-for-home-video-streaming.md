@@ -1,7 +1,6 @@
 ---
-title: PS3 media server is not for PS3
+title: PS3 media server for home media streaming
 publishAt: 2014-01-03
-kind: article
 ---
 
 I turned to [ps3 media server / pms](https://github.com/ps3mediaserver/ps3mediaserver)

@@ -1,7 +1,6 @@
 ---
 title: Checklist before Switching to HTTPS
 publishAt: 2017-07-03
-slug: checklist-before-switching-to-https
 ---
 
 This is a memo before I switched all my services to https.

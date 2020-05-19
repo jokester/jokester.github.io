@@ -1,8 +1,6 @@
 ---
 title: "Memo: Redis"
 publishAt: 2017-11-01
-slug: memo-redis
-
 ---
 
 # Redis

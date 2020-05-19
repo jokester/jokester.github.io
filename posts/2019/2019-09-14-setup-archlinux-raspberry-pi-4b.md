@@ -1,6 +1,5 @@
 ---
 title: Setup Archlinux on Raspberry Pi 4b
-slug: setup-archlinux-raspberry-pi-4b
 publishAt: 2019-09-14
 ---
 

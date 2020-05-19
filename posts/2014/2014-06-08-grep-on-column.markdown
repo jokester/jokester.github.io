@@ -1,5 +1,5 @@
 ---
-title: 'TIL: grep on a column rather on line'
+title: grep on a column rather on line
 publishAt: 2014-06-08
 slug: til-grep-on-column-rather-than-line
 ---

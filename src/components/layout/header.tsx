@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { TypedRoutes } from '../config/routes';
+import { TypedRoutes } from '../../config/routes';
 
 const SectionLink: React.FC<{ path: string; className?: string }> = (props) => {
   const { pathname } = useRouter();

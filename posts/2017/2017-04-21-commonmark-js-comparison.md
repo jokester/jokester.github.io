@@ -2,7 +2,6 @@
 title: 比较 CommonMark 的几种 JavaScript 实现
 publishAt: 2017-04-21
 lang: zh
-slug: comparison-commonmark-javascript-implementations
 ---
 
 前一段发现有 [Commonmark](http://commonmark.org/) 这个试图把 Markdown 标准化的尝试。

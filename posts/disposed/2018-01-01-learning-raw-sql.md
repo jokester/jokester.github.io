@@ -5,7 +5,6 @@ Memo when I learn about raw SQL statements, and other DB topics.
 - wikibook: sql
 - PgSQL10 manual.
 
-
 ## Select
 
 ## Join

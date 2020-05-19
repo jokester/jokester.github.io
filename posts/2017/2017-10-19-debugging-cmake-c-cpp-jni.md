@@ -1,7 +1,6 @@
 ---
 title: 'Memo: Debugging native code: CMake C CPP JNI'
 publishAt: 2017-10-19
-slug: memo-debugging-native-code-cmake-c-cpp-jni
 ---
 
 A few tricks I found when building native code (C / C++ / JNI) with CMake.

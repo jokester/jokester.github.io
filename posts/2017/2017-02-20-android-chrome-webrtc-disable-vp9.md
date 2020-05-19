@@ -1,7 +1,6 @@
 ---
 title: "Disabling VP9 in Android Chrome's WebRTC"
 publishAt: 2017-02-20
-slug: disabling-vp9-in-android-chrome-webrtc
 ---
 
 - toc

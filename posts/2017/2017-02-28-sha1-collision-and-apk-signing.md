@@ -1,7 +1,6 @@
 ---
 title: SHA1 Collision and Android APK Signing
 publishAt: 2017-02-28
-slug: sha1-collision-and-android-apk-signing
 ---
 
 As a paranoiac Android developer, I was concerned by recent SHA1-collision news.

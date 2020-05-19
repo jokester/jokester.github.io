@@ -1,6 +1,6 @@
 ---
 title: BSD for Linux Users 简译 3,4 / 11
-created_at: 2013-12-23
+publishAt: 2013-12-23
 ---
 原作者 [Matt](http://www.over-yonder.net/~fullermd/)
 

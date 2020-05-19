@@ -1,7 +1,6 @@
 ---
 title: How to limit resource usage of bhyve VM with rctl
 publishAt: 2017-10-02
-slug: howto-limit-resource-usage-bhyve-vm-rctl
 ---
 
 When trying to guarantee a minimum CPU percentage of CPU for FreeBSD itself (from a few VMs),

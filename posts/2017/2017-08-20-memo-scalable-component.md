@@ -1,7 +1,6 @@
 ---
-title: 'TIR: Scalable Component Abstractions'
+title: Scalable Component Abstractions
 publishAt: 2017-08-20
-slug: tir-scalable-component-abstractions
 lang: zh
 ---
 

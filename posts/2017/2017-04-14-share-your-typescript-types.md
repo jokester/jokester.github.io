@@ -1,7 +1,6 @@
 ---
 title: 分享你的 TypeScript 类型声明
 publishAt: 2017-04-14
-slug: share-your-typescript-type-declarations
 lang: zh
 ---
 

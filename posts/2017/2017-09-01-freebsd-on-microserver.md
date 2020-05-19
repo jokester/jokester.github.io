@@ -1,7 +1,6 @@
 ---
-title: 'Memo: home nas server and FreeBSD'
+title: A home NAS server running FreeBSD
 publishAt: 2017-09-01
-slug: memo-home-nas-server-freebsd
 ---
 
 This is a memo after installing FreeBSD on my MicroServer. Before that it was Arch Linux.

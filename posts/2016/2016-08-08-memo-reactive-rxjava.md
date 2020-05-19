@@ -1,7 +1,6 @@
 ---
-title: "Reactive (RxJava)"
+title: "Memo: Reactive (RxJava)"
 publishAt: 2016-08-08
-slug: memo-reactive-rxjava
 ---
 
 * toc

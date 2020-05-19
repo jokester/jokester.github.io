@@ -1,7 +1,6 @@
 ---
 title: 'Memo: Category Theory for Programmers'
 publishAt: 2016-12-12
-slug: memo-category-theory-for-pgorammers
 ---
 
 This post serves as a memo of [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/) series for myself.

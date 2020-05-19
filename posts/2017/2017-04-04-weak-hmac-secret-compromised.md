@@ -1,6 +1,6 @@
 ---
 title: 弱HMAC secret的危害
-created_at: 2017-04-04
+publishAt: 2017-04-04
 lang: zh
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: iostat cheatsheet
 publishAt: 2017-10-15
-slug: linux-iostat-cheatsheet
 ---
 
 A cheatsheet of `iostat` in Linux. Mostly learned from [Interpreting iostat Output](https://blog.serverfault.com/2010/07/06/777852755/)

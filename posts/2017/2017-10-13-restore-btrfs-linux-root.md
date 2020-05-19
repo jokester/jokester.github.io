@@ -1,7 +1,6 @@
 ---
 title: 我的笔记本电脑复活了
 publishAt: 2017-10-13
-slug: reviving-yogabook
 ---
 
 上上周我的笔记本 (Lenovo yogabook 710) 因无线网卡故障而送修了，今天拿到了修好的机器。本文记录一下送修前后备份和恢复系统的主要经过。
