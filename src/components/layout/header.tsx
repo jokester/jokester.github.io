@@ -22,7 +22,7 @@ const SectionLink: React.FC<{ path: string; className?: string }> = (props) => {
 
 export const Header: React.FC = () => {
   return (
-    <div className="px-4 py-2 flex items-center bg-gray-900 space-x-4">
+    <div className="px-4 py-2 flex items-center bg-gray-900 space-x-4 text-sm">
       <SectionLink className="sm:hidden" path={TypedRoutes.index}>
         {SiteMeta.siteTitleShort}
       </SectionLink>
