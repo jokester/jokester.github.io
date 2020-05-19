@@ -2,8 +2,9 @@ import * as fsp from './fsp';
 import path from 'path';
 import matter from 'gray-matter';
 import { format } from 'date-fns';
-import { sortBy, isEqual } from 'lodash-es';
 import { isDevBuild } from '../config/build-env';
+import isEqual from 'lodash/isEqual';
+import sortBy from 'lodash/sortBy';
 
 export async function recursiveDir(
   start: string,
