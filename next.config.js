@@ -10,6 +10,13 @@ const withTM = require('next-transpile-modules');
 const nextConf = {
   exportTrailingSlash: true,
 
+  exportPathMap: async (defaultPathMap) => {
+    return {
+      ...defaultPathMap,
+      '/404.html': { page: '/404', },
+    };
+  },
+
   analyzeServer: ['server', 'both'].includes(process.env.BUNDLE_ANALYZE),
   analyzeBrowser: ['browser', 'both'].includes(process.env.BUNDLE_ANALYZE),
   bundleAnalyzerConfig: {
