@@ -26,7 +26,7 @@ const nextConf = {
   env: {
     // becomes process.env.SOME_CONSTANT : booleanB
     REPO_ROOT: __dirname,
-    SOME_CONSTANT: 'SOME_CONSTANT',
+    GA_TRACKING_ID: 'UA-39627402-1',
   },
 
   devIndicators: {

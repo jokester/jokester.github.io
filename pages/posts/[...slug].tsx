@@ -1,28 +1,25 @@
 import React from 'react';
-import { PreJson } from '../../src/dummy/pre-json';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Layout } from '../../src/components/layout/layout';
-import { getMarkdownList, readMarkdownContent } from '../../src/ssr/create-markdown-pages';
+import { getMarkdownList, MarkdownMeta, readMarkdownContent } from '../../src/ssr/resolve-markdown-posts';
+import ReactMarkdown from 'react-markdown';
+import { HtmlMeta } from '../../src/components/html-meta';
+import { TypedRoutes } from '../../src/config/routes';
+import { MarkdownArticle } from '../../src/components/markdown/markdown-article';
 
 interface RouteParams {
   slug: string[];
 }
 
 interface PageProps {
-  slug: string[];
-  postContent: string;
+  mdMeta: MarkdownMeta;
+  mdContent: string;
 }
 
 const PostsShowPage: React.FC<PageProps> = (props) => (
   <Layout>
-    <div>
-      <pre>{__filename}</pre>
-      <hr />
-      <h4>props:</h4>
-      <PreJson value={props} />
-      <h1>title: TITLE</h1>
-      <code>{props.postContent}</code>
-    </div>
+    <HtmlMeta title={`${props.mdMeta.frontMatter.title}`} canonicalPath={TypedRoutes.posts.show(props.mdMeta.slug)} />
+    <MarkdownArticle title={props.mdMeta.frontMatter.title} content={props.mdContent} />
   </Layout>
 );
 
@@ -40,11 +37,11 @@ export const getStaticPaths: GetStaticPaths<{}> = async () => {
 
 export const getStaticProps: GetStaticProps<PageProps> = async (ctx) => {
   const query: RouteParams = ctx.params as any;
-  const content = await readMarkdownContent(query.slug);
+  const parsedMarkdown = await readMarkdownContent(query.slug);
   return {
     props: {
-      slug: query.slug,
-      postContent: content,
+      mdMeta: parsedMarkdown.meta,
+      mdContent: parsedMarkdown.content,
     },
   };
 };

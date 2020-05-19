@@ -7,7 +7,7 @@ import { isDevBuild } from '../config/build-env';
 
 export async function recursiveDir(
   start: string,
-  shouldContinue: (path: string) => boolean = () => true,
+  shouldContinue: (dirPath: string) => boolean = () => true,
 ): Promise<string[]> {
   const toSearch = [start];
   const ret: string[] = [];
@@ -28,12 +28,12 @@ export async function recursiveDir(
   return ret;
 }
 
-export async function readMarkdownContent(slug: string[]): Promise<string> {
+export async function readMarkdownContent(slug: string[]) {
   const x = await getMarkdownList();
-  const f = x.files.find((_) => isEqual(_.slug, slug))!;
-  const parsed = matter(await fsp.readText(f.realpath));
+  const meta = x.files.find((_) => isEqual(_.slug, slug))!;
+  const parsed = matter(await fsp.readText(meta.realpath));
 
-  return parsed.content;
+  return { meta, content: parsed.content } as const;
 }
 
 interface MarkdownFrontMatter {
@@ -43,7 +43,6 @@ interface MarkdownFrontMatter {
 
 export interface MarkdownMeta {
   realpath: string;
-  basename: string;
   slug: string[];
   frontMatter: MarkdownFrontMatter;
 }
@@ -56,6 +55,19 @@ function launderFrontMatter(data: { title?: string; publishAt?: Date }): null | 
 }
 
 export async function getMarkdownList(): Promise<{
+  postsDir: string;
+  files: MarkdownMeta[];
+}> {
+  if (!isDevBuild && cachedPostList) {
+    return cachedPostList;
+  } else {
+    return (cachedPostList = doParsePostList());
+  }
+}
+
+let cachedPostList: any = null;
+
+async function doParsePostList(): Promise<{
   postsDir: string;
   files: MarkdownMeta[];
 }> {
@@ -78,7 +90,6 @@ export async function getMarkdownList(): Promise<{
       if (isDevBuild || frontMatter) {
         files.push({
           realpath,
-          basename,
           slug: [frontMatter?.publishAt ?? '7777-77-77', slugFromBasename], //realpath.slice(start.length + 1).split('/'),
           frontMatter: frontMatter ?? {
             title: 'UNTITLED',

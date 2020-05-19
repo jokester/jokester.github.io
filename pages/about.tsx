@@ -11,8 +11,9 @@ interface PageProps {
 const AboutPage: React.FC<PageProps> = (props) => {
   return (
     <Layout>
-      <h2>AboutPage in {__filename}</h2>
-      <PreJson value={props} />
+      <h1>About</h1>
+      <hr />
+      TODO
     </Layout>
   );
 };

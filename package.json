@@ -20,6 +20,7 @@
   "dependencies": {
     "@types/classnames": "^2.2.10",
     "@types/lodash-es": "^4.17.3",
+    "@types/react-syntax-highlighter": "^11.0.4",
     "classnames": "^2.2.6",
     "date-fns": "^2.14.0",
     "gray-matter": "^4.0.2",
@@ -27,6 +28,9 @@
     "next": "^9.4.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-markdown": "^4.3.1",
+    "react-syntax-highlighter": "^12.2.1",
+    "tailwindcss": "^1.4.6",
     "tslib": "^1.11.2"
   },
   "devDependencies": {

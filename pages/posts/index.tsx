@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useRouter } from 'next/router';
 import { Layout } from '../../src/components/layout/layout';
 import { GetStaticProps } from 'next';
-import { getMarkdownList, MarkdownMeta } from '../../src/ssr/create-markdown-pages';
+import { getMarkdownList, MarkdownMeta } from '../../src/ssr/resolve-markdown-posts';
 import Link from 'next/link';
 import { TypedRoutes } from '../../src/config/routes';
 import { OnlyInDev } from '../../src/components/hoc/only-in-dev';
@@ -12,10 +12,8 @@ interface PageProps {
   files: MarkdownMeta[];
 }
 const PostsIndexPage: React.FC<PageProps> = (props) => {
-  const router = useRouter();
   return (
     <Layout>
-      <PreJson value={router.query} />
       <ul>
         {props.files.map((mdFile, i) => (
           <PostListItem meta={mdFile} key={i} />

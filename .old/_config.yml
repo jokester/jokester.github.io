@@ -18,10 +18,9 @@ email: momocraft@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   Random code, post, app, and stuff. Mostly web-related.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://jokester.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: tarsylia
 github_username:  jokester
-google_analytics: UA-39627402-1
+google_analytics: 
 disqus:
   shortname: jokester-blog
 
