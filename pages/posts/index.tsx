@@ -28,7 +28,7 @@ const PostListItem: React.FC<{ meta: MarkdownMeta }> = ({ meta }) => {
     <li className="block my-2">
       <Link as={TypedRoutes.posts.show(meta.slug)} href="/posts/[...slug]">
         <a>
-          <span className="text-sm mr-6 font-mono">{meta.frontMatter.publishAt}</span>
+          <span className="text-sm mr-2 sm:mr-4 font-mono">{meta.frontMatter.publishAt}</span>
           <span>{meta.frontMatter.title}</span>
           <OnlyInDev>
             {null}
