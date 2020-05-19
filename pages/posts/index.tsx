@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import { Layout } from '../../src/components/layout';
 import { GetStaticProps } from 'next';
 import { getMarkdownList, MarkdownMeta } from '../../src/ssr/create-markdown-pages';
+import Link from 'next/link';
+import { TypedRoutes } from '../../src/config/routes';
 
 interface PageProps {
   files: MarkdownMeta[];
@@ -12,10 +14,26 @@ const PostsIndexPage: React.FC<PageProps> = (props) => {
   const router = useRouter();
   return (
     <Layout>
-      <pre>{__filename}</pre>
-      <PreJson value={props} />
       <PreJson value={router.query} />
+      <ul>
+        {props.files.map((mdFile, i) => (
+          <PostListItem meta={mdFile} key={i} />
+        ))}
+      </ul>
     </Layout>
+  );
+};
+
+export const PostListItem: React.FC<{ meta: MarkdownMeta }> = ({ meta }) => {
+  return (
+    <li className="px-4 block my-2">
+      <Link as={TypedRoutes.posts.show(meta.slug)} href="/posts/[...slug]">
+        <a>
+          <span className="text-sm mr-2 font-mono">{meta.frontMatter.publishAt}</span>
+          <span>{meta.frontMatter.title}</span>
+        </a>
+      </Link>
+    </li>
   );
 };
 

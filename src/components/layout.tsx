@@ -6,7 +6,7 @@ export const Layout: React.FC = (props) => {
     <div className="bg-black text-yellow-100">
       <div className="min-h-screen container mx-auto">
         <Header />
-        {props.children}
+        <div className="p-2">{props.children}</div>
       </div>
     </div>
   );

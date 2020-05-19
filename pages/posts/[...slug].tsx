@@ -32,7 +32,7 @@ export const getStaticPaths: GetStaticPaths<{}> = async () => {
     paths: x.files.map((mdFile) => ({
       params: {
         slug: mdFile.slug,
-      },
+      } as RouteParams,
     })),
     fallback: false,
   };

@@ -1,7 +1,8 @@
 import * as fsp from './fsp';
 import path from 'path';
 import matter from 'gray-matter';
-import * as dateFns from 'date-fns';
+import { format } from 'date-fns';
+import { sortBy } from 'lodash-es';
 import { isDevBuild } from '../config/build-env';
 
 export async function recursiveDir(
@@ -34,8 +35,8 @@ export async function readMarkdownContent(realpath: string): Promise<string> {
 }
 
 interface MarkdownFrontMatter {
-  title?: string;
-  publishAt?: string;
+  title: string;
+  publishAt: string;
 }
 
 export interface MarkdownMeta {
@@ -45,8 +46,11 @@ export interface MarkdownMeta {
   frontMatter: MarkdownFrontMatter;
 }
 
-function launderFrontMatter(data: { title?: string; publishAt?: Date }): MarkdownFrontMatter {
-  return { title: data.title, publishAt: data.publishAt && dateFns.format(data.publishAt, 'yyyy-MM-dd') };
+function launderFrontMatter(data: { title?: string; publishAt?: Date }): null | MarkdownFrontMatter {
+  if (data.title && data.publishAt) {
+    return { title: data.title, publishAt: format(data.publishAt, 'yyyy-MM-dd') };
+  }
+  return null;
 }
 
 export async function getMarkdownList(): Promise<{
@@ -69,14 +73,14 @@ export async function getMarkdownList(): Promise<{
       const mdFile = matter(await fsp.readText(realpath));
       const frontMatter = launderFrontMatter(mdFile.data as any);
 
-      if (isDevBuild || (frontMatter.publishAt && frontMatter.title)) {
+      if (isDevBuild || frontMatter) {
         files.push({
           realpath,
           basename,
-          slug: [slug], //realpath.slice(start.length + 1).split('/'),
-          frontMatter: {
-            title: frontMatter.title ?? 'UNTITLED',
-            publishAt: frontMatter.publishAt ?? '7777-77-77',
+          slug: [frontMatter?.publishAt ?? '7777-77-77', slug], //realpath.slice(start.length + 1).split('/'),
+          frontMatter: frontMatter ?? {
+            title: 'UNTITLED',
+            publishAt: '7777-77-77',
           },
         });
       }
@@ -84,6 +88,6 @@ export async function getMarkdownList(): Promise<{
   }
   return {
     postsDir: start,
-    files,
+    files: sortBy(files, (_) => _.frontMatter.publishAt).reverse(),
   };
 }
