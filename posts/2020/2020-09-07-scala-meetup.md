@@ -1,3 +1,4 @@
+---
 title: Scala Meetup 2020-09
 publishAt: 2020-09-07
 -----
