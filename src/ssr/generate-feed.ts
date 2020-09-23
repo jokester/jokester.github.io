@@ -17,11 +17,12 @@ async function main() {
 
   const posts = await getMarkdownList();
   posts.files.forEach((post) => {
-    feed.addItem({
-      title: post.frontMatter.title,
-      date: new Date(post.frontMatter.publishAt),
-      link: `${SiteMeta.canonicalOrigin}${TypedRoutes.posts.show(post.slug)}`,
-    });
+    post.frontMatter.publishAt &&
+      feed.addItem({
+        title: post.frontMatter.title,
+        date: new Date(post.frontMatter.publishAt),
+        link: `${SiteMeta.canonicalOrigin}${TypedRoutes.posts.show(post.slug)}`,
+      });
   });
 
   await writeFile(path.join(__dirname, '../../public/feed.xml'), feed.atom1());
