@@ -1,6 +1,7 @@
 ---
 title: In-house k3s cluster
 publishAt: 2020-09-06
+lang: en
 ---
 
 # Hosts & Services

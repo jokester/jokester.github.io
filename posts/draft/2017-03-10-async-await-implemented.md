@@ -4,18 +4,18 @@ created_at: 2017-04-01
 language: zh
 ---
 
-本文介绍两种用ES6以下版本的JavaScript实现async语义的方法。
+本文介绍两种用 ES6 以下版本的 JavaScript 实现 async 语义的方法。
 
-`async / await` 是ES2017中引入的新JavaScript语法。用这种语法可以写出看上去像普通同步代码，实际上非阻塞 (间断执行) 的代码。
+`async / await` 是 ES2017 中引入的新 JavaScript 语法。用这种语法可以写出看上去像普通同步代码，实际上非阻塞 (间断执行) 的代码。
 
-async实质上是 (把Promise的`fulfill / reject` 映射到已有js语法的`return / throw`) 的结果，也依赖于Promise。
-如果你还不熟悉Promise，建议先阅读相关教程。
+async 实质上是 (把 Promise 的`fulfill / reject` 映射到已有 js 语法的`return / throw`) 的结果，也依赖于 Promise。
+如果你还不熟悉 Promise，建议先阅读相关教程。
 
-如果你也使用TypeScript: 这篇文章其实介绍的就是把TypeScript编译到ES6 / ES5以下时，tsc编译器替我们做的事情。
+如果你也使用 TypeScript: 这篇文章其实介绍的就是把 TypeScript 编译到 ES6 / ES5 以下时，tsc 编译器替我们做的事情。
 
 ## `async / await`
 
-本节介绍async / await的语法和行为，然后吹一下async比Promise好在哪里。
+本节介绍 async / await 的语法和行为，然后吹一下 async 比 Promise 好在哪里。
 
 #### async函数
 
@@ -29,7 +29,7 @@ const c = async () => {}
 
 ### await
 
-在 `async` 函数内，我们可以使用 `await` 关键字去 "等待" 一个可能是Promise的值:
+在 `async` 函数内，我们可以使用 `await` 关键字去 "等待" 一个可能是 Promise 的值:
 
 ```js
 async function a(p1) {
@@ -39,15 +39,15 @@ async function a(p1) {
 
 对`await p` 这个表达式求值的行为是这样的:
 
-- 如果p不是Promise: 返回p本身
-- 如果p是Promise:
-    - 在p fulfill之后，返回p内部的结果
-    - 在p reject之后，抛出p内部的异常值
-    - (如果p 一直不resolve，就不继续执行)
+- 如果 p 不是 Promise: 返回 p 本身
+- 如果 p 是 Promise:
+    - 在 p fulfill 之后，返回 p 内部的结果
+    - 在 p reject 之后，抛出 p 内部的异常值
+    - (如果 p 一直不 resolve，就不继续执行)
 
-注意1: await表达式的 "返回" "抛出" 其实都是异步的。原因下面会讲。
+注意 1: await 表达式的 "返回" "抛出" 其实都是异步的。原因下面会讲。
 
-注意2: await 只能在async函数本身那一"层"使用。如果一个async函数A内部有非async函数B，在B内部不能使用`await`:
+注意 2: await 只能在 async 函数本身那一"层"使用。如果一个 async 函数 A 内部有非 async 函数 B，在 B 内部不能使用`await`:
 
 ```js
 async function A() {
@@ -60,7 +60,7 @@ async function A() {
 
 ### async函数的返回值
 
-调用async函数一定返回一个反映了async函数内的执行结果的Promise。具体来说，有以下几种情况:
+调用 async 函数一定返回一个反映了 async 函数内的执行结果的 Promise。具体来说，有以下几种情况:
 
 ```js
 // 如果async 函数执行完毕，在内部返回a: 外部会得到一个相当于Promise.resolve(a)的Promise
@@ -95,7 +95,7 @@ foo3().catch(v => console.log(v)); // 打印2
 
 `async function` 和一般 js 有相同的 scope 和几乎相同的语法。我们可以写顺序执行的代码，而实现间断执行的行为。这大大减轻了读写代码的心智负担。
 
-在没有async的时候，传给Promise的每一个函数有自己的作用域。往往要做一些额外的事才能在这些作用域间共享值。比如有下面一段用Promise实现的，间断执行的代码:
+在没有 async 的时候，传给 Promise 的每一个函数有自己的作用域。往往要做一些额外的事才能在这些作用域间共享值。比如有下面一段用 Promise 实现的，间断执行的代码:
 
 ```ts
 function asyncOperation(n: number): Promise<number>;
@@ -107,9 +107,9 @@ function foo1(arg1: Promise<number>) {
 }
 ```
 
-如果这时我们需要在 `bar2` 那个函数中再使用n1的值怎么办呢？有几种做法：
+如果这时我们需要在 `bar2` 那个函数中再使用 n1 的值怎么办呢？有几种做法：
 
-A. 在上层scope，即foo1中新开一个变量，在`bar1`中把n1存进去，在`bar2`中取:
+A. 在上层 scope，即 foo1 中新开一个变量，在`bar1`中把 n1 存进去，在`bar2`中取:
 
 ```ts
 function foo1(arg1: Promise<number>) {
@@ -120,7 +120,7 @@ function foo1(arg1: Promise<number>) {
 }
 ```
 
-B. 把bar2整个移到bar1内:
+B. 把 bar2 整个移到 bar1 内:
 
 ```ts
 function foo1(arg1: Promise<number>) {
@@ -132,7 +132,7 @@ function foo1(arg1: Promise<number>) {
 
 这几种做法的共同点是长，以及痛苦。
 
-现在再看一下用async写的版本:
+现在再看一下用 async 写的版本:
 
 ```ts
 async function foo2(arg1: Promise<number>) {
@@ -145,11 +145,11 @@ async function foo2(arg1: Promise<number>) {
 
 ## 用Generator实现async
 
-本节将简要介绍生成器，并用生成器实现async / await。
+本节将简要介绍生成器，并用生成器实现 async / await。
 
 #### Generator / 生成器
 
-生成器 (Generator) 是ES6新增的一种可以不连续执行的控制流。我们可以用`function *`语法来定义一个 "生成器函数" (Generator function)，即 "创建生成器的函数"。
+生成器 (Generator) 是 ES6 新增的一种可以不连续执行的控制流。我们可以用`function *`语法来定义一个 "生成器函数" (Generator function)，即 "创建生成器的函数"。
 
 ```js
 function* gen(a) {
@@ -173,11 +173,11 @@ console.log(seq1.next()); // next 4
 // => { value: undefined, done: true }
 ```
 
-`seq1` 是一个普通的JS对象，我们不一定要像上面这样连续地执行 `.next()`，
+`seq1` 是一个普通的 JS 对象，我们不一定要像上面这样连续地执行 `.next()`，
 也可以在很久以后 (时间上的间隔)，在另一个函数中执行 (空间上的间隔)。
 每次调用`.next()`后，生成器函数内部的执行进度，以及局部变量都不会消失。
 
-生成器函数是 "懒" 的。每次调用 `next / throw` 会前进到下次的yield。如果一次也不调用，就完全不前进。
+生成器函数是 "懒" 的。每次调用 `next / throw` 会前进到下次的 yield。如果一次也不调用，就完全不前进。
 
 #### 向生成器函数内注入值或异常
 

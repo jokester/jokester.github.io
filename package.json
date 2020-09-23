@@ -15,6 +15,7 @@
     "test:coverage": "jest --coverage",
     "typecheck": "tsc --noEmit",
     "typecheck:watch": "tsc --watch --noEmit",
+    "textlint": "textlint posts/",
     "lint": "    eslint '**/*.@(ts|js|tsx|jsx)'",
     "lint:fix": "eslint '**/*.@(ts|js|tsx|jsx)' --fix"
   },
@@ -72,6 +73,9 @@
     "jest": "<27",
     "prettier": "^2.1.2",
     "sass": "^1.26.11",
+    "textlint": "^11.7.6",
+    "textlint-rule-ja-space-between-half-and-full-width": "^2.0.2",
+    "textlint-rule-zh-half-and-full-width-bracket": "^1.1.0",
     "ts-jest": "<27",
     "ts-node": "^9.0",
     "typescript": "^4"

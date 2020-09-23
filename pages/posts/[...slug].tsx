@@ -17,7 +17,7 @@ interface PageProps {
 const PostsShowPage: React.FC<PageProps> = (props) => (
   <Layout>
     <HtmlMeta title={`${props.mdMeta.frontMatter.title}`} />
-    <MarkdownArticle title={props.mdMeta.frontMatter.title} content={props.mdContent} />
+    <MarkdownArticle meta={props.mdMeta} content={props.mdContent} />
   </Layout>
 );
 
