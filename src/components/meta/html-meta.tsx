@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { createLogger } from '../../utils/debug-logger';
 
 const logger = createLogger(__filename);
-export const HtmlMeta: React.FC<{ title: string; canonicalPath: string }> = (props) => {
+export const HtmlMeta: React.FC<{ title: string }> = (props) => {
   /**
    * TODO: ogp / keywords / etc
    */
