@@ -100,7 +100,7 @@ async function doParsePostList(): Promise<{
           slug: [frontMatter.publishAt, slugFromBasename], //realpath.slice(start.length + 1).split('/'),
           frontMatter,
         });
-      } else if (frontMatter) {
+      } else if (frontMatter && isDevBuild) {
         logger(`draft post: ${realpath}`);
         files.push({
           realpath,
