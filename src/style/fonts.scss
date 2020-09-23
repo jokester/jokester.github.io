@@ -21,3 +21,13 @@ $tailwindDefaultSans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 
   font-family: 'Noto Sans CJK JP', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo,
     'ＭＳ Ｐゴシック', $tailwindDefaultSans;
 }
+
+:lang(en),
+:lang(ja),
+:lang(zh-hans),
+:lang(zh-hant) {
+  // redefined styles with higher priority
+  &.font-mono {
+    @apply font-mono;
+  }
+}

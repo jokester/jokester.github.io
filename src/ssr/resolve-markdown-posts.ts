@@ -43,6 +43,7 @@ export async function readMarkdownContent(slug: string[]) {
 interface MarkdownFrontMatter {
   title: string;
   publishAt?: string;
+  lang?: 'zh-hans' | 'zh-hant' | 'en' | 'ja';
 }
 
 export interface MarkdownMeta {

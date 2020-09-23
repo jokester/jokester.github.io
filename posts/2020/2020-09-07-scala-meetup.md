@@ -1,6 +1,7 @@
 ---
 title: Scala Meetup 2020-09
 publishAt: 2020-09-07
+lang: zh-hans
 -----
 
 2020-09-05 参加 Scala Meetup 的笔记。
