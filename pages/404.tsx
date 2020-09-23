@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from '../src/components/layout/layout';
 
-export default () => (
+const NotFoundPage = () => (
   <Layout>
     <div>
       <h1>You are here!</h1>
@@ -9,3 +9,5 @@ export default () => (
     </div>
   </Layout>
 );
+
+export default NotFoundPage;

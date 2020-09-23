@@ -14,4 +14,6 @@ export const TypedRoutes = {
     me: '/about/',
   },
 } as const;
-export type TypedRouteParam<RouteNode> = RouteNode extends (param: infer Param) => string ? Param & ParsedUrlQuery : {};
+export type TypedRouteParam<RouteNode> = RouteNode extends (param: infer Param) => string
+  ? Param & ParsedUrlQuery
+  : never;

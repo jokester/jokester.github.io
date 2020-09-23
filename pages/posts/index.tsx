@@ -1,6 +1,4 @@
-import { PreJson } from '../../src/dummy/pre-json';
 import * as React from 'react';
-import { useRouter } from 'next/router';
 import { Layout } from '../../src/components/layout/layout';
 import { GetStaticProps } from 'next';
 import { getMarkdownList, MarkdownMeta } from '../../src/ssr/resolve-markdown-posts';

@@ -2,12 +2,11 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Layout } from '../../src/components/layout/layout';
 import { getMarkdownList, MarkdownMeta, readMarkdownContent } from '../../src/ssr/resolve-markdown-posts';
-import ReactMarkdown from 'react-markdown';
 import { HtmlMeta } from '../../src/components/html-meta';
 import { TypedRoutes } from '../../src/config/routes';
 import { MarkdownArticle } from '../../src/components/markdown/markdown-article';
 
-interface RouteParams {
+interface RouteParams extends Record<string, string | string[]> {
   slug: string[];
 }
 
@@ -23,7 +22,7 @@ const PostsShowPage: React.FC<PageProps> = (props) => (
   </Layout>
 );
 
-export const getStaticPaths: GetStaticPaths<{}> = async () => {
+export const getStaticPaths: GetStaticPaths<RouteParams> = async () => {
   const x = await getMarkdownList();
   return {
     paths: x.files.map((mdFile) => ({
