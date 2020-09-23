@@ -15,17 +15,17 @@ publishAt: 2013-12-25
 
 #### 发布工程
 
-BSD的系统都处于版本控制的管理之下。各种免费BSD都用CVS。
+BSD 的系统都处于版本控制的管理之下。各种免费 BSD 都用 CVS。
 简单地说，版本控制是一种流程，在这个流程中修改一个程序需要把文件拿出来－改动文件－把文件放回去－留言说明改动。
 版本控制系统保留所有变更的完整历史，你可以查看变更历史，拿出一个文件的旧版本，或是比较任意两个版本。
 
-各种BSD的CVS版本库都是公开的。
+各种 BSD 的 CVS 版本库都是公开的。
 作为一个用户，你可以看到几时，谁，为何做出改动。你随时可以拿到最新代碼。
-各种免费BSD都有邮件列表，你注册后可以立刻得到通知。
-其实CVS也提供web界面，你可以在[这](http://cvsweb.freebsd.org/src)看到FreeBSD代码树的全部历史。
+各种免费 BSD 都有邮件列表，你注册后可以立刻得到通知。
+其实 CVS 也提供 web 界面，你可以在[这](http://cvsweb.freebsd.org/src)看到 FreeBSD 代码树的全部历史。
 
-Linux最初没有用版本控制来管理kernel代码。
-在2.4版本中期的某时，kernel代码开始由一个公开的BitKeeper版本库管理。
+Linux 最初没有用版本控制来管理 kernel 代码。
+在 2.4 版本中期的某时，kernel 代码开始由一个公开的 BitKeeper 版本库管理。
 Linux, historically, hasn't used any version control for the kernel. Somewhere in mid-2.4 days the kernel began being kept in a public BitKeeper repository. Many of the other utilities use revision control, but since they're all developed separately, there isn't any central place you can go to to look through the changes. So it's sometimes hard to get a historic picture of even any one part; to so do for a whole distribution is practically impossible.
 
 Note: There's been some contention about the last paragraph. While many developers have used CVS for parts of the kernel, available information says that Linus never used it for the kernel, thus the whole thing wasn't in a coherent version control system until the move to Bitkeeper. See this paper for details.

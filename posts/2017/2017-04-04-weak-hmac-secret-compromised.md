@@ -6,7 +6,7 @@ lang: zh
 
 [One Line of Code that Compromises Your Server](https://martinfowler.com/articles/session-secret.html)
 
-如果你在加密secret时用了sha1-HMAC和弱secret:
+如果你在加密 secret 时用了 sha1-HMAC 和弱 secret:
 
-- AWS 2.6 USD/h 的instance可以一分钟内穷举出 `super secret`
-- 有secret后便可假造出管理员cookie, 甚至用反序列化向服务器注入代码
+- AWS 2.6 USD/h 的 instance 可以一分钟内穷举出 `super secret`
+- 有 secret 后便可假造出管理员 cookie, 甚至用反序列化向服务器注入代码

@@ -8,14 +8,14 @@ title: 解剖Preact - 4
 
 ## Pure / Stateless
 
-我们把前 3 种情况称为 "无状态" 渲染。"无状态" 是指渲染所需信息完全由V-DOM决定，且不会再变动:
+我们把前 3 种情况称为 "无状态" 渲染。"无状态" 是指渲染所需信息完全由 V-DOM 决定，且不会再变动:
 
-- 1和2已经是固定了的JS值。
-- 3虽然还没有被执行，但只要 `nodeName` 是对相同输入给出相同输出的纯函数Component，在props确定时相应的Node也已经确定。
+- 1 和 2 已经是固定了的 JS 值。
+- 3 虽然还没有被执行，但只要 `nodeName` 是对相同输入给出相同输出的纯函数 Component，在 props 确定时相应的 Node 也已经确定。
 
 与其相反的则是 4 "有状态" 渲染:
 
-本文介绍Preact将1 / 2 / 3几种Node渲染到DOM的过程。
+本文介绍 Preact 将 1 / 2 / 3 几种 Node 渲染到 DOM 的过程。
 
 
 
@@ -56,7 +56,7 @@ component._component        :: child component?
     - 和`isDirectOwner`有关
 
 - `node._component`
-    - 最内层的Component instance
+    - 最内层的 Component instance
 
 ### Component constructor
 
@@ -64,14 +64,14 @@ component._component        :: child component?
 
 ### Component instance的属性
 
-- `c.constructor` 指向constructor (这是JS Obj共有的)
+- `c.constructor` 指向 constructor (这是 JS Obj 共有的)
 - `c._component` 本次
-- `c._disable` 曾经的名字是 `_disableRendering`. unmount时置为true / setComponentProps中先true再false / 是true时renderComponent会忽略
-- `c.base` 最后一次render结果的dom
-    - 有base `<=>` mounted
-- `c.__ref` props中的ref
-- `c.__key` props中的key
-- `c._dirty` 用于避免多次enqueueRender
+- `c._disable` 曾经的名字是 `_disableRendering`. unmount 时置为 true / setComponentProps 中先 true 再 false / 是 true 时 renderComponent 会忽略
+- `c.base` 最后一次 render 结果的 dom
+    - 有 base `<=>` mounted
+- `c.__ref` props 中的 ref
+- `c.__key` props 中的 key
+- `c._dirty` 用于避免多次 enqueueRender
 - `c.nextBase` ???
 
 ### DOM Node的属性
@@ -80,22 +80,22 @@ component._component        :: child component?
 
 ### Component (instance) 怎样和dom互相引用
 
-dom到Component: 
+dom 到 Component: 
 
 - `dom._component` 最内层的 `Component` instance
-- `dom._componentConstructor` 这个instance的Constructor
+- `dom._componentConstructor` 这个 instance 的 Constructor
 
-Component到外层Component:
+Component 到外层 Component:
 
 - `c._parentComponent`
 
-Component到内层 (inner) Component:
+Component 到内层 (inner) Component:
 
 - `c._component`
 
-Component到DOM:
+Component 到 DOM:
 
-- `c.base` (最内层的非DOM component才有)
+- `c.base` (最内层的非 DOM component 才有)
 
 ```jsx
 const A = (props) => <B />;
@@ -115,7 +115,7 @@ p._component = A
 
 ### 设计模式: 对象池
 
-Preact分别为DOM对象 `HTML***Element`
+Preact 分别为 DOM 对象 `HTML***Element`
 
 
 ### 代码模式: 在递归中使用全局变量
@@ -126,7 +126,7 @@ Preact分别为DOM对象 `HTML***Element`
 - 内层递归: 使用
 
 - 好处: 避免了每次创建变量，或用参数传递变量
-- 条件: JS是单线程，这不会导致冲突。
+- 条件: JS 是单线程，这不会导致冲突。
 - 条件: 整个递归需要是同步的
 - 风险: 如果内层代码抛出异常，全局变量有可能不会被正常复原
 
@@ -139,8 +139,8 @@ Preact分别为DOM对象 `HTML***Element`
 
 ### Preact的细节
 
-- 自带一个className() 实现 `8.1中已删除`
-- 在JSX中可以使用属性名 `class`, 也可以使用 `className`, 但如果同时存在, 其中一个会被覆盖.
+- 自带一个 className() 实现 `8.1中已删除`
+- 在 JSX 中可以使用属性名 `class`, 也可以使用 `className`, 但如果同时存在, 其中一个会被覆盖.
 - `ref` 必须是函数
 
 
