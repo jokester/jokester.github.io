@@ -16,6 +16,8 @@ export const GoogleAnalyticsTag: React.FC = () => {
   const { GA_TRACKING_ID } = buildEnv;
   const router = useRouter();
 
+  logger('GA_TRACKING_ID', GA_TRACKING_ID);
+
   useEffect(() => {
     if (GA_TRACKING_ID) {
       router.events.on('routeChangeComplete', (url: string) => {

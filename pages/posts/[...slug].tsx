@@ -2,7 +2,7 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Layout } from '../../src/components/layout/layout';
 import { getMarkdownList, MarkdownMeta, readMarkdownContent } from '../../src/ssr/resolve-markdown-posts';
-import { HtmlMeta } from '../../src/components/html-meta';
+import { HtmlMeta } from '../../src/components/meta/html-meta';
 import { TypedRoutes } from '../../src/config/routes';
 import { MarkdownArticle } from '../../src/components/markdown/markdown-article';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout } from '../src/components/layout/layout';
-import { HtmlMeta } from '../src/components/html-meta';
+import { HtmlMeta } from '../src/components/meta/html-meta';
 import { SiteMeta } from '../src/config/const';
 import { TypedRoutes } from '../src/config/routes';
 
