@@ -1,15 +1,17 @@
 import ReactMarkdown from 'react-markdown';
 import React from 'react';
-import { Prism } from 'react-syntax-highlighter';
+import { Prism, PrismAsync } from 'react-syntax-highlighter';
 import codeStyle from 'react-syntax-highlighter/dist/cjs/styles/prism/atom-dark';
 import { MarkdownMeta } from '../../ssr/resolve-markdown-posts';
+import { inServer } from '../../config/build-env';
 
 const CustomRenderers = {
-  code(prop: { language: string; value: string }) {
+  code: function (prop: { language: string; value: string }) {
+    const P = inServer ? Prism : PrismAsync;
     return (
-      <Prism language={prop.language} style={codeStyle}>
+      <P language={prop.language} style={codeStyle}>
         {prop.value}
-      </Prism>
+      </P>
     );
   },
 } as const;
