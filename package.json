@@ -4,7 +4,7 @@
   "author": "Wang Guan <momocraft@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "DEBUG=ssr:* next dev",
     "build": "DEBUG=ssr:* next build",
     "export": "DEBUG=ssr:* next export",
     "preexport": "REPO_ROOT=. NODE_OPTIONS=--experimental-modules ts-node --project tsconfig.node.json src/ssr/generate-feed.ts",

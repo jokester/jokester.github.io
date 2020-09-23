@@ -5,8 +5,11 @@ import { format } from 'date-fns';
 import { isDevBuild } from '../config/build-env';
 import isEqual from 'lodash/isEqual';
 import sortBy from 'lodash/sortBy';
+import { createLogger } from '../utils/debug-logger';
 
-export async function recursiveDir(
+const logger = createLogger(__filename);
+
+async function recursiveDir(
   start: string,
   shouldContinue: (dirPath: string) => boolean = () => true,
 ): Promise<string[]> {
@@ -39,7 +42,7 @@ export async function readMarkdownContent(slug: string[]) {
 
 interface MarkdownFrontMatter {
   title: string;
-  publishAt: string;
+  publishAt?: string;
 }
 
 export interface MarkdownMeta {
@@ -51,6 +54,8 @@ export interface MarkdownMeta {
 function launderFrontMatter(data: { title?: string; publishAt?: Date }): null | MarkdownFrontMatter {
   if (data.title && data.publishAt) {
     return { title: data.title, publishAt: format(data.publishAt, 'yyyy-MM-dd') };
+  } else if (data.title) {
+    return { title: data.title };
   }
   return null;
 }
@@ -79,24 +84,34 @@ async function doParsePostList(): Promise<{
   for (const realpath of realpaths) {
     const basename = path.basename(realpath);
 
-    let _, authorDate, slugFromBasename;
+    let authorDate, slugFromBasename;
     if (
-      ([_, authorDate = null, slugFromBasename = null] = /^(\d+-\d+-\d+)-(.*)\.(md|markdown)$/i.exec(basename) ?? []) &&
+      ([, authorDate = null, slugFromBasename = null] = /^(\d+-\d+-\d+)-(.*)\.(md|markdown)$/i.exec(basename) ?? []) &&
       authorDate &&
       slugFromBasename
     ) {
       const mdFile = matter(await fsp.readText(realpath));
       const frontMatter = launderFrontMatter(mdFile.data as any);
 
-      if (isDevBuild || frontMatter) {
+      if (frontMatter?.publishAt) {
+        logger(`published post: ${realpath}`);
         files.push({
           realpath,
-          slug: [frontMatter?.publishAt ?? '7777-77-77', slugFromBasename], //realpath.slice(start.length + 1).split('/'),
-          frontMatter: frontMatter ?? {
-            title: 'UNTITLED',
+          slug: [frontMatter.publishAt, slugFromBasename], //realpath.slice(start.length + 1).split('/'),
+          frontMatter,
+        });
+      } else if (frontMatter) {
+        logger(`draft post: ${realpath}`);
+        files.push({
+          realpath,
+          slug: ['7777-77-77', slugFromBasename], //realpath.slice(start.length + 1).split('/'),
+          frontMatter: {
+            ...frontMatter,
             publishAt: '7777-77-77',
           },
         });
+      } else {
+        logger(`non-post: ${realpath}`);
       }
     }
   }

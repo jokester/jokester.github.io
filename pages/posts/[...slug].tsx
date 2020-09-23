@@ -2,8 +2,7 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Layout } from '../../src/components/layout/layout';
 import { getMarkdownList, MarkdownMeta, readMarkdownContent } from '../../src/ssr/resolve-markdown-posts';
-import { HtmlMeta } from '../../src/components/html-meta';
-import { TypedRoutes } from '../../src/config/routes';
+import { HtmlMeta } from '../../src/components/meta/html-meta';
 import { MarkdownArticle } from '../../src/components/markdown/markdown-article';
 
 interface RouteParams extends Record<string, string | string[]> {
@@ -17,7 +16,7 @@ interface PageProps {
 
 const PostsShowPage: React.FC<PageProps> = (props) => (
   <Layout>
-    <HtmlMeta title={`${props.mdMeta.frontMatter.title}`} canonicalPath={TypedRoutes.posts.show(props.mdMeta.slug)} />
+    <HtmlMeta title={`${props.mdMeta.frontMatter.title}`} />
     <MarkdownArticle title={props.mdMeta.frontMatter.title} content={props.mdContent} />
   </Layout>
 );
