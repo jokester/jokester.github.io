@@ -105,10 +105,7 @@ async function doParsePostList(): Promise<{
         files.push({
           realpath,
           slug: ['7777-77-77', slugFromBasename], //realpath.slice(start.length + 1).split('/'),
-          frontMatter: {
-            ...frontMatter,
-            publishAt: '7777-77-77',
-          },
+          frontMatter,
         });
       } else {
         logger(`non-post: ${realpath}`);
