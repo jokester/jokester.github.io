@@ -5,9 +5,9 @@ import { format } from 'date-fns';
 import { isDevBuild } from '../config/build-env';
 import isEqual from 'lodash/isEqual';
 import sortBy from 'lodash/sortBy';
-import debug from 'debug';
+import { createLogger } from '../utils/debug-logger';
 
-const logger = debug('ssr:resolve-markdown-posts');
+const logger = createLogger(__filename);
 
 async function recursiveDir(
   start: string,

@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { buildEnv } from '../../config/build-env';
+import { createLogger } from '../../utils/debug-logger';
+
+const logger = createLogger(__filename);
 
 declare function gtag(...args: any[]): void;
 
@@ -16,6 +19,7 @@ export const GoogleAnalyticsTag: React.FC = () => {
   useEffect(() => {
     if (GA_TRACKING_ID) {
       router.events.on('routeChangeComplete', (url: string) => {
+        logger('RouteChangeComplete', url);
         setTimeout(() => {
           typeof gtag === 'function' &&
             gtag('config', GA_TRACKING_ID, {
