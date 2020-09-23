@@ -15,7 +15,7 @@ const CustomRenderers = {
 
 export const MarkdownArticle: React.FC<{ title: string; content: string }> = ({ title, content }) => {
   return (
-    <div className="p-2 markdown">
+    <div className="markdown">
       <h1>{title}</h1>
       <hr />
       <ReactMarkdown className="markdown" source={content} renderers={CustomRenderers} />
