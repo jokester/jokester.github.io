@@ -7,7 +7,7 @@ import { TypedRoutes } from '../src/config/routes';
 const IndexPage: React.FC = (props) => {
   return (
     <Layout>
-      <HtmlMeta title={SiteMeta.siteTitle} canonicalPath={TypedRoutes.index} />
+      <HtmlMeta title={SiteMeta.siteTitle} />
       <div>{SiteMeta.siteDesc}</div>
     </Layout>
   );

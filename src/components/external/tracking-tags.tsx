@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { buildEnv } from '../../config/build-env';
 import { createLogger } from '../../utils/debug-logger';
+import Head from 'next/head';
 
 const logger = createLogger(__filename);
 
@@ -16,26 +17,24 @@ export const GoogleAnalyticsTag: React.FC = () => {
   const { GA_TRACKING_ID } = buildEnv;
   const router = useRouter();
 
-  logger('GA_TRACKING_ID', GA_TRACKING_ID);
-
   useEffect(() => {
+    logger('GA_TRACKING_ID', GA_TRACKING_ID);
     if (GA_TRACKING_ID) {
-      router.events.on('routeChangeComplete', (url: string) => {
-        logger('RouteChangeComplete', url);
-        setTimeout(() => {
-          typeof gtag === 'function' &&
-            gtag('config', GA_TRACKING_ID, {
-              page_location: url,
-              page_title: document.title,
-            });
-        }, 0);
-      });
+      const url = router.asPath;
+      logger('RouteChangeComplete', url);
+      setTimeout(() => {
+        typeof gtag === 'function' &&
+          gtag('config', GA_TRACKING_ID, {
+            page_location: url,
+            page_title: document.title,
+          });
+      }, 0);
     }
   }, []);
 
   return (
     (GA_TRACKING_ID && (
-      <>
+      <Head>
         {/* Global Site Tag (gtag.js) - Google Analytics */}
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
         <script
@@ -50,7 +49,7 @@ export const GoogleAnalyticsTag: React.FC = () => {
           `,
           }}
         />
-      </>
+      </Head>
     )) ||
     null
   );
