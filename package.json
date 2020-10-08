@@ -32,7 +32,7 @@
     "fp-ts": "^2.8.3",
     "gray-matter": "^4.0.2",
     "lodash-es": "^4.17.15",
-    "next": "^9.5.3",
+    "next": "^9.5.4",
     "next-compose-plugins": "^2.2.0",
     "next-optimized-images": "^2.6.2",
     "next-transpile-modules": "^4.1.0",
