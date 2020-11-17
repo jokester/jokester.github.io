@@ -47,7 +47,6 @@ const nextConf = {
       new webpack.DefinePlugin({
         // becomes process.env.NEXT_DEV : boolean
         'process.env.NEXT_DEV': JSON.stringify(!!dev),
-        'process.env.NEXT_SERVER': JSON.stringify(!!isServer),
       }),
     );
 
