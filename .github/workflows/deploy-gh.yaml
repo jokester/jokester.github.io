@@ -2,7 +2,7 @@ name: deploy github page
 on:
   push:
     branches:
-      - content
+      - master
 
 jobs:
   build-and-deploy:
@@ -26,5 +26,5 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BRANCH: master
+        BRANCH: gh-pages
         FOLDER: out
