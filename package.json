@@ -37,8 +37,8 @@
     "next-optimized-images": "^2.6.2",
     "next-transpile-modules": "^6.0.0",
     "preact": "^10.5.7",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react": "<17",
+    "react-dom": "<17",
     "react-markdown": "^5.0.3",
     "react-syntax-highlighter": "^15.4.3",
     "react-use": "^15.3.4",
@@ -82,5 +82,9 @@
   },
   "engines": {
     "node": "12"
+  },
+  "resolutions": {
+    "postcss": "^8"
   }
+
 }

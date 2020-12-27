@@ -28,6 +28,6 @@ $tailwindDefaultSans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 :lang(zh-hant) {
   // redefined styles with higher priority
   &.font-mono {
-    @apply font-mono;
+    font-family: monospace;
   }
 }
