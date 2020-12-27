@@ -1,0 +1,2 @@
+_N_E=(window.webpackJsonp_N_E=window.webpackJsonp_N_E||[]).push([[13],{YEr2:function(n,r,t){"use strict";t.r(r);var u=t("FdF9"),o=t("B7F5"),_=u.createElement;r.default=function(n){return _(o.a,null,_("h1",null,"Works"),_("hr",null),"TODO")}},at7P:function(n,r,t){(window.__NEXT_P=window.__NEXT_P||[]).push(["/works",function(){return t("YEr2")}])}},[["at7P",0,1,2]]]);
+//# sourceMappingURL=works-a3f554cdb68a2054e4ce.js.map

@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id/>
+    <title>挖坑自動機 / Digging automaton</title>
+    <updated>2020-12-27T16:04:55.164Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://jokester.github.io"/>
+    <subtitle>Posts and works about Web, Android, Linux and stuff.</subtitle>
+    <rights>CC BY-SA</rights>
+    <entry>
+        <title type="html"><![CDATA[Scala Meetup 2020-09]]></title>
+        <id>https://jokester.github.io/posts/2020-09-07/scala-meetup/</id>
+        <link href="https://jokester.github.io/posts/2020-09-07/scala-meetup/"/>
+        <updated>2020-09-07T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[In-house k3s cluster]]></title>
+        <id>https://jokester.github.io/posts/2020-09-06/inhouse-k3s-cluster/</id>
+        <link href="https://jokester.github.io/posts/2020-09-06/inhouse-k3s-cluster/"/>
+        <updated>2020-09-06T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Setup Archlinux on Raspberry Pi 4b]]></title>
+        <id>https://jokester.github.io/posts/2019-09-14/setup-archlinux-raspberry-pi-4b/</id>
+        <link href="https://jokester.github.io/posts/2019-09-14/setup-archlinux-raspberry-pi-4b/"/>
+        <updated>2019-09-14T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Install docker-ce without aufs in Debian]]></title>
+        <id>https://jokester.github.io/posts/2019-09-07/install-docker-wo-aufs-debian/</id>
+        <link href="https://jokester.github.io/posts/2019-09-07/install-docker-wo-aufs-debian/"/>
+        <updated>2019-09-07T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ELK stack for log archiving and search]]></title>
+        <id>https://jokester.github.io/posts/2018-08-22/elk-stach-for-log-archive-search/</id>
+        <link href="https://jokester.github.io/posts/2018-08-22/elk-stach-for-log-archive-search/"/>
+        <updated>2018-08-22T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Memo: Redis]]></title>
+        <id>https://jokester.github.io/posts/2017-11-01/memo-redis/</id>
+        <link href="https://jokester.github.io/posts/2017-11-01/memo-redis/"/>
+        <updated>2017-11-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Memo: Debugging native code: CMake C CPP JNI]]></title>
+        <id>https://jokester.github.io/posts/2017-10-19/debugging-cmake-c-cpp-jni/</id>
+        <link href="https://jokester.github.io/posts/2017-10-19/debugging-cmake-c-cpp-jni/"/>
+        <updated>2017-10-19T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[iostat cheatsheet]]></title>
+        <id>https://jokester.github.io/posts/2017-10-15/iostat-cheatsheet/</id>
+        <link href="https://jokester.github.io/posts/2017-10-15/iostat-cheatsheet/"/>
+        <updated>2017-10-15T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[我的笔记本电脑复活了]]></title>
+        <id>https://jokester.github.io/posts/2017-10-13/restore-btrfs-linux-root/</id>
+        <link href="https://jokester.github.io/posts/2017-10-13/restore-btrfs-linux-root/"/>
+        <updated>2017-10-13T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[How to limit resource usage of bhyve VM with rctl]]></title>
+        <id>https://jokester.github.io/posts/2017-10-02/limit-bhyve-vm-resource-rctl/</id>
+        <link href="https://jokester.github.io/posts/2017-10-02/limit-bhyve-vm-resource-rctl/"/>
+        <updated>2017-10-02T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[TIR: java memory model (JSR133)]]></title>
+        <id>https://jokester.github.io/posts/2017-10-01/mem-jsr133-jmm/</id>
+        <link href="https://jokester.github.io/posts/2017-10-01/mem-jsr133-jmm/"/>
+        <updated>2017-10-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Static site with AWS S3 and custom domain]]></title>
+        <id>https://jokester.github.io/posts/2017-09-10/static-site-s3-custom-domain/</id>
+        <link href="https://jokester.github.io/posts/2017-09-10/static-site-s3-custom-domain/"/>
+        <updated>2017-09-10T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Using PGP with keybase, OpenKeychain and fidesmo]]></title>
+        <id>https://jokester.github.io/posts/2017-09-01/pgp-keybase-openkeychain-fidesmo/</id>
+        <link href="https://jokester.github.io/posts/2017-09-01/pgp-keybase-openkeychain-fidesmo/"/>
+        <updated>2017-09-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[PDF creation in browser]]></title>
+        <id>https://jokester.github.io/posts/2017-09-01/pdf-creation-in-browser/</id>
+        <link href="https://jokester.github.io/posts/2017-09-01/pdf-creation-in-browser/"/>
+        <updated>2017-09-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[A home NAS server running FreeBSD]]></title>
+        <id>https://jokester.github.io/posts/2017-09-01/freebsd-on-microserver/</id>
+        <link href="https://jokester.github.io/posts/2017-09-01/freebsd-on-microserver/"/>
+        <updated>2017-09-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Scalable Component Abstractions]]></title>
+        <id>https://jokester.github.io/posts/2017-08-20/memo-scalable-component/</id>
+        <link href="https://jokester.github.io/posts/2017-08-20/memo-scalable-component/"/>
+        <updated>2017-08-20T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Checklist before Switching to HTTPS]]></title>
+        <id>https://jokester.github.io/posts/2017-07-03/checklist-switching-to-https/</id>
+        <link href="https://jokester.github.io/posts/2017-07-03/checklist-switching-to-https/"/>
+        <updated>2017-07-03T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Memo: Inspecting vox file format]]></title>
+        <id>https://jokester.github.io/posts/2017-07-01/memo-vox-file-format/</id>
+        <link href="https://jokester.github.io/posts/2017-07-01/memo-vox-file-format/"/>
+        <updated>2017-07-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[比较 CommonMark 的几种 JavaScript 实现]]></title>
+        <id>https://jokester.github.io/posts/2017-04-21/commonmark-js-comparison/</id>
+        <link href="https://jokester.github.io/posts/2017-04-21/commonmark-js-comparison/"/>
+        <updated>2017-04-21T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[分享你的 TypeScript 类型声明]]></title>
+        <id>https://jokester.github.io/posts/2017-04-14/share-your-typescript-types/</id>
+        <link href="https://jokester.github.io/posts/2017-04-14/share-your-typescript-types/"/>
+        <updated>2017-04-14T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Update git submodule with minimal traffic]]></title>
+        <id>https://jokester.github.io/posts/2017-04-12/update-git-submodule-with-minimal-traffic/</id>
+        <link href="https://jokester.github.io/posts/2017-04-12/update-git-submodule-with-minimal-traffic/"/>
+        <updated>2017-04-12T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[想要一个能重排 markdown 的东西]]></title>
+        <id>https://jokester.github.io/posts/2017-04-08/ideapad-markdown-formatter/</id>
+        <link href="https://jokester.github.io/posts/2017-04-08/ideapad-markdown-formatter/"/>
+        <updated>2017-04-08T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[弱HMAC secret的危害]]></title>
+        <id>https://jokester.github.io/posts/2017-04-04/weak-hmac-secret-compromised/</id>
+        <link href="https://jokester.github.io/posts/2017-04-04/weak-hmac-secret-compromised/"/>
+        <updated>2017-04-04T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[A simple benchmark of nginx http2]]></title>
+        <id>https://jokester.github.io/posts/2017-04-01/nginx-http2-benchmark/</id>
+        <link href="https://jokester.github.io/posts/2017-04-01/nginx-http2-benchmark/"/>
+        <updated>2017-04-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Fast exp() operator for Monoids]]></title>
+        <id>https://jokester.github.io/posts/2017-03-30/monoid-fast-exp/</id>
+        <link href="https://jokester.github.io/posts/2017-03-30/monoid-fast-exp/"/>
+        <updated>2017-03-30T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Type for non-null and non-undefined in TypeScript]]></title>
+        <id>https://jokester.github.io/posts/2017-03-15/type-for-nonnull-and-nonundefined/</id>
+        <link href="https://jokester.github.io/posts/2017-03-15/type-for-nonnull-and-nonundefined/"/>
+        <updated>2017-03-15T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[SHA1 Collision and Android APK Signing]]></title>
+        <id>https://jokester.github.io/posts/2017-02-28/sha1-collision-and-apk-signing/</id>
+        <link href="https://jokester.github.io/posts/2017-02-28/sha1-collision-and-apk-signing/"/>
+        <updated>2017-02-28T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Android app 中 jsoup 性能原因的分析]]></title>
+        <id>https://jokester.github.io/posts/2017-02-23/jsoup-performance-for-android/</id>
+        <link href="https://jokester.github.io/posts/2017-02-23/jsoup-performance-for-android/"/>
+        <updated>2017-02-23T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Disabling VP9 in Android Chrome's WebRTC]]></title>
+        <id>https://jokester.github.io/posts/2017-02-20/android-chrome-webrtc-disable-vp9/</id>
+        <link href="https://jokester.github.io/posts/2017-02-20/android-chrome-webrtc-disable-vp9/"/>
+        <updated>2017-02-20T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[TypeScript 2.1中的类型运算]]></title>
+        <id>https://jokester.github.io/posts/2016-12-21/typescript-2.1-type-calculation/</id>
+        <link href="https://jokester.github.io/posts/2016-12-21/typescript-2.1-type-calculation/"/>
+        <updated>2016-12-21T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Memo: Category Theory for Programmers]]></title>
+        <id>https://jokester.github.io/posts/2016-12-12/memo-category-theory-for-programmers/</id>
+        <link href="https://jokester.github.io/posts/2016-12-12/memo-category-theory-for-programmers/"/>
+        <updated>2016-12-12T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Memo: Reactive (RxJava)]]></title>
+        <id>https://jokester.github.io/posts/2016-08-08/memo-reactive-rxjava/</id>
+        <link href="https://jokester.github.io/posts/2016-08-08/memo-reactive-rxjava/"/>
+        <updated>2016-08-08T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[grep on a column rather on line]]></title>
+        <id>https://jokester.github.io/posts/2014-06-08/grep-on-column/</id>
+        <link href="https://jokester.github.io/posts/2014-06-08/grep-on-column/"/>
+        <updated>2014-06-08T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Note for SICP Chapter 2]]></title>
+        <id>https://jokester.github.io/posts/2014-05-19/sicp-chapter-2/</id>
+        <link href="https://jokester.github.io/posts/2014-05-19/sicp-chapter-2/"/>
+        <updated>2014-05-19T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Note for SICP Chapter 1]]></title>
+        <id>https://jokester.github.io/posts/2014-05-16/sicp-chapter-1/</id>
+        <link href="https://jokester.github.io/posts/2014-05-16/sicp-chapter-1/"/>
+        <updated>2014-05-16T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[memo: Thinking Clearly About Performance]]></title>
+        <id>https://jokester.github.io/posts/2014-05-11/memo-thinking-clearly-about-performance/</id>
+        <link href="https://jokester.github.io/posts/2014-05-11/memo-thinking-clearly-about-performance/"/>
+        <updated>2014-05-11T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Ruby "or" operator and precedence]]></title>
+        <id>https://jokester.github.io/posts/2014-05-07/ruby-operator-or/</id>
+        <link href="https://jokester.github.io/posts/2014-05-07/ruby-operator-or/"/>
+        <updated>2014-05-07T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Detecting common posix OSs]]></title>
+        <id>https://jokester.github.io/posts/2014-04-17/detecting-os-type-posix/</id>
+        <link href="https://jokester.github.io/posts/2014-04-17/detecting-os-type-posix/"/>
+        <updated>2014-04-17T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Operate multiple ssh simultaneously with cssh]]></title>
+        <id>https://jokester.github.io/posts/2014-04-17/cssh/</id>
+        <link href="https://jokester.github.io/posts/2014-04-17/cssh/"/>
+        <updated>2014-04-17T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Immutable element in Python tuple]]></title>
+        <id>https://jokester.github.io/posts/2014-01-14/immutable-element-in-python-tuple/</id>
+        <link href="https://jokester.github.io/posts/2014-01-14/immutable-element-in-python-tuple/"/>
+        <updated>2014-01-14T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[PS3 media server for home media streaming]]></title>
+        <id>https://jokester.github.io/posts/2014-01-03/ps3-media-server-for-home-video-streaming/</id>
+        <link href="https://jokester.github.io/posts/2014-01-03/ps3-media-server-for-home-video-streaming/"/>
+        <updated>2014-01-03T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Local domain names with pow]]></title>
+        <id>https://jokester.github.io/posts/2013-12-31/local-domain-names-with-pow/</id>
+        <link href="https://jokester.github.io/posts/2013-12-31/local-domain-names-with-pow/"/>
+        <updated>2013-12-31T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Data URI]]></title>
+        <id>https://jokester.github.io/posts/2013-12-30/data-uri/</id>
+        <link href="https://jokester.github.io/posts/2013-12-30/data-uri/"/>
+        <updated>2013-12-30T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Debugging ruby with pry and plugins]]></title>
+        <id>https://jokester.github.io/posts/2013-12-29/debugging-ruby-with-pry/</id>
+        <link href="https://jokester.github.io/posts/2013-12-29/debugging-ruby-with-pry/"/>
+        <updated>2013-12-29T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[My vim bundle]]></title>
+        <id>https://jokester.github.io/posts/2013-12-28/my-vim-bundle/</id>
+        <link href="https://jokester.github.io/posts/2013-12-28/my-vim-bundle/"/>
+        <updated>2013-12-28T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[My OSX bundle]]></title>
+        <id>https://jokester.github.io/posts/2013-12-26/my-osx-bundle/</id>
+        <link href="https://jokester.github.io/posts/2013-12-26/my-osx-bundle/"/>
+        <updated>2013-12-26T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[BSD for Linux Users 简译 5,6,7 / 11]]></title>
+        <id>https://jokester.github.io/posts/2013-12-25/BSD-for-Linux-Users-5,6,7/</id>
+        <link href="https://jokester.github.io/posts/2013-12-25/BSD-for-Linux-Users-5,6,7/"/>
+        <updated>2013-12-25T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[BSD for Linux Users 简译 3,4 / 11]]></title>
+        <id>https://jokester.github.io/posts/2013-12-23/BSD-for-Linux-Users-3,4/</id>
+        <link href="https://jokester.github.io/posts/2013-12-23/BSD-for-Linux-Users-3,4/"/>
+        <updated>2013-12-23T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[BSD for Linux Users 简译 1,2 / 11]]></title>
+        <id>https://jokester.github.io/posts/2013-12-02/BSD-for-Linux-Users-1,2/</id>
+        <link href="https://jokester.github.io/posts/2013-12-02/BSD-for-Linux-Users-1,2/"/>
+        <updated>2013-12-02T00:00:00.000Z</updated>
+    </entry>
+</feed>
