@@ -2,7 +2,6 @@
   "presets": ["next/babel"],
   "plugins": [
     "const-enum",
-    ["@babel/plugin-transform-typescript", { "allowNamespaces": true }],
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
     ["@babel/plugin-proposal-class-properties", { "loose": true }],
   ]

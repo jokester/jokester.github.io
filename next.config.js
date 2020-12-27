@@ -8,6 +8,9 @@ const withBundleAnalyzer = require('@zeit/next-bundle-analyzer');
 const withTM = require('next-transpile-modules');
 
 const nextConf = {
+
+  target: 'serverless',
+
   trailingSlash: true,
 
   exportPathMap: async (defaultPathMap) => {
