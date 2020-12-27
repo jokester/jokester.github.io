@@ -62,7 +62,7 @@
     "@types/webpack": "^4.41.25",
     "@typescript-eslint/eslint-plugin": "^4.11.0",
     "@typescript-eslint/parser": "^4.11.0",
-    "autoprefixer": "^10",
+    "autoprefixer": "^9",
     "babel-plugin-const-enum": "^1.0.1",
     "eslint": "7.16.0",
     "eslint-config-prettier": "^7.1.0",
