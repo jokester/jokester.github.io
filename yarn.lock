@@ -757,10 +757,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@jokester/ts-commonutil@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@jokester/ts-commonutil/-/ts-commonutil-0.2.2.tgz#fc6a14adb485f9fc6e93fe2245fab5034115109b"
-  integrity sha512-rfgbKpF7PefIaLUzegaL2BXky3YbJussPFPiaCZ8t82F6WngI7UQemEvE4zNHaH6Xjnz/EJWjIaWVmVULi2tXA==
+"@jokester/ts-commonutil@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@jokester/ts-commonutil/-/ts-commonutil-0.2.3.tgz#10ae2e14ccf7f247f062de2e0bfe49c377fdb2ae"
+  integrity sha512-ycipnrny/WcVVF8GPTDizLGQ+bQS2pNi54KzwJiSf9EbMcztBMlWmNSJo+S1+XxduBn3kYbxrSqvPZwAxm9L1g==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
