@@ -6,6 +6,7 @@ const withSourceMap = require('@zeit/next-source-maps');
 const optimizedImages = require('next-optimized-images');
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer');
 const withTM = require('next-transpile-modules');
+const withPreact = require('next-plugin-preact');
 
 const nextConf = {
 
@@ -64,9 +65,6 @@ const nextConf = {
       ...config.resolve,
       alias: {
         ...config.resolve.alias,
-        react: 'preact/compat',
-        'react-dom/test-utils': 'preact/test-utils',
-        'react-dom': 'preact/compat',
       },
     };
 
@@ -80,6 +78,7 @@ module.exports = withPlugins(
     [withBundleAnalyzer],
     // [withSourceMap],  // this does not work
     withTM([/* ES modules used in server code */ 'lodash-es', '@jokester/ts-commonutil']),
+    [withPreact],
   ],
   withSourceMap(nextConf),
 );
