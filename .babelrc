@@ -1,8 +1,0 @@
-{
-  "presets": ["next/babel"],
-  "plugins": [
-    "const-enum",
-    ["@babel/plugin-proposal-decorators", { "legacy": true }],
-    ["@babel/plugin-proposal-class-properties", { "loose": true }],
-  ]
-}
