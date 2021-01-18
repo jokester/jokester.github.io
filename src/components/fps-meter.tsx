@@ -1,11 +1,13 @@
 import { FC, useState } from 'react';
-import { animationFrameScheduler, interval, Observable } from 'rxjs';
+import { animationFrameScheduler, interval, Observable, range } from 'rxjs';
 import { map, scan, throttleTime } from 'rxjs/operators';
 import useConstant from 'use-constant';
 import { useObservable } from 'react-use';
 
+const everyFrame = range(0, Number.MAX_SAFE_INTEGER, animationFrameScheduler);
+
 function fpsObservable(numFrame: number): Observable<number> {
-  return interval(0, animationFrameScheduler).pipe(
+  return everyFrame.pipe(
     map((frameNo) => Date.now()),
     scan((acc, l) => [...acc, l].slice(-numFrame), [] as number[]),
     map((frames) => (frames.length >= numFrame ? (numFrame * 1e3) / (frames[frames.length - 1] - frames[0]) : -1)),

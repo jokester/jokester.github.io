@@ -15,7 +15,7 @@ export const PocCssTransform: FC = () => {
   const [items, setItems] = useState<FlyingText[]>([]);
 
   useEffect(() => {
-    const timer = interval(0.5e3, animationFrameScheduler);
+    const timer = interval(0.1e3, animationFrameScheduler);
 
     const itemSource = timer.pipe(map((_) => ({ nonce: randomHex(6), text: `click #${_}` })));
     const subscribe = itemSource.subscribe((newItem) => setItems((prev) => [...prev, newItem].slice(-30)));
