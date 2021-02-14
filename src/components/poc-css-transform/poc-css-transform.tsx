@@ -18,13 +18,20 @@ export const PocCssTransform: FC = () => {
     const timer = interval(0.5e3);
 
     const itemSource = timer.pipe(map((_) => ({ nonce: randomHex(6), text: `item #${_}` })));
-    const subscribe = itemSource.subscribe((newItem) => setItems((prev) => [...prev, newItem].slice(-50)));
+    const subscribe = itemSource.subscribe(
+      //
+      (newItem) => setItems((prev) => [...prev, newItem].slice(-10)),
+    );
     return () => subscribe.unsubscribe();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div onClick={() => clicked.next(1 + clicked.value)} className="h-64 relative flex justify-center items-center ">
+    <div
+      onClick={() => clicked.next(1 + clicked.value)}
+      className="h-64 relative flex justify-center items-center "
+      style={{ transformStyle: 'preserve-3d' }}
+    >
       {items.map((item) => (
         <FlyingTextLazy item={item} key={item.nonce} />
       ))}
@@ -43,7 +50,7 @@ const FlyingTextRaw: FC<{ item: FlyingText }> = (props) => {
 
     requestAnimationFrame(() => {
       p.style.transition = 'ease-out 5s all';
-      p.style.filter = `blur(5px) opacity(0)`;
+      p.style.filter = `blur(5px) opacity(0.5)`;
       p.style.transform = `translateY(${randomness.y()}px) translateX(${randomness.x()}px) translateZ(${randomness.z()}px)`;
     });
   }, []);
@@ -58,7 +65,7 @@ const FlyingTextRaw: FC<{ item: FlyingText }> = (props) => {
 const FlyingTextLazy = memo(FlyingTextRaw, () => true);
 
 const randomness = {
-  x: randomInt(-300, 300),
+  x: randomInt(-100, 100),
   y: randomInt(-100, 100),
   z: randomInt(-5000, 0),
 } as const;

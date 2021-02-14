@@ -17,7 +17,7 @@ function fpsObservable(numFrame: number): Observable<number> {
 
 export const FpsMeter: FC = () => {
   return (
-    <div className="p-4 border-black border inline-block w-64">
+    <div className="fixed right-0 bottom-0 p-4 border-black border inline-block w-64">
       <FpsMeterRow samples={15} />
       <FpsMeterRow samples={60} />
     </div>

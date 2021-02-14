@@ -2,12 +2,14 @@ import {
   buildFilter,
   SvgFilterEffectDemo,
   SvgFilterEffectGallery,
-} from '../../src/components/poc-svg-filters/photon-demo';
+} from '../../src/components/demo-svg-filters/photon-demo';
 import { Layout } from '../../src/components/layout/layout';
+import { HtmlMeta } from '../../src/components/meta/html-meta';
 
 const SvgFilterEffectsPage: React.FC = () => {
   return (
     <Layout>
+      <HtmlMeta title="Demo: SVG Filter Effects" />
       <SvgFilterEffectGallery>
         <SvgFilterEffectDemo title="orig" filterString="" />
         <SvgFilterEffectDemo title="Inc Red Channel" filterString={buildFilter(`inc-red-channel`)} />
