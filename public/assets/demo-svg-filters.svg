@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <filter id="inc-red-channel" x="0" y="0" width="100%" height="100%">
+            <feColorMatrix in="SourceGraphic" type="matrix"
+                           values="1.5 0 0 0 0
+            0   1 0 0 0
+            0   0 1 0 0
+            0   0 0 1 0
+            "/>
+        </filter>
+
+        <filter id="only-red-channel" x="0" y="0" width="100%" height="100%">
+            <feColorMatrix in="SourceGraphic" type="matrix"
+                           values="
+            1 0 0 0 0
+            0 0 0 0 0
+            0 0 0 0 0
+            0 0 0 1 0
+            "/>
+        </filter>
+
+        <filter id="swap-r-g-channels" x="0" y="0" width="100%" height="100%">
+            <feColorMatrix in="SourceGraphic" type="matrix"
+                           values=
+                                   "0 1 0 0 0
+            1   0 0 0 0
+            0   0 1 0 0
+            0   0 0 1 0
+            "/>
+        </filter>
+
+
+        <filter id="monochrome" x="0" y="0" width="100%" height="100%">
+            <feColorMatrix in="SourceGraphic" type="matrix"
+                           values="
+            0.333 .333 0.333 0 0
+            0.333 .333 0.333 0 0
+            0.333 .333 0.333 0 0
+            0        0     0 1 0
+            "/>
+        </filter>
+
+        <filter id="offset-red" x="0" y="0" width="100%" height="100%">
+            <feColorMatrix in="SourceGraphic" type="matrix"
+                           result="orig-without-red"
+                           values="
+            0 0 0 0 0
+            0 1 0 0 0
+            0 0 1 0 0
+            0 0 0 0 0
+            "/>
+
+            <feColorMatrix in="SourceGraphic" type="matrix"
+                           result="orig-only-red"
+                           values="
+            0 0 0 0 0
+            0 0 0 0 0
+            0 0 0 0 0
+            0 0 0 0 255
+            "/>
+
+<!--            <feOffset in="orig-only-red" result="red-offseted" x="10" y="10"/>-->
+            <feComposite in="orig-without-red" in2="orig-only-red" operator="over" />
+        </filter>
+
+        <filter id="turbulence1" x="0" y="0" width="100%" height="100%">
+            <feTurbulence numOctaves="3" seed="2" baseFrequency="0.02 0.05"></feTurbulence>
+            <feDisplacementMap scale="20" in="SourceGraphic"></feDisplacementMap>
+        </filter>
+    </defs>
+</svg>

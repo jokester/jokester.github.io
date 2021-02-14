@@ -20,8 +20,8 @@
     "lint:fix": "eslint '**/*.@(ts|js|tsx|jsx)' --fix"
   },
   "dependencies": {
-    "@chakra-ui/core": "^0.8.0",
-    "@emotion/core": "^11.0.0",
+    "@chakra-ui/react": "^1.1.5",
+    "@emotion/react": "^11.1.4",
     "@emotion/styled": "^11.0.0",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-source-maps": "^0.0.3",
@@ -30,6 +30,7 @@
     "debug": "^4.3.1",
     "feed": "^4.2.1",
     "fp-ts": "^2.9.3",
+    "framer-motion": "^3.2.1",
     "gray-matter": "^4.0.2",
     "lodash-es": "^4.17.20",
     "next": "^10",
@@ -42,6 +43,7 @@
     "react": "npm:@preact/compat",
     "react-dom": "npm:@preact/compat",
     "react-markdown": "^5.0.3",
+    "react-spring": "^8.0.27",
     "react-syntax-highlighter": "^15.4.3",
     "react-use": "^15.3.4",
     "rxjs": "^6.6.3",

@@ -23,6 +23,8 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 0,
     '@typescript-eslint/explicit-member-accessibility': 0,
     '@typescript-eslint/no-non-null-assertion': 1,
+    '@typescript-eslint/ban-ts-ignore': 0,
+    '@typescript-eslint/camelcase': 0,
     '@typescript-eslint/no-use-before-define': 0,
     '@typescript-eslint/no-empty-interface': 0,
     '@typescript-eslint/no-parameter-properties': 0,
@@ -31,6 +33,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 0,
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    'react/react-in-jsx-scope': 0,
   },
   settings: {
     react: {

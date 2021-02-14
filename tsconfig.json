@@ -5,29 +5,12 @@
     "jsx": "preserve",
     "module": "esnext",
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "noEmit": true,
     "target": "esnext",
-    "typeRoots": [
-      "typings",
-      "node_modules/@types"
-    ],
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ]
+    "typeRoots": ["typings", "node_modules/@types"],
+    "lib": ["dom", "dom.iterable", "esnext"]
   },
-  "exclude": [
-    "node_modules",
-    "scripts",
-    "coverage",
-    "build",
-    "__test__",
-    "bin",
-    "jest.config.js"
-  ],
-  "include": [
-    "pages",
-    "src"
-  ]
+  "exclude": ["node_modules", "scripts", "coverage", "build", "__test__", "bin", "jest.config.js"],
+  "include": ["pages", "src"]
 }
