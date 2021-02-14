@@ -25,7 +25,9 @@ You may see contents in English / Chinese / Japanese, please stay calm \`:o\`
 
 I have various skills and responsibilities. My title is executive developer.
 
-Links about me: [about.me/wangguan](https://about.me/wangguan)
+Github profile: [gh/jokester](https://github.com/jokester)
+
+More links about me: [about.me/wangguan](https://about.me/wangguan)
 `}
       />
     </Layout>
