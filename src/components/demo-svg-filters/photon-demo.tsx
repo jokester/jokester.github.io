@@ -1,8 +1,6 @@
-import { createAspectRatioStyle } from '@jokester/ts-commonutil/lib/react/component/aspect-ratio/aspect-ratio';
-
 const defaultPhotonDemoImg = 'https://silvia-odwyer.github.io/photon/images/nine_yards.jpg';
 
-export const SvgFilterEffectDemo: React.FC<{ title: string; filterString: boolean }> = (props) => {
+export const SvgFilterEffectDemo: React.FC<{ title: string; filterString: string }> = (props) => {
   return (
     <section className="relative inline-block float-left w-1/3">
       <h2>{props.title}</h2>
