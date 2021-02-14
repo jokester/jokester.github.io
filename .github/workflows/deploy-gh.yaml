@@ -14,7 +14,7 @@ jobs:
         echo "yarn-$(yarn -v)"
     - uses: actions/checkout@v2
       with:
-        ref: content
+        ref: master
     - uses: bahmutov/npm-install@v1
     - name: Echo node_modules size
       run: du -sh node_modules
