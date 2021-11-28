@@ -1,5 +1,3 @@
-/public/feed.xml
-
 /node_modules
 /out
 /build
@@ -8,8 +6,13 @@
 *.map
 /coverage
 /.next
+/.env
 node_modules
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+.DS_store
+tsconfig.tsbuildinfo
+public/feed.xml

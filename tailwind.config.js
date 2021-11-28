@@ -9,9 +9,12 @@ module.exports = {
     './posts/**/*.md',
     './posts/**/*.markdown',
   ],
+  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
   },
-  variants: {},
+  variants: {
+    extend: {},
+  },
   plugins: [],
 };
