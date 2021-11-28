@@ -1,6 +1,8 @@
 import fs from 'fs';
 import util from 'util';
 
+import * as fsp from 'fs/promises';
+
 export const readDir = util.promisify(fs.readdir);
 export const readFile = util.promisify(fs.readFile);
 
@@ -22,19 +24,4 @@ export const writeFile = util.promisify(fs.writeFile);
 
 export const cp = util.promisify(fs.copyFile);
 
-export const mv = async (oldPath: string, newPath: string) => {
-  try {
-    return await rename(oldPath, newPath);
-  } catch (e) {
-    if (e && e.code === 'EXDEV') {
-      /**
-       * on "EXDEV: cross-device link not permitted" error
-       * fallback to cp + unlink
-       */
-      await cp(oldPath, newPath);
-      return await unlink(oldPath);
-    } else {
-      throw e;
-    }
-  }
-};
+export const mv = fsp.rename;

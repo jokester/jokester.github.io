@@ -14,7 +14,7 @@ const CustomRenderers = {
       </P>
     );
   },
-} as const;
+};
 
 export const MarkdownArticle: React.FC<{ title?: string; meta?: MarkdownMeta; content: string }> = ({
   meta,
@@ -25,7 +25,7 @@ export const MarkdownArticle: React.FC<{ title?: string; meta?: MarkdownMeta; co
     <div className="markdown" lang={meta?.frontMatter?.lang}>
       <h1>{title ?? meta?.frontMatter?.lang ?? ''}</h1>
       <hr />
-      <ReactMarkdown className="markdown" source={content} renderers={CustomRenderers} />
+      <ReactMarkdown className="markdown">{content}</ReactMarkdown>
     </div>
   );
 };

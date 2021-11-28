@@ -2,7 +2,6 @@
 
 module.exports = {
   plugins: [
-    'tailwindcss',
     'autoprefixer', // autoprefixer(/* moved to .browserlistrc */),
   ],
 };
