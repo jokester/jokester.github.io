@@ -15,19 +15,6 @@ const nextConf = {
 
   poweredByHeader: false,
 
-  analyzeServer: ['server', 'both'].includes(process.env.BUNDLE_ANALYZE),
-  analyzeBrowser: ['browser', 'both'].includes(process.env.BUNDLE_ANALYZE),
-  bundleAnalyzerConfig: {
-    server: {
-      analyzerMode: 'static',
-      // reportFilename: '../bundles/server.html'
-    },
-    browser: {
-      analyzerMode: 'static',
-      // reportFilename: '../bundles/client.html'
-    },
-  },
-
   env: {
     // becomes process.env.SOME_CONSTANT : booleanB
     REPO_ROOT: __dirname,
@@ -50,6 +37,17 @@ const nextConf = {
     config.plugins = config.plugins.map((p) => {
       return p;
     });
+
+    if (1) {
+      config.resolve = {
+        ...config.resolve,
+        alias: {
+          ...config.resolve.alias,
+          react: 'preact/compat',
+          'react-dom': 'preact/compat',
+        },
+      };
+    }
 
     config.node = {
       // allow use of __file / __dirname
