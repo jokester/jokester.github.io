@@ -1,2 +1,0 @@
-_N_E=(window.webpackJsonp_N_E=window.webpackJsonp_N_E||[]).push([[13],{QT6K:function(e,n,l){"use strict";l.r(n);var u=l("FdF9"),o=l("B7F5"),t=u.default.createElement;n.default=()=>t(o.a,null,t("ul",null,t("li",null,t("a",{href:"/works/svg-filter-effects"},"svg-filter-effects demo")),t("li",null,t("a",{href:"/works/danmaku"},"waapi demo"))))},Tz91:function(e,n,l){(window.__NEXT_P=window.__NEXT_P||[]).push(["/works",function(){return l("QT6K")}])}},[["Tz91",0,2,1,3]]]);
-//# sourceMappingURL=works-b8f6d95f777e2c12b2c9.js.map

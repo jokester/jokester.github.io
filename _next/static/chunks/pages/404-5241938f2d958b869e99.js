@@ -1,2 +1,0 @@
-_N_E=(window.webpackJsonp_N_E=window.webpackJsonp_N_E||[]).push([[6],{BdxU:function(n,u,o){"use strict";o.r(u);var e=o("FdF9"),i=o("B7F5"),t=e.default.createElement;u.default=()=>t(i.a,null,t("div",null,t("h1",null,"You are here!"),t("h2",null,"But nothing found for you #404")))},i67r:function(n,u,o){(window.__NEXT_P=window.__NEXT_P||[]).push(["/404",function(){return o("BdxU")}])}},[["i67r",0,2,1,3]]]);
-//# sourceMappingURL=404-5241938f2d958b869e99.js.map
