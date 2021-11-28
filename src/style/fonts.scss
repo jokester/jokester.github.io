@@ -1,6 +1,8 @@
 $tailwindDefaultSans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
   'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
+$tailwindDefaultMono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
 :lang(en),
 .font-lang-en {
   font-family: $tailwindDefaultSans;
@@ -27,7 +29,8 @@ $tailwindDefaultSans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 :lang(zh-hans),
 :lang(zh-hant) {
   // redefined styles with higher priority
+  code,
   &.font-mono {
-    font-family: monospace;
+    font-family: $tailwindDefaultMono;
   }
 }
