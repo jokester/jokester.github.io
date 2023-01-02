@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { TypedRoutes } from '../../config/routes';
 import { SiteMeta } from '../../config/const';
 
-const SectionLink: React.FC<{ path: string; className?: string }> = (props) => {
+const SectionLink: React.FC<PropsWithChildren<{ path: string; className?: string }>> = (props) => {
   const { pathname } = useRouter();
   return (
     <Link href={props.path}>

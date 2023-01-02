@@ -16,7 +16,7 @@ export const MarkdownArticle: React.FC<{ title?: string; meta?: MarkdownMeta; co
     <div className="markdown" lang={meta?.frontMatter?.lang}>
       <h1>{title ?? meta?.frontMatter?.lang ?? ''}</h1>
       <hr />
-      <ReactMarkdown className="markdown" plugins={[remarkGfm]}>
+      <ReactMarkdown className="markdown" remarkPlugins={[remarkGfm]}>
         {content}
       </ReactMarkdown>
     </div>

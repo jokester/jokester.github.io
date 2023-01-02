@@ -1,3 +1,5 @@
+import React, { PropsWithChildren } from 'react';
+
 const defaultPhotonDemoImg = 'https://silvia-odwyer.github.io/photon/images/nine_yards.jpg';
 
 export const SvgFilterEffectDemo: React.FC<{ title: string; filterString: string }> = (props) => {
@@ -9,7 +11,7 @@ export const SvgFilterEffectDemo: React.FC<{ title: string; filterString: string
   );
 };
 
-export const SvgFilterEffectGallery: React.FC = (props) => <div className="">{props.children}</div>;
+export const SvgFilterEffectGallery: React.FC<PropsWithChildren> = (props) => <div className="">{props.children}</div>;
 
 const svgFilterUrl = '/assets/demo-svg-filters.svg';
 export const buildFilter = (filterId: string): string => `url(${svgFilterUrl}#${filterId})`;

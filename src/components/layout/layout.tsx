@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { PropsWithChildren, useEffect } from 'react';
 import { Header } from './header';
 import { GoogleAnalyticsTag } from '../external/tracking-tags';
 
-export const Layout: React.FC = (props) => {
+export const Layout: React.FC<PropsWithChildren> = (props) => {
   return (
     <div className="bg-black text-yellow-100">
       <GoogleAnalyticsTag />

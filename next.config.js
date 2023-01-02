@@ -1,9 +1,13 @@
 /* eslint @typescript-eslint/no-var-requires: 0 */
-const { withPlugins, optional } = require('next-compose-plugins');
-
 const { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } = require('next/constants');
 
+/**
+ * when in problem, try to sync with {@link https://github.com/vercel/next.js/tree/canary/packages/create-next-app/templates/typescript}
+ * @type {import('next').NextConfig}
+ */
 const nextConf = {
+  poweredByHeader: false,
+
   trailingSlash: true,
 
   exportPathMap: async (defaultPathMap) => {
@@ -13,89 +17,58 @@ const nextConf = {
     };
   },
 
-  poweredByHeader: false,
-
+  /**
+   * runtime server-only configuration
+   */
+  serverRuntimeConfig: {
+    // becomes process.env.SOME_CONSTANT : boolean
+    serverStartedAt: new Date().toISOString(),
+  },
+  /**
+   * build-time configuration
+   */
   env: {
-    // becomes process.env.SOME_CONSTANT : booleanB
+    // becomes process.env.SOME_CONSTANT : boolean
     REPO_ROOT: __dirname,
     GA_TRACKING_ID: 'UA-39627402-1',
+    builtAt: new Date().toISOString(),
   },
-
-  devIndicators: {
-    autoPrerender: false,
-  },
-
   // see https://nextjs.org/docs/#customizing-webpack-config
   webpack(config, { buildId, dev, isServer, webpack }) {
     config.plugins.push(
       new webpack.DefinePlugin({
-        // becomes process.env.NEXT_DEV : boolean
+        /**
+         * build-time configuration
+         */
         'process.env.NEXT_DEV': JSON.stringify(!!dev),
       }),
     );
-
-    config.plugins = config.plugins.map((p) => {
-      return p;
-    });
-
-    if (1) {
-      config.resolve = {
-        ...config.resolve,
-        alias: {
-          ...config.resolve.alias,
-          react: 'preact/compat',
-          'react-dom': 'preact/compat',
-        },
-      };
-    }
 
     config.node = {
       // allow use of __file / __dirname
       ...config.node,
       __filename: true,
     };
-
-    config.resolve = {
-      ...config.resolve,
-      alias: {
-        ...config.resolve.alias,
-      },
-    };
-
     return config;
   },
 
-  images: {
-    // disableStaticImages: true,
-  },
+  transpilePackages: ['lodash-es'],
 
-  webpack5: true,
+  images: {},
 
-  // productionBrowserSourceMaps: true,
-
-  future: {},
+  productionBrowserSourceMaps: true,
+  reactStrictMode: true,
 };
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: !!process.env.BUNDLE_ANALYZE,
-});
+module.exports = (phase, { defaultConfig }) => {
+  /**
+   * @type {import('next').NextConfig}
+   */
+  let merged = { ...nextConf };
 
-module.exports = withPlugins(
-  [
-    [withBundleAnalyzer], // no idea how to make it optional
-    // [require('next-images'), {}], // required after { disableStaticImages: true }
-    [
-      optional(() =>
-        // eslint-disable-next-line node/no-unpublished-require
-        require('next-transpile-modules')([
-          '@jokester/ts-commonutil',
-          'lodash-es',
-          /* ES modules used in server code */
-        ]),
-      ),
-      {},
-      [PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD],
-    ],
-  ],
-  nextConf,
-);
+  if (phase === PHASE_PRODUCTION_BUILD) {
+    merged = require('@next/bundle-analyzer')({ enabled: true, openAnalyzer: false })(merged);
+  }
+
+  return merged;
+};

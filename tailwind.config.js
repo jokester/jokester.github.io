@@ -1,5 +1,5 @@
 module.exports = {
-  purge: [
+  content: [
     './src/**/*.html',
     './src/**/*.jsx',
     './src/**/*.js',
@@ -9,7 +9,6 @@ module.exports = {
     './posts/**/*.md',
     './posts/**/*.markdown',
   ],
-  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
   },
