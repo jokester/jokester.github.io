@@ -8,14 +8,13 @@ import { SiteMeta } from '../../config/const';
 const SectionLink: React.FC<PropsWithChildren<{ path: string; className?: string }>> = (props) => {
   const { pathname } = useRouter();
   return (
-    <Link href={props.path}>
-      <a
-        className={classNames(props.className ?? '', {
-          ['text-yellow-200']: props.path !== TypedRoutes.index && pathname.startsWith(props.path),
-        })}
-      >
-        {props.children}
-      </a>
+    <Link
+      href={props.path}
+      className={classNames(props.className ?? '', {
+        ['text-yellow-200']: props.path !== TypedRoutes.index && pathname.startsWith(props.path),
+      })}
+    >
+      {props.children}
     </Link>
   );
 };

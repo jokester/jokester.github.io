@@ -5,7 +5,7 @@ import '../src/app.scss';
 export default class extends App {
   static getInitialProps = App.getInitialProps;
 
-  render() {
+  render(): React.ReactElement {
     const { Component } = this.props;
     const pageProps = {
       ...this.props.pageProps,
