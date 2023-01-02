@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from '../src/components/layout/layout';
 
-const NotFoundPage = () => (
+const NotFoundPage: React.FC = () => (
   <Layout>
     <div>
       <h1>You are here!</h1>
