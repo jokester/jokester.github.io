@@ -8,6 +8,15 @@ const { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } = require('next/const
 const nextConf = {
   poweredByHeader: false,
 
+  trailingSlash: true,
+
+  exportPathMap: async (defaultPathMap) => {
+    return {
+      ...defaultPathMap,
+      '/404.html': { page: '/404' },
+    };
+  },
+
   /**
    * runtime server-only configuration
    */
@@ -20,6 +29,8 @@ const nextConf = {
    */
   env: {
     // becomes process.env.SOME_CONSTANT : boolean
+    REPO_ROOT: __dirname,
+    GA_TRACKING_ID: 'UA-39627402-1',
     builtAt: new Date().toISOString(),
   },
   // see https://nextjs.org/docs/#customizing-webpack-config
