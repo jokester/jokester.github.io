@@ -16,7 +16,7 @@ async function main() {
   });
 
   const posts = await getMarkdownList();
-  posts.files.forEach((post) => {
+  posts.files.slice(0, 5).forEach((post) => {
     post.frontMatter.publishAt &&
       feed.addItem({
         title: post.frontMatter.title,
