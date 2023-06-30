@@ -20,7 +20,7 @@ jobs:
     - name: Echo node_modules size
       run: du -sh node_modules
     - name: Build JS
-      run: npm build
+      run: npm run build
     - name: Build Site
       run: npm run preexport && npm run export
     - name: Deploy Github Page
