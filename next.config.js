@@ -8,7 +8,7 @@ const { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } = require('next/const
 const nextConf = {
   poweredByHeader: false,
 
-  trailingSlash: true,
+  trailingSlash: false,
 
   exportPathMap: async (defaultPathMap) => {
     return {
@@ -52,7 +52,7 @@ const nextConf = {
     return config;
   },
 
-  transpilePackages: ['lodash-es'],
+  transpilePackages: ['lodash-es', '@jokester/ts-commonutil'],
 
   images: {},
 
