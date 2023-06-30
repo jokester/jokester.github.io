@@ -10,7 +10,11 @@ module.exports = {
     './posts/**/*.markdown',
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        xs: '375px', // iPhone SE 1
+      },
+    },
   },
   variants: {
     extend: {},
