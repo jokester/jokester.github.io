@@ -13,3 +13,7 @@ This is a workaround to create a type for `non-null and non-undefined`:
 - Set `"strictNullChecks": true` in `tsconfig.json` to separate `null` / `undefined` and other types.
 
 We can then express the complement set of type `null | undefined` with `number | string | boolean | symbol | object`.
+
+----------
+
+UPDATE: a new trick is use `TheType & {}` to remove `null` and `undefined` from `TheType`:

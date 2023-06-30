@@ -1,6 +1,5 @@
 ---
 title: Immutable element in Python tuple
-publishAt: 2014-01-14
 ---
 
 #### What

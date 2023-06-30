@@ -1,6 +1,5 @@
 ---
 title: PS3 media server for home media streaming
-publishAt: 2014-01-03
 ---
 
 I turned to [ps3 media server / pms](https://github.com/ps3mediaserver/ps3mediaserver)
