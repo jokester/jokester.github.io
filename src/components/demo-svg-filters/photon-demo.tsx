@@ -11,7 +11,7 @@ export const SvgFilterEffectDemo: React.FC<{ title: string; filterString: string
   );
 };
 
-export const SvgFilterEffectGallery: React.FC<PropsWithChildren> = (props) => <div className="">{props.children}</div>;
+export const SvgFilterEffectGallery: React.FC<PropsWithChildren> = (props) => <div className="flex flex-wrap">{props.children}</div>;
 
 const svgFilterUrl = '/assets/demo-svg-filters.svg';
 export const buildFilter = (filterId: string): string => `url(${svgFilterUrl}#${filterId})`;

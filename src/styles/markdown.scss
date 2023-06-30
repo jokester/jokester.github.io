@@ -1,6 +1,11 @@
 /** upstream: https://tjaddison.com/blog/2019/08/styling-markdown-tailwind-gatsby/  */
 
 /* purgecss start ignore */
+.markdown {
+  img {
+    display: inline-block;
+  }
+}
 /* Markdown Styles */
 /* Global */
 .markdown {
