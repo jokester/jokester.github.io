@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-39627402-1"></script><script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-39627402-1', {
+              page_path: window.location.pathname,
+            });
+          </script><title>Memo: Category Theory for Programmers</title><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.5,minimum-scale=1"/><link rel="canonical" href="https://jokester.github.io/posts/2016-12-12/memo-category-theory-for-programmers"/><meta name="next-head-count" content="7"/><link rel="preload" href="/_next/static/css/63fa5f5ae0ef060f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/63fa5f5ae0ef060f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/_next/static/chunks/webpack-3278669249d12298.js" defer=""></script><script src="/_next/static/chunks/framework-e6d86b677864e3f5.js" defer=""></script><script src="/_next/static/chunks/main-899d8f68bcf1b91c.js" defer=""></script><script src="/_next/static/chunks/pages/_app-ae73a96cb32306a3.js" defer=""></script><script src="/_next/static/chunks/782-c0d129453d73cf2f.js" defer=""></script><script src="/_next/static/chunks/503-60468e2aaeee9d33.js" defer=""></script><script src="/_next/static/chunks/pages/posts/%5B...slug%5D-3dca7f9898ec5bee.js" defer=""></script><script src="/_next/static/_eqUY05tLYeOqeMVrs-Bb/_buildManifest.js" defer=""></script><script src="/_next/static/_eqUY05tLYeOqeMVrs-Bb/_ssgManifest.js" defer=""></script></head><body class="overflow-y-scroll"><div id="__next"><div class="bg-black text-yellow-100"><div class="px-2 sm:px-4 py-1 flex items-center bg-gray-900 space-x-3 text-sm"><a class="hidden text-lg" href="/">挖</a><a class="inline-block sm:hidden text sm:text-lg" href="/">挖坑自動機</a><a class="hidden sm:inline-block text-lg" href="/">挖坑自動機 / Digging automaton</a><span>|</span><a class="text-yellow-200" href="/posts">/posts</a><a class="" href="/demos">/demos</a><a class="" href="/works">/works</a><a class="" href="/about">/about</a></div><div class="min-h-screen container mx-auto"><div class="px-4 pt-6"><div class="markdown"><h1></h1><hr/><div class="markdown"><p>This post serves as a memo of <a href="https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/">Category Theory for Programmers</a> series for myself.</p>
+<p>As a programmer without much math / algebra background, I cannot overstate my gratitude to the author of this series: Bartosz Milewski.</p>
+<h2>Part 1</h2>
+<h3>1. Category: The Essence of Composition</h3>
+<p>Definition of category: &quot;objects&quot; and &quot;arrows aka <em>morphisms</em>&quot;.</p>
+<p>The morphisms must have 2 characticics in order to form a category:</p>
+<ul>
+<li>transitive: if <code>A -&gt; B</code> and <code>B -&gt; C</code> exists, <code>A -&gt; C</code> must exist.</li>
+<li>reflexive: for any object x, <code>X -&gt; X</code>, or <em>identity morphism</em> must exist.</li>
+</ul>
+<p><code>0</code> in addition --- <code>id</code> in morphism.</p>
+<p>Composition is ubiqutious in programming. It helps by limiting the concept we have to deal simultaneously.</p>
+<h3>2. Types and Functions</h3>
+<p>Types helps us to find incorrect code at early stage (<em>fail fast</em>).</p>
+<blockquote>
+<p>Testing is almost always a probabilistic rather than a deterministic process.
+Testing is a poor substitute for proof.</p>
+</blockquote>
+<p>Types can be considered <em>sets of values</em>, while morphisms / arrows being functions.</p>
+<p><code>Hask</code>: the category of Haskell types and functions, that is like <code>Set: category of sets</code> but contains <code>_|_</code> (bottom, or <code>undefined :: a</code>) for computation that never ends.</p>
+<p>Special types:</p>
+<ul>
+<li><code>Void</code> the type that have no values</li>
+<li><code>()</code> the type that have 1 value, <code>()</code></li>
+</ul>
+<p>Challange 6.</p>
+<pre><code class="language-text">() -&gt; () : 1　arrows
+    _ -&gt; ()
+
+Bool -&gt; Bool: 4 arrows
+    _ -&gt; True
+    _ -&gt; False
+    _ -&gt; _
+    _ -&gt; !_
+
+Void -&gt; Void: 1 arrows (I&#x27;m not pretty confident, but it cannot be more than 1 so)
+</code></pre>
+<h3>3. Categories Great and Small</h3></div></div></div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"mdMeta":{"realpath":"/home/runner/work/jokester.github.io/jokester.github.io/posts/2016/2016-12-12-memo-category-theory-for-programmers.md","slug":["2016-12-12","memo-category-theory-for-programmers"],"frontMatter":{"title":"Memo: Category Theory for Programmers","publishAt":"2016-12-12"}},"mdContent":"\nThis post serves as a memo of [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/) series for myself.\n\nAs a programmer without much math / algebra background, I cannot overstate my gratitude to the author of this series: Bartosz Milewski.\n\n## Part 1\n\n### 1. Category: The Essence of Composition\n\nDefinition of category: \"objects\" and \"arrows aka _morphisms_\".\n\nThe morphisms must have 2 characticics in order to form a category:\n\n- transitive: if `A -\u003e B` and `B -\u003e C` exists, `A -\u003e C` must exist.\n- reflexive: for any object x, `X -\u003e X`, or _identity morphism_ must exist.\n\n`0` in addition --- `id` in morphism.\n\nComposition is ubiqutious in programming. It helps by limiting the concept we have to deal simultaneously.\n\n### 2. Types and Functions\n\nTypes helps us to find incorrect code at early stage (_fail fast_).\n\n\u003e Testing is almost always a probabilistic rather than a deterministic process.\n\u003e Testing is a poor substitute for proof.\n\nTypes can be considered _sets of values_, while morphisms / arrows being functions.\n\n`Hask`: the category of Haskell types and functions, that is like `Set: category of sets` but contains `_|_` (bottom, or `undefined :: a`) for computation that never ends.\n\nSpecial types:\n\n- `Void` the type that have no values\n- `()` the type that have 1 value, `()`\n\nChallange 6.\n\n```text\n() -\u003e () : 1　arrows\n    _ -\u003e ()\n\nBool -\u003e Bool: 4 arrows\n    _ -\u003e True\n    _ -\u003e False\n    _ -\u003e _\n    _ -\u003e !_\n\nVoid -\u003e Void: 1 arrows (I'm not pretty confident, but it cannot be more than 1 so)\n```\n\n### 3. Categories Great and Small\n"},"__N_SSG":true},"page":"/posts/[...slug]","query":{"slug":["2016-12-12","memo-category-theory-for-programmers"]},"buildId":"_eqUY05tLYeOqeMVrs-Bb","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

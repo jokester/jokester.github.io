@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-39627402-1"></script><script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-39627402-1', {
+              page_path: window.location.pathname,
+            });
+          </script><title>Fast exp() operator for Monoids</title><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.5,minimum-scale=1"/><link rel="canonical" href="https://jokester.github.io/posts/2017-03-30/monoid-fast-exp"/><meta name="next-head-count" content="7"/><link rel="preload" href="/_next/static/css/63fa5f5ae0ef060f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/63fa5f5ae0ef060f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/_next/static/chunks/webpack-3278669249d12298.js" defer=""></script><script src="/_next/static/chunks/framework-e6d86b677864e3f5.js" defer=""></script><script src="/_next/static/chunks/main-899d8f68bcf1b91c.js" defer=""></script><script src="/_next/static/chunks/pages/_app-ae73a96cb32306a3.js" defer=""></script><script src="/_next/static/chunks/782-c0d129453d73cf2f.js" defer=""></script><script src="/_next/static/chunks/503-60468e2aaeee9d33.js" defer=""></script><script src="/_next/static/chunks/pages/posts/%5B...slug%5D-3dca7f9898ec5bee.js" defer=""></script><script src="/_next/static/_eqUY05tLYeOqeMVrs-Bb/_buildManifest.js" defer=""></script><script src="/_next/static/_eqUY05tLYeOqeMVrs-Bb/_ssgManifest.js" defer=""></script></head><body class="overflow-y-scroll"><div id="__next"><div class="bg-black text-yellow-100"><div class="px-2 sm:px-4 py-1 flex items-center bg-gray-900 space-x-3 text-sm"><a class="hidden text-lg" href="/">挖</a><a class="inline-block sm:hidden text sm:text-lg" href="/">挖坑自動機</a><a class="hidden sm:inline-block text-lg" href="/">挖坑自動機 / Digging automaton</a><span>|</span><a class="text-yellow-200" href="/posts">/posts</a><a class="" href="/demos">/demos</a><a class="" href="/works">/works</a><a class="" href="/about">/about</a></div><div class="min-h-screen container mx-auto"><div class="px-4 pt-6"><div class="markdown"><h1></h1><hr/><div class="markdown"><p>Today I learned that the fast-exponentiation in <a href="https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-11.html#%25_sec_1.2.4">SICP 1.2.4</a> can be applied to all monoids as well.</p>
+<h2>Monoid</h2>
+<p>Definition: set <code>S</code> and operation <code>⊕ : S -&gt; S -&gt; S</code> forms a <strong>Monoid</strong> if they satisfy:</p>
+<ul>
+<li><strong>Associativity</strong>: <code>(x ⊕ y) ⊕ z === x ⊕ (y ⊕ z)</code> for <code>x, y, z</code> in <code>S</code> .</li>
+<li><strong>Identity element</strong>, or <strong>Unit</strong>: <code>I</code> such that <code>x ⊕ I === x === I ⊕ x</code> exists.</li>
+</ul>
+<h3>Example of Monoid: Plus</h3>
+<p>We can see that the set of all real numbers, <code>R</code>, and <code>a ⊕ b := a + b</code> forms a Monoid, where <code>I = 0</code>.</p>
+<h3>More examples of Monoid</h3>
+<ul>
+<li><code>R</code>, and <code>a ⊕ b := a * b</code> forms a Monoid, where <code>I = 1</code>.</li>
+<li>When N is an integer, Set of all integers <code>Z</code>, and <code>a ⊕ b := (a + b) mod N</code> forms a Monoid, where <code>I = 0</code>.</li>
+</ul>
+<h2>&quot;Multiplication&quot; of Monoid</h2>
+<p>If we consider <code>⊕</code> to be a general form of <code>plus</code>, we can define a general form of <code>multiply</code>, denoted by operator <code>⊗</code>:</p>
+<ul>
+<li>Let k be <code>k</code> a non-negative integer</li>
+<li><code>a ⊗ 0 := I</code> when <code>k == 0</code></li>
+<li><code>a ⊗ k := a ⊕ (a ⊗ (k-1))</code> when <code>k &gt; 0</code></li>
+</ul>
+<p>This makes <code>a ⊗ k := a ⊕ a ⊕ a ⊕ a ⊕ a ⊕ a ⊕ a ⊕ a ⊕ a ...</code> where the right hand side is <code>k</code> <code>a</code>s concatencated by <code>⊕</code>.</p>
+<ul>
+<li>When <code>a ⊕ b</code> is <code>a + b</code>, <code>⊗</code> becomes <code>*</code>.</li>
+<li>When <code>a ⊕ b</code> is <code>a * b</code>, <code>⊗</code> becomes <code>**</code>.</li>
+<li>When <code>a ⊕ b</code> is <code>(a + b) % N</code>, <code>a ⊗ b</code> becomes <code>(a * b) % N</code>.</li>
+</ul>
+<h2><code>a ⊗ k</code> can be computed in <code>O(ln2 k)</code></h2>
+<p>Let binary representation of <code>k</code> be <code>B(m) B(m-1) ... B(0)</code> where B0 is the LSB. We can rewrite <code>a ⊗ k</code> to be:</p>
+<p><code>a ⊗ k := (a ⊗ (2**B(m))) ⊕ (a ⊗ (2**B(m-1))) ⊕ ... ⊕ (a ⊗ (2**B(0)))</code></p>
+<p>If <code>⊕</code> has <code>O(1)</code>, <code>a ⊗ k</code> can be computing in <code>O(ln2 k)</code>. The key idea is to reuse <code>a ⊗ (2**B(m-1))</code> when computing <code>a ⊗ (2**B(m))</code>, with dynamic-programming.</p>
+<p>Computing <code>*</code> in this way is not quite fruitful: we know that processor can compute <code>a * b</code> in <code>O(1)</code>.</p>
+<p>However things are different in the case of <code>a * b</code> and <code>(a + b) % N</code>. Applying our fast-<code>⊗</code> method to them can save both time and space.</p>
+<h2>Code</h2>
+<pre><code class="language-ts">function fastMul&lt;T&gt;(id: T, mplus: (op1: T, op2: T) =&gt; T, a: T, k: number): T {
+  if (~~k !== k || k &lt; 0) throw new Error(&#x27;exp must be positive integer&#x27;);
+
+  let ans = id;
+
+  while (k &gt; 0) {
+    if (k % 2 == 1) {
+      ans = mplus(ans, a);
+      k--;
+    } else {
+      a = mplus(a, a);
+      k /= 2;
+    }
+  }
+
+  return ans;
+}
+
+// 2**5
+console.log(fastMul(1, (a, b) =&gt; a * b, 2, 5));
+
+// (887 * 885) % 12
+console.log(fastMul(0, (a, b) =&gt; ((a % 12) + (b % 12)) % 12, 887, 885));
+</code></pre></div></div></div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"mdMeta":{"realpath":"/home/runner/work/jokester.github.io/jokester.github.io/posts/2017/2017-03-30-monoid-fast-exp.md","slug":["2017-03-30","monoid-fast-exp"],"frontMatter":{"title":"Fast exp() operator for Monoids","publishAt":"2017-03-30"}},"mdContent":"\nToday I learned that the fast-exponentiation in [SICP 1.2.4](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.4) can be applied to all monoids as well.\n\n## Monoid\n\nDefinition: set `S` and operation `⊕ : S -\u003e S -\u003e S` forms a **Monoid** if they satisfy:\n\n- **Associativity**: `(x ⊕ y) ⊕ z === x ⊕ (y ⊕ z)` for `x, y, z` in `S` .\n- **Identity element**, or **Unit**: `I` such that `x ⊕ I === x === I ⊕ x` exists.\n\n### Example of Monoid: Plus\n\nWe can see that the set of all real numbers, `R`, and `a ⊕ b := a + b` forms a Monoid, where `I = 0`.\n\n### More examples of Monoid\n\n- `R`, and `a ⊕ b := a * b` forms a Monoid, where `I = 1`.\n- When N is an integer, Set of all integers `Z`, and `a ⊕ b := (a + b) mod N` forms a Monoid, where `I = 0`.\n\n## \"Multiplication\" of Monoid\n\nIf we consider `⊕` to be a general form of `plus`, we can define a general form of `multiply`, denoted by operator `⊗`:\n\n- Let k be `k` a non-negative integer\n- `a ⊗ 0 := I` when `k == 0`\n- `a ⊗ k := a ⊕ (a ⊗ (k-1))` when `k \u003e 0`\n\nThis makes `a ⊗ k := a ⊕ a ⊕ a ⊕ a ⊕ a ⊕ a ⊕ a ⊕ a ⊕ a ...` where the right hand side is `k` `a`s concatencated by `⊕`.\n\n- When `a ⊕ b` is `a + b`, `⊗` becomes `*`.\n- When `a ⊕ b` is `a * b`, `⊗` becomes `**`.\n- When `a ⊕ b` is `(a + b) % N`, `a ⊗ b` becomes `(a * b) % N`.\n\n## `a ⊗ k` can be computed in `O(ln2 k)`\n\nLet binary representation of `k` be `B(m) B(m-1) ... B(0)` where B0 is the LSB. We can rewrite `a ⊗ k` to be:\n\n`a ⊗ k := (a ⊗ (2**B(m))) ⊕ (a ⊗ (2**B(m-1))) ⊕ ... ⊕ (a ⊗ (2**B(0)))`\n\nIf `⊕` has `O(1)`, `a ⊗ k` can be computing in `O(ln2 k)`. The key idea is to reuse `a ⊗ (2**B(m-1))` when computing `a ⊗ (2**B(m))`, with dynamic-programming.\n\nComputing `*` in this way is not quite fruitful: we know that processor can compute `a * b` in `O(1)`.\n\nHowever things are different in the case of `a * b` and `(a + b) % N`. Applying our fast-`⊗` method to them can save both time and space.\n\n## Code\n\n```ts\nfunction fastMul\u003cT\u003e(id: T, mplus: (op1: T, op2: T) =\u003e T, a: T, k: number): T {\n  if (~~k !== k || k \u003c 0) throw new Error('exp must be positive integer');\n\n  let ans = id;\n\n  while (k \u003e 0) {\n    if (k % 2 == 1) {\n      ans = mplus(ans, a);\n      k--;\n    } else {\n      a = mplus(a, a);\n      k /= 2;\n    }\n  }\n\n  return ans;\n}\n\n// 2**5\nconsole.log(fastMul(1, (a, b) =\u003e a * b, 2, 5));\n\n// (887 * 885) % 12\nconsole.log(fastMul(0, (a, b) =\u003e ((a % 12) + (b % 12)) % 12, 887, 885));\n```\n"},"__N_SSG":true},"page":"/posts/[...slug]","query":{"slug":["2017-03-30","monoid-fast-exp"]},"buildId":"_eqUY05tLYeOqeMVrs-Bb","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>
