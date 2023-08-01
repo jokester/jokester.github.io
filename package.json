@@ -1,5 +1,5 @@
 {
-  "name": "static-blog",
+  "name": "jokester.github.io",
   "version": "0.1.0",
   "author": "Wang Guan <momocraft@gmail.com>",
   "private": true,
@@ -75,7 +75,24 @@
     "tslib": "^2"
   },
   "engines": {
-    "node": ">=16",
+    "node": ">=18",
     "npm": "=8"
-  }
+  },
+  "description": "My blog `挖坑自動機 / Hole digging automaton` at [jokester.github.io](https://jokester.github.io).",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jokester/jokester.github.io.git"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/jokester/jokester.github.io/issues"
+  },
+  "homepage": "https://github.com/jokester/jokester.github.io#readme"
 }
