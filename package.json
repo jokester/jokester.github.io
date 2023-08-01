@@ -10,14 +10,15 @@
     "preexport": "REPO_ROOT=. NODE_OPTIONS=--experimental-modules ts-node --project tsconfig.node.json src/ssr/generate-feed.ts",
     "analyze": "BUNDLE_ANALYZE=both next build",
     "start": "NODE_ENV=production next start",
+    "sync": "ts-node --project tsconfig.node.json scripts/sync-notes",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "typecheck": "tsc --noEmit",
     "typecheck:watch": "tsc --watch --noEmit",
     "textlint": "textlint posts/",
-    "lint": "    eslint '@(src|pages)/**/*.@(ts|js|tsx|jsx)'",
-    "lint:fix": "eslint '@(src|pages)/**/*.@(ts|js|tsx|jsx)' --fix"
+    "lint": "    eslint '@(src|pages|scripts)/**/*.@(ts|js|tsx|jsx)'",
+    "lint:fix": "eslint '@(src|pages|scripts)/**/*.@(ts|js|tsx|jsx)' --fix"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -28,6 +29,7 @@
     "classnames": "^2.3.2",
     "date-fns": "^2.29.3",
     "debug": "^4.3.4",
+    "dree": "^4.5.5",
     "feed": "^4.2.2",
     "fp-ts": "<3",
     "gray-matter": "^4.0.3",

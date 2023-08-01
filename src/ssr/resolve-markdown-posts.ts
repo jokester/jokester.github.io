@@ -68,6 +68,7 @@ async function doParsePostList(): Promise<{
   postsDir: string;
   files: MarkdownMeta[];
 }> {
+  // MUST NOT use __dir, the file may be built and reside in .next
   const start = path.join(process.env.REPO_ROOT!, 'posts');
   const realpaths = await recursiveDir(start);
   const files: MarkdownMeta[] = [];
