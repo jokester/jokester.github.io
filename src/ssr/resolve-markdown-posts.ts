@@ -6,6 +6,7 @@ import { isDevBuild } from '../config/build-env';
 import isEqual from 'lodash/isEqual';
 import sortBy from 'lodash/sortBy';
 import { createLogger } from '../utils/debug-logger';
+import { asyncThrottle } from '../utils/async-throttle';
 
 const logger = createLogger(__filename);
 
@@ -61,18 +62,7 @@ function launderFrontMatter(data: { title?: string; publishAt?: Date }): null | 
   return null;
 }
 
-export async function getMarkdownList(): Promise<{
-  postsDir: string;
-  files: MarkdownMeta[];
-}> {
-  if (!isDevBuild && cachedPostList) {
-    return cachedPostList;
-  } else {
-    return (cachedPostList = doParsePostList());
-  }
-}
-
-let cachedPostList: any = null;
+export const getMarkdownList = asyncThrottle(doParsePostList, 3e3);
 
 async function doParsePostList(): Promise<{
   postsDir: string;
