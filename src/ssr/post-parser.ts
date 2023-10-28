@@ -20,6 +20,8 @@ export interface MarkdownMeta {
   frontMatter: MarkdownFrontMatter;
 }
 
+export async function loadPost(filename: string): Promise<>
+
 export async function extractPostMeta(filename: string): Promise<null | MarkdownMeta> {
   const mdFile = matter(await fsp.readFile(filename, { encoding: 'utf-8' }));
   const frontMatter = mdFile.data as Partial<MarkdownFrontMatter>;
