@@ -30,8 +30,15 @@ A paragraph with some text and a [link](https://hakim.se).
       import('reveal.js/plugin/markdown/markdown'),
     ]);
     const api = new Reveal(sectionRef.current, {
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
       plugins: [RevealMarkdown],
     });
+    if (1) {
+      // return;
+    }
     console.debug('reveal api', api);
     await api.initialize();
     await released;
@@ -45,13 +52,26 @@ A paragraph with some text and a [link](https://hakim.se).
     <div className={styles.revealRoot}>
       <div className={clsx('reveal')} ref={sectionRef}>
         <div className="slides">
-          <section>Horizontal Slide</section>
-          <section>
-            <section>Vertical Slide 1</section>
-            <section>Vertical Slide 2</section>
+          <section data-markdown="">
+            <script type="text/template">
+              {`
+            
+## Slide 1
+A paragraph with some text and a [link](https://hakim.se).
+
+---
+
+## Slide 2
+
+---
+
+## Slide 3
+      
+      
+      `.trim()}
+            </script>
           </section>
         </div>
-        {/*<section data-markdown> <textarea data-template readOnly value={slideText}></textarea> </section>*/}
       </div>
     </div>
   );
