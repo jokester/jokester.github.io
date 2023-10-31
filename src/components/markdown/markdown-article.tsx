@@ -2,7 +2,7 @@ import ReactMarkdown from 'react-markdown';
 import React from 'react';
 import { Prism } from 'react-syntax-highlighter';
 import codeStyle from 'react-syntax-highlighter/dist/cjs/styles/prism/atom-dark';
-import { MarkdownMeta } from '../../ssr/resolve-markdown-posts';
+import { MarkdownMeta } from '../../ssr/post-parser';
 import { inServer } from '../../config/build-env';
 import remarkGfm from 'remark-gfm';
 import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';

@@ -1,7 +1,7 @@
 import debug from 'debug';
 const repoRoot = __filename.replace(/src[\\/]utils[\\/].*$/i, '');
 
-export function createLogger(srcFile: string) {
+export function createLogger(srcFile: string): debug.IDebugger {
   const tag = srcFile
     .slice(repoRoot.length)
     .replace(/^src[\\/]/i, '')
