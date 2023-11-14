@@ -2,51 +2,38 @@
 import path from 'node:path';
 import fsp from 'node:fs/promises';
 import * as dree from 'dree';
-import {extractPostMeta} from "../src/ssr/post-parser";
+import { extractPost, extractPostMeta, PostItem } from '../src/ssr/post-parser';
+import { createLogger } from '../src/utils/debug-logger';
 
-const TARGET_DIR = path.join(__dirname, '../posts');
-const DEFAULT_SOURCE_DIR = path.join(__dirname, '../posts');
-
-async function cleanTargetDir(targetDir: string): Promise<void> {
-  const pending: Promise<unknown>[] = [];
-  await dree.scanAsync(targetDir, { followLinks: false }, (dir, item) => {
-    if (item.isFile()) {
-      pending.push(fsp.unlink(''));
-    }
-  });
-  await Promise.all(pending);
-}
+const logger = createLogger(__filename);
+const POSTS_DIR = path.join(__dirname, '../posts');
 
 async function main(srcDir: string): Promise<void> {
-  const source = await walkDir(srcDir);
-
-  console.debug('source', source);
+  await fsp.rm(POSTS_DIR, { recursive: true, force: true });
+  await fsp.mkdir(POSTS_DIR, { recursive: true });
+  const source = await findPosts(srcDir);
+  for (const s of source) {
+    const dest = path.join(POSTS_DIR, ...s.pathSegments);
+    console.info('copy', { src: s.origPath, dest });
+    await fsp.mkdir(path.dirname(dest), { recursive: true });
+    await fsp.copyFile(s.origPath, dest);
+  }
 }
 
-interface PostItem {
-  slug: string;
-  filename: string;
-  contentHash: string;
-  date: string;
-  category: string;
-}
-
-function buildTargetPath(p: PostItem) {}
-
-async function walkDir(start: string): Promise<PostItem[]> {
-  const found: Promise<null  |PostItem>[] = [];
-  const scan = await dree.scanAsync(start, { followLinks: true, extensions: ['md'] }, (dir, item) => {
-    console.debug('dir', dir);
-    console.debug('item', item);
-    found.push(extractPostMeta(dir.path))
+async function findPosts(start: string): Promise<PostItem[]> {
+  const found: PostItem[] = [];
+  await dree.scanAsync(start, { followLinks: true, extensions: ['md'] }, async (dir, item) => {
+    const p = await extractPost(dir.path);
+    if (p) {
+      found.push(p);
+    }
   });
-  console.debug('scan', scan);
-  const foundResolved = await Promise.all(found);
-  return foundResolved.filter(Boolean) as PostItem[];
+  logger('found', found);
+  return found;
 }
 
 if (require.main === module) {
-  const [_node, _script, srcDir = DEFAULT_SOURCE_DIR] = process.argv;
+  const [_node, _script, srcDir] = process.argv;
   if (!srcDir) {
     throw new Error(`usage: ${_script} <source-dir>`);
   }
