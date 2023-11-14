@@ -10,7 +10,7 @@
     "preexport": "REPO_ROOT=. NODE_OPTIONS=--experimental-modules ts-node --project tsconfig.node.json src/ssr/generate-feed.ts",
     "analyze": "BUNDLE_ANALYZE=both next build",
     "start": "NODE_ENV=production next start",
-    "sync": "ts-node --project tsconfig.node.json scripts/sync-notes",
+    "sync-notes": "ts-node --project tsconfig.node.json scripts/sync-notes ./notes",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
