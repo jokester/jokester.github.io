@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Layout } from '../../src/components/layout/layout';
 import { GetStaticProps } from 'next';
-import { getMarkdownList, MarkdownMeta } from '../../src/ssr/resolve-markdown-posts';
+import { loadPosts } from '../../src/ssr/post-resolver';
 import Link from 'next/link';
 import { TypedRoutes } from '../../src/config/routes';
-import { OnlyInDev } from '../../src/components/hoc/only-in-dev';
+import { MarkdownMeta } from '../../src/ssr/post-parser';
 
 interface PageProps {
   files: MarkdownMeta[];
@@ -14,7 +14,7 @@ const PostsIndexPage: React.FC<PageProps> = (props) => {
     <Layout>
       <ul>
         {props.files.map((mdFile, i) => (
-          <PostListItem meta={mdFile} key={i} />
+          <PostListItem meta={mdFile} key={mdFile.filename} />
         ))}
       </ul>
     </Layout>
@@ -24,20 +24,16 @@ const PostsIndexPage: React.FC<PageProps> = (props) => {
 const PostListItem: React.FC<{ meta: MarkdownMeta }> = ({ meta }) => {
   return (
     <li className="block my-2">
-      <Link as={TypedRoutes.posts.show(meta.slug)} href="/posts/[...slug]">
-        <span className="text-sm mr-2 sm:mr-4 font-mono">{meta.frontMatter.publishAt || '7777-77-77'}</span>
+      <Link as={TypedRoutes.posts.show(meta.pathSegments)} href="/posts/[...segments]">
+        <span className="text-sm mr-2 sm:mr-4 font-mono">{meta.frontMatter.publishAt}</span>
         <span lang={meta.frontMatter.lang}>{meta.frontMatter.title}</span>
-        <OnlyInDev>
-          {null}
-          {/*<code className="block">({meta.slug.join('/')})</code>*/}
-        </OnlyInDev>
       </Link>
     </li>
   );
 };
 
 export const getStaticProps: GetStaticProps<PageProps> = async (ctx) => {
-  const files = await getMarkdownList();
+  const files = await loadPosts();
 
   return { props: { files: files.files } };
 };

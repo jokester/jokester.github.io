@@ -7,7 +7,7 @@ export const TypedRoutes = {
   index: '/',
   posts: {
     index: '/posts/',
-    show: (slug: string[]) => `/posts/${slug.join('/')}/`,
+    show: (pathSegments: string[]) => `/posts/${pathSegments.join('/')}/`,
   },
   works: '/works/',
   about: {

@@ -1,5 +1,5 @@
 {
-  "name": "static-blog",
+  "name": "jokester.github.io",
   "version": "0.1.0",
   "author": "Wang Guan <momocraft@gmail.com>",
   "private": true,
@@ -10,14 +10,15 @@
     "preexport": "REPO_ROOT=. NODE_OPTIONS=--experimental-modules ts-node --project tsconfig.node.json src/ssr/generate-feed.ts",
     "analyze": "BUNDLE_ANALYZE=both next build",
     "start": "NODE_ENV=production next start",
+    "sync-notes": "ts-node --project tsconfig.node.json scripts/sync-notes ./notes",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "typecheck": "tsc --noEmit",
     "typecheck:watch": "tsc --watch --noEmit",
     "textlint": "textlint posts/",
-    "lint": "    eslint '@(src|pages)/**/*.@(ts|js|tsx|jsx)'",
-    "lint:fix": "eslint '@(src|pages)/**/*.@(ts|js|tsx|jsx)' --fix"
+    "lint": "    eslint '@(src|pages|scripts)/**/*.@(ts|js|tsx|jsx)'",
+    "lint:fix": "eslint '@(src|pages|scripts)/**/*.@(ts|js|tsx|jsx)' --fix"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -28,6 +29,7 @@
     "classnames": "^2.3.2",
     "date-fns": "^2.29.3",
     "debug": "^4.3.4",
+    "dree": "^4.5.5",
     "feed": "^4.2.2",
     "fp-ts": "<3",
     "gray-matter": "^4.0.3",
@@ -70,12 +72,29 @@
     "ts-node": "^10.9",
     "typescript": "^4.9"
   },
-  "resolutions": {
-    "@types/node": "=18",
+  "overrides": {
+    "@types/node": "^18",
     "tslib": "^2"
   },
   "engines": {
-    "node": ">=16",
+    "node": ">=18",
     "npm": "=8"
-  }
+  },
+  "description": "My blog `挖坑自動機 / Hole digging automaton` at [jokester.github.io](https://jokester.github.io).",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jokester/jokester.github.io.git"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/jokester/jokester.github.io/issues"
+  },
+  "homepage": "https://github.com/jokester/jokester.github.io#readme"
 }

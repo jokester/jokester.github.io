@@ -16,3 +16,5 @@ yarn-error.log*
 .DS_store
 tsconfig.tsbuildinfo
 public/feed.xml
+
+/notes

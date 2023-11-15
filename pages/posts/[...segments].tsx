@@ -1,12 +1,13 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Layout } from '../../src/components/layout/layout';
-import { getMarkdownList, MarkdownMeta, readMarkdownContent } from '../../src/ssr/resolve-markdown-posts';
+import { loadPosts, readMarkdownContent } from '../../src/ssr/post-resolver';
 import { HtmlMeta } from '../../src/components/meta/html-meta';
 import { MarkdownArticle } from '../../src/components/markdown/markdown-article';
+import { MarkdownMeta } from '../../src/ssr/post-parser';
 
 interface RouteParams extends Record<string, string | string[]> {
-  slug: string[];
+  segments: string[];
 }
 
 interface PageProps {
@@ -22,11 +23,11 @@ const PostsShowPage: React.FC<PageProps> = (props) => (
 );
 
 export const getStaticPaths: GetStaticPaths<RouteParams> = async () => {
-  const x = await getMarkdownList();
+  const x = await loadPosts();
   return {
     paths: x.files.map((mdFile) => ({
       params: {
-        slug: mdFile.slug,
+        segments: mdFile.pathSegments,
       } as RouteParams,
     })),
     fallback: false,
@@ -35,7 +36,7 @@ export const getStaticPaths: GetStaticPaths<RouteParams> = async () => {
 
 export const getStaticProps: GetStaticProps<PageProps> = async (ctx) => {
   const query: RouteParams = ctx.params as any;
-  const parsedMarkdown = await readMarkdownContent(query.slug);
+  const parsedMarkdown = await readMarkdownContent(query.segments);
   return {
     props: {
       mdMeta: parsedMarkdown.meta,
